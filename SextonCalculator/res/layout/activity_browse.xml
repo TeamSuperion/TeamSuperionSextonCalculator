@@ -21,23 +21,140 @@
 	    <Button
         	android:id="@+id/entree_button"
         	android:layout_width="fill_parent"
-        	android:layout_height="fill_parent"
+        	android:layout_height="wrap_content"
         	android:text="@string/entree_button" 
-        />	  
+        />	  
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            
+	    	<TableRow
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content" >
+	        
+	        	<ImageView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:src="@drawable/ic_launcher" >
+	        	</ImageView>
+	        	<TextView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:text="Food Item" />
+	        	<TextView 
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:text="Price"/>
+	        	<Button android:layout_width="50dp"
+	        	    android:layout_height="50dp"
+	        	    android:text="-" >
+	        	</Button>
+	        	<TextView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:textSize="30dp"
+	        	    android:text="0" />
+	        	<Button
+	        	    android:layout_width="50dp"
+	        	    android:layout_height="50dp"
+	        	    android:text="+" >
+	        	</Button>
+	        
+	    	</TableRow>
+	    
+	    </TableLayout>
           
 	    <Button
         	android:id="@+id/sides_button"
         	android:layout_width="fill_parent"
-        	android:layout_height="fill_parent"
+        	android:layout_height="wrap_content"
         	android:text="@string/sides_button" 
-        />	    
+        />	 
+        
+	    <TableLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+            
+	    	<TableRow
+	    	    android:layout_width="fill_parent"
+	    	    android:layout_height="wrap_content" >
+	        
+	        	<ImageView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:src="@drawable/ic_launcher" >
+	        	</ImageView>
+	        	<TextView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:text="Food Item" />
+	        	<TextView 
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:text="Price"/>
+	        	<Button android:layout_width="50dp"
+	        	    android:layout_height="50dp"
+	        	    android:text="-" >
+	        	</Button>
+	        	<TextView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:textSize="30dp"
+	        	    android:text="0" />
+	        	<Button
+	        	    android:layout_width="50dp"
+	        	    android:layout_height="50dp"
+	        	    android:text="+" >
+	        	</Button>
+	        
+	    	</TableRow>
+	    
+	    </TableLayout>
         
 	    <Button
         	android:id="@+id/drinks_button"
         	android:layout_width="fill_parent"
-        	android:layout_height="fill_parent"
+        	android:layout_height="wrap_content"
         	android:text="@string/drinks_button" 
         />
+	    
+	    <TableLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+            
+	    	<TableRow >
+	        
+	        	<ImageView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:src="@drawable/ic_launcher" >
+	        	</ImageView>
+	        	<TextView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:text="Food Item" />
+	        	<TextView 
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:text="Price"/>
+	        	<Button android:layout_width="50dp"
+	        	    android:layout_height="50dp"
+	        	    android:text="-" >
+	        	</Button>
+	        	<TextView
+	        	    android:layout_width="wrap_content"
+	        	    android:layout_height="wrap_content"
+	        	    android:textSize="30dp"
+	        	    android:text="0" />
+	        	<Button
+	        	    android:layout_width="50dp"
+	        	    android:layout_height="50dp"
+	        	    android:text="+" >
+	        	</Button>
+	        
+	    	</TableRow>
+	    
+	    </TableLayout>
 	    
 	</LinearLayout>
 	
