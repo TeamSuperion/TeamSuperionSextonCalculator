@@ -26,5 +26,8 @@
     <string name="title_activity_browse">BrowseActivity</string>
     <string name="title_activity_checkout">CheckoutActivity</string>
     <string name="home_text">Meal Options</string>
+    <string name="entree_button">Entree</string>
+    <string name="sides_button">Sides</string>
+    <string name="drinks_button">Drinks</string>
 
 </resources>
