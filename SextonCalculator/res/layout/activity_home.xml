@@ -1,31 +1,69 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ff0000"
+    android:orientation="vertical" >
 
+       <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight=".8">
+        
+           <TextView 
+               android:id="@+id/home_text"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+               android:textSize="30dp"
+		android:textColor="#ffffff"
+               android:text="@string/home_text"
+               android:gravity="center"
+               />
+           
+       </RelativeLayout>
+       
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight=".6">
     <Button
         android:id="@+id/punch_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+		android:textColor="#ffffff"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp"
         android:text="@string/punch_button" />
-
+	</RelativeLayout>
+	
+	    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight=".6">
+    
     <Button
         android:id="@+id/browse_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+		android:textColor="#ffffff"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp"
         android:text="@string/browse_button" />
 
+    	</RelativeLayout>
+	
+	    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight=".6">
+    
     <Button
         android:id="@+id/calorie_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+		android:textColor="#ffffff"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/browse_button"
         android:text="@string/calorie_button" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

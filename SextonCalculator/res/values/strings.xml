@@ -1,7 +1,6 @@
 <resources>
 
-    <string name="app_name">SextonCalculator</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Sexton Calculator</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="punch_button">Punch for a Meal</string>
@@ -26,5 +25,6 @@
     <string name="title_activity_calorie">CalorieActivity</string>
     <string name="title_activity_browse">BrowseActivity</string>
     <string name="title_activity_checkout">CheckoutActivity</string>
+    <string name="home_text">Meal Options</string>
 
 </resources>
