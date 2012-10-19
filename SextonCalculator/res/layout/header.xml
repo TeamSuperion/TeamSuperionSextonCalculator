@@ -10,14 +10,16 @@
     android:layout_height="wrap_content"
     android:text="@string/home_button"
     android:layout_weight="1"
-    android:onClick="homeActivity" />
+    android:onClick="homeActivity"
+    android:textColor="#ffffff"/>
 
 <Button
     android:id="@+id/reset_button"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"        
     android:text="@string/reset_button"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:textColor="#ffffff"/>
 
 <Button
     android:id="@+id/checkout_button"
@@ -25,6 +27,7 @@
     android:layout_height="wrap_content"        
     android:text="@string/checkout_button"
     android:layout_weight="1"
-    android:onClick="checkoutActivity" />
+    android:onClick="checkoutActivity"
+    android:textColor="#ffffff"/>
 
 </LinearLayout>

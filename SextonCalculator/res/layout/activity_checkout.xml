@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#ff0000">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -14,14 +15,16 @@
     android:layout_height="wrap_content"
     android:text="@string/home_button"
     android:layout_weight="1"
-    android:onClick="homeActivity" />
+    android:onClick="homeActivity"
+    android:textColor="#ffffff"/>
 
 <Button
     android:id="@+id/reset_button"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"        
     android:text="@string/reset_button"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:textColor="#ffffff"/>
 
 <Button
     android:id="@+id/back_button"
@@ -29,7 +32,8 @@
     android:layout_height="wrap_content"        
     android:text="@string/back_button"
     android:layout_weight="1"
-    android:onClick="backActivity" />
+    android:onClick="backActivity"
+    android:textColor="#ffffff"/>
 
 </LinearLayout>
 
@@ -65,21 +69,27 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="@string/punchPay_button"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:onClick="punchActivity"
+    android:textColor="#ffffff"/>
 
 <Button
     android:id="@+id/flexPay_button"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"        
     android:text="@string/flexPay_button"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:onClick="flexActivity"
+    android:textColor="#ffffff"/>
 
 <Button
     android:id="@+id/cashPay_button"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"        
     android:text="@string/cashPay_button"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:onClick="cashActivity"
+    android:textColor="#ffffff"/>
 
 </LinearLayout>
 
@@ -94,24 +104,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:inputType="numberDecimal" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="numberDecimal"
+        android:text="@string/punchTotal_editText"
+        android:gravity="center"/>
     
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:text="@string/flexTotal_editText"
+        android:gravity="center"/>
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:text="@string/cashTotal_editText"
+        android:gravity="center"/>
     
 </LinearLayout>
 

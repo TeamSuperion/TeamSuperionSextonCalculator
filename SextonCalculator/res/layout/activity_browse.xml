@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#ff0000">
 
 	<include     
     	android:id="@+id/header"
@@ -32,7 +33,8 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:enabled="true"
-	        android:text="@string/entree_button" />
+	        android:text="@string/entree_button"
+	        />
 
 	        <LinearLayout
     	        android:id="@+id/entree_content"
