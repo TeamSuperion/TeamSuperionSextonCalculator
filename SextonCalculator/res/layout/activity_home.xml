@@ -32,7 +32,8 @@
         android:layout_height="fill_parent"
 		android:textColor="#ffffff"
         android:layout_centerHorizontal="true"
-        android:text="@string/punch_button" />
+        android:text="@string/punch_button"
+        android:onClick="punchActivity" />
 	</RelativeLayout>
 	
 	    <RelativeLayout 
@@ -47,7 +48,8 @@
 		android:textColor="#ffffff"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/browse_button" />
+        android:text="@string/browse_button"
+        android:onClick="browseActivity" />
 
     	</RelativeLayout>
 	
@@ -63,7 +65,8 @@
 		android:textColor="#ffffff"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/browse_button"
-        android:text="@string/calorie_button" />
+        android:text="@string/calorie_button"
+        android:onClick="calorieActivity" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -34,7 +34,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:onClick="sendMessage"
+        android:onClick="homeActivity"
         android:textColor="#ffffff"
         android:text="@string/start_button" />
         

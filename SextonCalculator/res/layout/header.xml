@@ -9,7 +9,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="@string/home_button"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:onClick="homeActivity" />
 
 <Button
     android:id="@+id/reset_button"
@@ -23,6 +24,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"        
     android:text="@string/checkout_button"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:onClick="checkoutActivity" />
 
 </LinearLayout>

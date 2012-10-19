@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void sendMessage(View view) {
+    public void homeActivity(View view) {
     	Intent intent = new Intent(this, HomeActivity.class);
     	startActivity(intent);
     }
