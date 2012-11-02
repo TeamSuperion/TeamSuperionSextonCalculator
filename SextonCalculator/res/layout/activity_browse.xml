@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff0000">
+    android:background="#ff0000" >
 
 	<include     
     	android:id="@+id/header"
@@ -11,19 +11,11 @@
     	android:layout_height="wrap_content"
     />
 
-	<RelativeLayout
-	    xmlns:android="http://schemas.android.com/apk/res/android"
-    	xmlns:tools="http://schemas.android.com/tools"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical"
-        android:layout_below="@+id/header" >
-	    
     	<SlidingDrawer
     	    android:id="@+id/entree_drawer"
     	    android:layout_width="fill_parent"
     	    android:layout_height="wrap_content"
-    	    android:layout_alignTop="@+id/header"
+    	    android:layout_below="@+id/header"
     	    android:allowSingleTap="true"
     	    android:content="@+id/entree_content"
     	    android:handle="@+id/entree_button" >
@@ -77,7 +69,7 @@
         	android:id="@+id/sides_drawer"
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:layout_alignTop="@+id/entree_drawer"
+        	android:layout_below="@+id/entree_drawer"
         	android:content="@+id/sides_content"
         	android:handle="@+id/sides_button" >
 	        
@@ -102,7 +94,7 @@
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
         	android:content="@+id/drinks_content"
-        	android:layout_alignTop="@+id/sides_drawer"
+        	android:layout_below="@+id/sides_drawer"
         	android:handle="@+id/drinks_button" >
 	        
 	    <Button
@@ -123,7 +115,6 @@
         
 
 	    
-	</RelativeLayout>
 	
     <TextView
         android:id="@+id/totalPrice_textView"
@@ -133,5 +124,6 @@
         android:layout_centerHorizontal="true"
         android:text="@string/totalPrice_textView"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
 
 </RelativeLayout>
