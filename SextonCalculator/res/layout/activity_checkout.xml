@@ -15,6 +15,7 @@
     android:layout_height="wrap_content"
     android:text="@string/home_button"
     android:layout_weight="1"
+    android:textSize="30dp"
     android:onClick="homeActivity"
     android:textColor="#ffffff"/>
 
@@ -24,6 +25,7 @@
     android:layout_height="wrap_content"        
     android:text="@string/reset_button"
     android:layout_weight="1"
+    android:textSize="30dp"
     android:textColor="#ffffff"/>
 
 <Button
@@ -32,6 +34,7 @@
     android:layout_height="wrap_content"        
     android:text="@string/back_button"
     android:layout_weight="1"
+    android:textSize="30dp"
     android:onClick="backActivity"
     android:textColor="#ffffff"/>
 
@@ -43,9 +46,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/reset_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="100dp"
         android:text="@string/totalRemaining_textView"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/amountRemaining_textView"
@@ -53,7 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/totalRemaining_textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="50dp"
+    	android:textSize="30dp"
         android:text="@string/amountRemaining_textView"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -61,7 +65,6 @@
     android:id="@+id/payButtonBar"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/amountRemaining_textView"
     android:orientation="horizontal" >
 
 <Button
@@ -93,10 +96,10 @@
 
 </LinearLayout>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/numberLine"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/payButtonBar"
     android:orientation="horizontal" >
     
     <EditText
