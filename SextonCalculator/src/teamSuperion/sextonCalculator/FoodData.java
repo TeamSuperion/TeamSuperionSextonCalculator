@@ -58,4 +58,10 @@ public class FoodData extends SQLiteOpenHelper {
 		SQLiteDatabase db = getReadableDatabase();
 		return DatabaseUtils.queryNumEntries(db, TABLE_NAME);
 	}
+	
+	public void load(){
+		insert("Apple", 1 , 1);
+		insert("Banana", 1 , 1);
+		insert("Orange", 1 , 1);
+	}
 }

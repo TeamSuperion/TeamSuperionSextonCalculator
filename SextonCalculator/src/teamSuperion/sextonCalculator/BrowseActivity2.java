@@ -26,7 +26,7 @@ public class BrowseActivity2 extends Activity {
         foodData = new FoodData(this);
 		spinner = (Spinner) findViewById(R.id.spinner);
 		if(foodData.count() == 0){
-			loadData();
+			foodData.load();
 		}
 		Cursor cursor = foodData.all(this);
 		@SuppressWarnings("deprecation")
@@ -51,9 +51,4 @@ public class BrowseActivity2 extends Activity {
     	startActivity(intent);
     }
     
-	public void loadData(){
-	foodData.insert("Apple", 1 , 1);
-	foodData.insert("Banana", 1 , 1);
-	foodData.insert("Orange", 1 , 1);
-	}
 }
