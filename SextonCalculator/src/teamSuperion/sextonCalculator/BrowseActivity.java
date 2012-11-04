@@ -9,10 +9,14 @@ import com.example.sextoncalculator.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 
 public class BrowseActivity extends Activity {
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,4 +39,6 @@ public class BrowseActivity extends Activity {
     	Intent intent = new Intent(this, CheckoutActivity2.class);
     	startActivity(intent);
     }
+    
+
 }
