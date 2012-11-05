@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
-import com.example.sextoncalculator.R;
 
 public class DatabaseTest extends Activity {
 

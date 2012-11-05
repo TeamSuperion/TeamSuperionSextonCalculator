@@ -11,16 +11,56 @@
     	android:layout_height="wrap_content"
     />
 
-    <ExpandableListView
-        android:id="@+id/expandableListView1"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/header" >
-        
-    </ExpandableListView>
-    
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:layout_marginBottom="60dp"
+	    android:orientation="vertical"
+	    android:id="@+id/item_holder"
+	    android:layout_below="@+id/header"
+	    >
+	    
+ 	<Button
+ 	    android:id="@+id/entree_button"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:text="@string/entree_button"
+ 	    />
+ 	
+ 	<ListView
+ 	    android:id="@+id/entree_list"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content" >
+ 	    
+ 	</ListView>
+ 		    
+ 	<Button
+ 	    android:id="@+id/sides_button"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:text="@string/sides_button"
+ 	    />
+ 	<ListView
+ 	    android:id="@+id/sides_list"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content" >
+ 	    
+ 	</ListView>	    
+ 	
+ 	<Button
+ 	    android:id="@+id/drinks_button"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:text="@string/drinks_button"
+ 	    />
+ 	<ListView
+ 	    android:id="@+id/drinks_list"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content" >
+ 	    
+ 	</ListView>
+ 	
+    </LinearLayout>
 
     <SlidingDrawer
         android:id="@+id/slidingDrawer1"

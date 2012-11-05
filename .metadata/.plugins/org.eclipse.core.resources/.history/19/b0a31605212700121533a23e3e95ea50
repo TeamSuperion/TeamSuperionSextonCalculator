@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff0000" >
+
+	<include     
+    	android:id="@+id/header"
+    	layout="@layout/header"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    />
+
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:layout_marginBottom="60dp"
+	    android:orientation="vertical"
+	    android:id="@+id/item_holder"
+	    android:layout_below="@+id/header"
+	    >
+	    
+ 	<Button
+ 	    android:id="@+id/entree_button"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:text="@string/entree_button"
+ 	    />
+ 	
+ 	<ListView
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content" >
+ 	    
+ 	</ListView>
+ 		    
+ 	<Button
+ 	    android:id="@+id/sides_button"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:text="@string/sides_button"
+ 	    />
+ 	<ListView
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content" >
+ 	    
+ 	</ListView>	    
+ 	
+ 	<Button
+ 	    android:id="@+id/drinks_button"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:text="@string/drinks_button"
+ 	    />
+ 	<ListView
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content" >
+ 	    
+ 	</ListView>
+ 	
+    </LinearLayout>
+
+    <SlidingDrawer
+        android:id="@+id/slidingDrawer1"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:content="@+id/content"
+        android:handle="@+id/handle"
+        >
+
+        <Button
+            android:id="@+id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text= "@string/totalPrice_textView"
+            />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </LinearLayout>
+        
+    </SlidingDrawer>
+
+</RelativeLayout>

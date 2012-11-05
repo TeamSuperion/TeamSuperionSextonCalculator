@@ -2,10 +2,10 @@ package teamSuperion.sextonCalculator;
 
 import java.text.DecimalFormat;
 
-import com.example.sextoncalculator.R;
-import com.example.sextoncalculator.R.id;
-import com.example.sextoncalculator.R.layout;
-import com.example.sextoncalculator.R.menu;
+import teamSuperion.sextonCalculator.R.id;
+import teamSuperion.sextonCalculator.R.layout;
+import teamSuperion.sextonCalculator.R.menu;
+
 
 
 import android.annotation.SuppressLint;

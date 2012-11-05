@@ -101,7 +101,7 @@
     </SlidingDrawer>
     
     <SlidingDrawer
-        android:id="@+id/slidingDrawer1"
+        android:id="@+id/slidingDrawer2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -112,21 +112,21 @@
         android:handle="@+id/handle" >
 
         <Button
-            android:id="@+id/handle"
+            android:id="@+id/handle2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dip"
             android:text="Sides" />
 
         <LinearLayout
-            android:id="@+id/content"
+            android:id="@+id/content2"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
         </LinearLayout>
     </SlidingDrawer>
     
     <SlidingDrawer
-        android:id="@+id/slidingDrawer1"
+        android:id="@+id/slidingDrawer3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -137,14 +137,14 @@
         android:handle="@+id/handle" >
 
         <Button
-            android:id="@+id/handle"
+            android:id="@+id/handle3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dip"
             android:text="Drinks" />
 
         <LinearLayout
-            android:id="@+id/content"
+            android:id="@+id/content3"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
         </LinearLayout>
