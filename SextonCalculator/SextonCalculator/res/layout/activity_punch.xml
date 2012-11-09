@@ -23,90 +23,50 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/activity_header"
+        android:layout_centerHorizontal="true"
         android:text="@string/entrees"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup1"
+    <Spinner
+        android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1" >
-
-        <RadioButton
-            android:id="@+id/cheeseburger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Cheeseburger - $3.30" />
-
-        <RadioButton
-            android:id="@+id/pizza"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pizza - $2.15" />
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/radioGroup1"
-        android:text="@string/sides"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2" >
-
-        <RadioButton
-            android:id="@+id/fries"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Fries - $1.49" />
-
-        <RadioButton
-            android:id="@+id/salad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Salad - $3.00" />
-    </RadioGroup>
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/textView1" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/radioGroup2"
+        android:layout_above="@+id/random_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="65dp"
         android:text="@string/drinks"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup3"
+    <Spinner
+        android:id="@+id/spinner2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3" >
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_centerVertical="true" />
 
-        <RadioButton
-            android:id="@+id/pop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Pop - $1.49" />
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_marginTop="23dp" />
 
-        <RadioButton
-            android:id="@+id/coffee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Coffee - $1.49" />
-    </RadioGroup>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/spinner2"
+        android:layout_centerHorizontal="true"
+        android:text="@string/sides"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

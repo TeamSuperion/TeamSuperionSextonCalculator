@@ -1,33 +1,33 @@
 package com.example.sextoncalculator;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
 
-public class BrowseActivity extends Activity {
-	protected Spinner spinner;
+public class BrowseActivity extends ListActivity {
+	//protected Spinner spinner;
 	protected FoodData foodData;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_browse);
+		
 		
         foodData = new FoodData(this);
-		spinner = (Spinner) findViewById(R.id.spinner);
+		//spinner = (Spinner) findViewById(R.id.spinner);
 		if(foodData.count() == 0){
 			foodData.load();
 		}
 		Cursor cursor = foodData.all(this);
 		@SuppressWarnings("deprecation")
-		SimpleCursorAdapter foodCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursor, new String[] { foodData.NAME }, new int[] { android.R.id.text1 });
-		spinner.setAdapter(foodCursorAdapter);
-		foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		SimpleCursorAdapter foodCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_browse_row, cursor, new String[] { foodData.NAME, foodData.PRICE }, new int[] { R.id.foodItem_textView, R.id.price_textView });
+		setListAdapter(foodCursorAdapter);
+		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		setContentView(R.layout.activity_browse);
 	}
 
 	@Override

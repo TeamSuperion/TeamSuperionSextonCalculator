@@ -2,17 +2,35 @@ package com.example.sextoncalculator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 
 public class PunchActivity extends Activity {
-
+	protected Spinner entreSpinner, sideSpinner, drinkSpinner;
+	protected FoodData foodData;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_punch);
+
+        foodData = new FoodData(this);
+		entreSpinner = (Spinner) findViewById(R.id.spinner1);
+		//sideSpinner = (Spinner) findViewById(R.id.spinner2);
+		//drinkSpinner = (Spinner) findViewById(R.id.spinner3);
+		if(foodData.count() == 0){
+			foodData.load();
+		}
+		Cursor cursor = foodData.all(this);
+		@SuppressWarnings("deprecation")
+		SimpleCursorAdapter foodCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row, cursor, new String[] { foodData.NAME, foodData.PRICE }, new int[] { R.id.spinner_textView1, R.id.spinner_textView2 });
+		entreSpinner.setAdapter(foodCursorAdapter);
+		
+		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 
 	@Override
@@ -23,6 +41,7 @@ public class PunchActivity extends Activity {
 
 	public void checkoutActivity(View view) {
 		Intent intent = new Intent(this, CheckoutActivity.class);
+		/*
 		RadioButton cheeseburgerButton = (RadioButton) findViewById(R.id.cheeseburger);
 		RadioButton pizzaButton = (RadioButton) findViewById(R.id.pizza);
 		RadioButton friesButton = (RadioButton) findViewById(R.id.fries);
@@ -47,6 +66,7 @@ public class PunchActivity extends Activity {
 		if (coffeeButton.isChecked()) {
 			intent.putExtra("drinkPrice", 1.49);
 		}
+		*/
 		startActivity(intent);
 	}
 
