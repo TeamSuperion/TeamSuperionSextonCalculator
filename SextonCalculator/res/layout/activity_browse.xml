@@ -31,5 +31,15 @@
         android:layout_centerHorizontal="true" >
 
     </ListView>
+
+    <Button
+        android:id="@+id/totalPrice_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="calculateTotal"
+        android:text="Calculate" />
 
 </RelativeLayout>

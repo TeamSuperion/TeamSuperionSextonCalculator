@@ -25,7 +25,7 @@ public class FoodData extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String createSql = "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT NOT NULL, " + PRICE + " INTEGER NOT NULL, " + CALORIES + " INTEGER NOT NULL);"; 
+		String createSql = "CREATE TABLE " + TABLE_NAME + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT NOT NULL, " + PRICE + " REAL NOT NULL, " + CALORIES + " INTEGER NOT NULL);"; 
 		db.execSQL(createSql);
 	}
 
@@ -36,7 +36,7 @@ public class FoodData extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public void insert(String name, int price, int calories){
+	public void insert(String name, double price, int calories){
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(NAME, name);
@@ -60,9 +60,9 @@ public class FoodData extends SQLiteOpenHelper {
 	}
 	
 	public void load(){
-		insert("Apple", 1 , 1);
-		insert("Banana", 1 , 1);
-		insert("Orange", 1 , 1);
+		insert("Apple", .50 , 1);
+		insert("Banana", .75 , 1);
+		insert("Orange", 1.00 , 1);
 	}
 
 }

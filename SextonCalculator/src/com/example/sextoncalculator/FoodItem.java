@@ -4,15 +4,15 @@ public class FoodItem {
 
 	private String name;
 	private double price;
-	private int calories;
+	private int quantity;
 
 	public FoodItem() {
 	}
 
-	public FoodItem(String name, double price, int calories) {
+	public FoodItem(String name, double price, int quantity) {
 		this.name = name;
 		this.price = price;
-		this.calories = calories;
+		this.quantity = quantity;
 	}
 
 	public void setName(String name) {
@@ -23,8 +23,8 @@ public class FoodItem {
 		this.price = price;
 	}
 
-	public void setCalories(int calories) {
-		this.calories = calories;
+	public void setQuantity(int calories) {
+		this.quantity = calories;
 	}
 
 	public String getName() {
@@ -35,12 +35,12 @@ public class FoodItem {
 		return price;
 	}
 
-	public int getCalories() {
-		return calories;
+	public int getQuantity() {
+		return quantity;
 	}
 
 	public String toString() {
-		return name + " " + price + " " + calories;
+		return name + " " + price + " " + quantity;
 	}
 
 }
