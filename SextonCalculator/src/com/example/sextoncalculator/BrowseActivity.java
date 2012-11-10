@@ -91,7 +91,9 @@ public class BrowseActivity extends ListActivity {
 			name = itemName.getText().toString();
 			price = Double.parseDouble(itemPrice.getText().toString());
 			quantity = Integer.parseInt(itemQuantity.getText().toString());
-			foodList.add(new FoodItem(name, price, quantity));
+			if (quantity > 0) {
+				foodList.add(new FoodItem(name, price, quantity));
+			}
 		}
 		return foodList;
 	}
@@ -102,7 +104,7 @@ public class BrowseActivity extends ListActivity {
 		TextView totalPrice = (TextView) layout
 				.findViewById(R.id.totalPrice_textView);
 		double total = 0;
-		for(int i = 0; i < foodList.size(); i++){
+		for (int i = 0; i < foodList.size(); i++) {
 			total += foodList.get(i).getPrice() * foodList.get(i).getQuantity();
 		}
 		totalPrice.setText("Total Price: $" + String.valueOf(total));
