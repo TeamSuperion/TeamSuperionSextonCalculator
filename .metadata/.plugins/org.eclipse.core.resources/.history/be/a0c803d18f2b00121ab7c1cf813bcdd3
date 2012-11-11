@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/itemIncrease_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/+"
+        android:onClick="increaseQuantity" />
+
+    <TextView
+        android:id="@+id/itemName_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/TextView" />
+
+    <Button
+        android:id="@+id/itemDecrease_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="46dp"
+        android:layout_toLeftOf="@+id/itemIncrease_button"
+        android:text="@string/-"
+        android:onClick="decreaseQuantity" />
+
+    <TextView
+        android:id="@+id/itemQuantity_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemName_textView"
+        android:layout_marginRight="17dp"
+        android:layout_toLeftOf="@+id/itemIncrease_button"
+        android:text="@string/0" />
+
+    <TextView
+        android:id="@+id/itemPrice_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/itemDecrease_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/TextView" />
+
+</RelativeLayout>

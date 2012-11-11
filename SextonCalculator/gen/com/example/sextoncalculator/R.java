@@ -95,6 +95,7 @@ public final class R {
         public static final int activity_punch=0x7f060008;
     }
     public static final class string {
+        public static final int TextView=0x7f04002d;
         public static final int amountRemaining_textView=0x7f04000e;
         public static final int app_name=0x7f040000;
         public static final int back_button=0x7f04001c;
@@ -115,6 +116,8 @@ public final class R {
         public static final int home_text=0x7f040019;
         public static final int maxCalories_textView=0x7f04000b;
         public static final int menu_settings=0x7f040001;
+        public static final int minus=0x7f04002b;
+        public static final int plus=0x7f04002a;
         public static final int pressToContinue=0x7f040021;
         public static final int price=0x7f040029;
         public static final int punchPay_button=0x7f04000f;
@@ -137,6 +140,7 @@ public final class R {
         public static final int totalCalories_textView=0x7f04000c;
         public static final int totalPrice_textView=0x7f040014;
         public static final int totalRemaining_textView=0x7f04000d;
+        public static final int zero=0x7f04002c;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;
