@@ -9,7 +9,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:onClick="homeActivity"
         android:text="@string/home_button"
         android:textColor="#ffffff" />
 
@@ -26,7 +25,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:onClick="checkoutActivity"
         android:text="@string/checkout_button"
         android:textColor="#ffffff" />
 

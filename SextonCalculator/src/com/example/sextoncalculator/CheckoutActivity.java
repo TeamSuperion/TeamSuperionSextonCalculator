@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 @SuppressLint("UseValueOf")
-public class CheckoutActivity extends Activity {
+public class CheckoutActivity extends Activity implements OnClickListener {
 
 	TextView total;
 	double totalPrice;
@@ -21,20 +23,35 @@ public class CheckoutActivity extends Activity {
 	double sidePrice;
 	double drinkPrice;
 	String punchCounter;
+	
+	protected Button homeButton, resetButton, checkoutButton, punchButton, flexButton, cashButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_checkout);
-		extras = getIntent().getExtras();
-		entrePrice = extras.getDouble("entrePrice");
-		sidePrice = extras.getDouble("sidePrice");
-		drinkPrice = extras.getDouble("drinkPrice");
-		totalPrice = entrePrice + sidePrice + drinkPrice;
-		DecimalFormat df = new DecimalFormat("#.##");
-		totalPrice = Double.parseDouble(df.format(totalPrice));
-		total = (TextView) findViewById(R.id.amountRemaining_textView);
-		total.setText("$" + String.valueOf(totalPrice));
+		//extras = getIntent().getExtras();
+		//entrePrice = extras.getDouble("entrePrice");
+		//sidePrice = extras.getDouble("sidePrice");
+		//drinkPrice = extras.getDouble("drinkPrice");
+		//totalPrice = entrePrice + sidePrice + drinkPrice;
+		//DecimalFormat df = new DecimalFormat("#.##");
+		//totalPrice = Double.parseDouble(df.format(totalPrice));
+		//total = (TextView) findViewById(R.id.amountRemaining_textView);
+		//total.setText("$" + String.valueOf(totalPrice));
+		
+		homeButton = (Button) findViewById(R.id.home_button);
+		homeButton.setOnClickListener(this);
+		resetButton = (Button) findViewById(R.id.reset_button);
+		resetButton.setOnClickListener(this);
+		checkoutButton = (Button) findViewById(R.id.checkout_button);
+		checkoutButton.setOnClickListener(this);
+		punchButton = (Button) findViewById(R.id.punch_button);
+		punchButton.setOnClickListener(this);
+		flexButton = (Button) findViewById(R.id.flex_button);
+		flexButton.setOnClickListener(this);
+		cashButton = (Button) findViewById(R.id.cash_button);
+		cashButton.setOnClickListener(this);
 	}
 
 	@Override
@@ -43,14 +60,24 @@ public class CheckoutActivity extends Activity {
 		return true;
 	}
 
-	public void homeActivity(View view) {
-		Intent intent = new Intent(this, HomeActivity.class);
-		startActivity(intent);
-	}
-
-	public void backActivity(View view) {
-		Intent intent = new Intent(this, PunchActivity.class);
-		startActivity(intent);
+	public void onClick(View v) {
+		Intent intent;
+		if (v == homeButton) {
+			intent = new Intent(this, HomeActivity.class);
+			startActivity(intent);
+		} else if (v == resetButton) {
+			//intent = new Intent(this, y.class);
+			//startActivity(intent);
+		} else if (v == checkoutButton) {
+			intent = new Intent(this, CheckoutActivity.class);
+			startActivity(intent);
+		} else if (v == punchButton) {
+			
+		} else if (v == flexButton) {
+			
+		} else if (v == cashButton) {
+			
+		}
 	}
 
 	public void punchActivity(View view) {
