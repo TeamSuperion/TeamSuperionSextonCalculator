@@ -6,25 +6,17 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
-public class PunchActivity extends Activity implements OnClickListener {
+public class PunchActivity extends Activity {
 	protected Spinner entreSpinner, sideSpinner, drinkSpinner;
 	protected FoodData foodData;
-	protected Button homeButton, checkoutButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_punch);
-		
-		homeButton = (Button) findViewById(R.id.home_button);
-		homeButton.setOnClickListener(this);
-		checkoutButton = (Button) findViewById(R.id.checkout_button);
-		checkoutButton.setOnClickListener(this);
 
         foodData = new FoodData(this);
 		entreSpinner = (Spinner) findViewById(R.id.spinner1);
@@ -47,16 +39,45 @@ public class PunchActivity extends Activity implements OnClickListener {
 		return true;
 	}
 
-
-	public void onClick(View v) {
-		Intent intent;
-		if (v == homeButton) {
-			intent = new Intent(this, HomeActivity.class);
-			startActivity(intent);
-		} else if (v == checkoutButton) {
-			intent = new Intent(this, CheckoutActivity.class);
-			startActivity(intent);
+	public void checkoutActivity(View view) {
+		Intent intent = new Intent(this, CheckoutActivity.class);
+		/*
+		RadioButton cheeseburgerButton = (RadioButton) findViewById(R.id.cheeseburger);
+		RadioButton pizzaButton = (RadioButton) findViewById(R.id.pizza);
+		RadioButton friesButton = (RadioButton) findViewById(R.id.fries);
+		RadioButton saladButton = (RadioButton) findViewById(R.id.salad);
+		RadioButton popButton = (RadioButton) findViewById(R.id.pop);
+		RadioButton coffeeButton = (RadioButton) findViewById(R.id.coffee);
+		if (cheeseburgerButton.isChecked()) {
+			intent.putExtra("entrePrice", 3.30);
 		}
+		if (pizzaButton.isChecked()) {
+			intent.putExtra("entrePrice", 2.15);
+		}
+		if (friesButton.isChecked()) {
+			intent.putExtra("sidePrice", 1.49);
+		}
+		if (saladButton.isChecked()) {
+			intent.putExtra("sidePrice", 3.00);
+		}
+		if (popButton.isChecked()) {
+			intent.putExtra("drinkPrice", 1.49);
+		}
+		if (coffeeButton.isChecked()) {
+			intent.putExtra("drinkPrice", 1.49);
+		}
+		*/
+		startActivity(intent);
+	}
+
+	public void homeActivity(View view) {
+		Intent intent = new Intent(this, HomeActivity.class);
+		startActivity(intent);
+	}
+
+	public void punchActivity(View view) {
+		Intent intent = new Intent(this, CheckoutActivity.class);
+		startActivity(intent);
 	}
 
 }
