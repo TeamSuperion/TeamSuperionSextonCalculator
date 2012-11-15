@@ -23,14 +23,35 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double sidePrice;
 	double drinkPrice;
 	String punchCounter;
+<<<<<<< HEAD
+	Button homeButton, checkoutButton;
+=======
 	
 	protected Button homeButton, resetButton, checkoutButton, punchButton, flexButton, cashButton;
-	
+>>>>>>> d36833484072b6ad4b563b3ed05f871a0e1f0917
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_checkout);
+<<<<<<< HEAD
 
+		homeButton = (Button) findViewById(R.id.home_button);
+		homeButton.setOnClickListener(this);
+		checkoutButton = (Button) findViewById(R.id.checkout_button);
+		checkoutButton.setOnClickListener(this);
+
+		
+		extras = getIntent().getExtras();
+		entrePrice = extras.getDouble("entrePrice");
+		sidePrice = extras.getDouble("sidePrice");
+		drinkPrice = extras.getDouble("drinkPrice");
+		totalPrice = entrePrice + sidePrice + drinkPrice;
+		DecimalFormat df = new DecimalFormat("#.##");
+		totalPrice = Double.parseDouble(df.format(totalPrice));
+		total = (TextView) findViewById(R.id.amountRemaining_textView);
+		total.setText("$" + String.valueOf(totalPrice));
+=======
 		//extras = getIntent().getExtras();
 		//entrePrice = extras.getDouble("entrePrice");
 		//sidePrice = extras.getDouble("sidePrice");
@@ -53,6 +74,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		flexButton.setOnClickListener(this);
 		cashButton = (Button) findViewById(R.id.cash_button);
 		cashButton.setOnClickListener(this);
+>>>>>>> d36833484072b6ad4b563b3ed05f871a0e1f0917
 	}
 
 	@Override
@@ -61,6 +83,11 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		return true;
 	}
 
+<<<<<<< HEAD
+	public void backActivity(View view) {
+		Intent intent = new Intent(this, PunchActivity.class);
+		startActivity(intent);
+=======
 	public void onClick(View v) {
 		Intent intent;
 		if (v == homeButton) {
@@ -79,6 +106,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		} else if (v == cashButton) {
 			
 		}
+>>>>>>> d36833484072b6ad4b563b3ed05f871a0e1f0917
 	}
 
 	public void punchActivity(View view) {
@@ -97,6 +125,17 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			aInt = aInt + 1;
 			punchCounter = Integer.toString(aInt);
 			edit.setText(punchCounter);
+		}
+	}
+
+	public void onClick(View v) {
+		Intent intent;
+		if (v == homeButton) {
+			intent = new Intent(this, HomeActivity.class);
+			startActivity(intent);
+		} else if (v == checkoutButton) {
+			intent = new Intent(this, CheckoutActivity.class);
+			startActivity(intent);
 		}
 	}
 
