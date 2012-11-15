@@ -12,7 +12,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
 public class PunchActivity extends Activity implements OnClickListener {
-	protected Spinner entreeSpinner, sideSpinner, drinkSpinner;
+	protected Spinner entreSpinner, sideSpinner, drinkSpinner;
 	protected FoodData foodData;
 	protected Button homeButton, checkoutButton;
 	
@@ -25,9 +25,20 @@ public class PunchActivity extends Activity implements OnClickListener {
 		homeButton.setOnClickListener(this);
 		checkoutButton = (Button) findViewById(R.id.checkout_button);
 		checkoutButton.setOnClickListener(this);
+
+        foodData = new FoodData(this);
+		entreSpinner = (Spinner) findViewById(R.id.spinner1);
+		//sideSpinner = (Spinner) findViewById(R.id.spinner2);
+		//drinkSpinner = (Spinner) findViewById(R.id.spinner3);
+		if(foodData.count() == 0){
+			foodData.load();
+		}
+		Cursor cursor = foodData.all(this);
+		@SuppressWarnings("deprecation")
+		SimpleCursorAdapter foodCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row, cursor, new String[] { foodData.NAME, foodData.PRICE }, new int[] { R.id.spinner_textView1, R.id.spinner_textView2 });
+		entreSpinner.setAdapter(foodCursorAdapter);
 		
-		initializeDB();
-		
+		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 
 	@Override
@@ -36,32 +47,6 @@ public class PunchActivity extends Activity implements OnClickListener {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
-	public void initializeDB(){
-
-        foodData = new FoodData(this);
-		entreeSpinner = (Spinner) findViewById(R.id.spinner1);
-		//sideSpinner = (Spinner) findViewById(R.id.spinner2);
-		//drinkSpinner = (Spinner) findViewById(R.id.spinner3);
-		if(foodData.count() == 0){
-			foodData.load();
-		}
-		
-		//String[] category = new String[] {foodData.NAME, foodData.CATEGORY};
-		//String temp = category[1];
-		//System.out.println(temp);
-		
-		String[] from = new String[] { foodData.NAME, foodData.PRICE, foodData.CALORIES};
-		int[] to =new int[] { R.id.spinner_textView1, R.id.spinner_textView2, R.id.spinner_textView3};
-		
-		Cursor cursor = foodData.all(this);
-		startManagingCursor(cursor);
-		
-		SimpleCursorAdapter foodCursor = new SimpleCursorAdapter(this, R.layout.activity_punch_row, cursor, from, to);
-		entreeSpinner.setAdapter(foodCursor);
-		
-		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	}
 
 	public void onClick(View v) {
 		Intent intent;

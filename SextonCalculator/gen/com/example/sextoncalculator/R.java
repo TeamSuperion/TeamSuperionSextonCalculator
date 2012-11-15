@@ -45,7 +45,7 @@ public final class R {
         public static final int itemQuantity_textView=0x7f070008;
         public static final int item_holder=0x7f07000a;
         public static final int maxCalories_textView=0x7f070015;
-        public static final int menu_settings=0x7f070036;
+        public static final int menu_settings=0x7f070037;
         public static final int punchValue_textView=0x7f07001e;
         public static final int punch_button=0x7f070024;
         public static final int random_button=0x7f070014;
@@ -59,6 +59,7 @@ public final class R {
         public static final int spinner3=0x7f070032;
         public static final int spinner_textView1=0x7f070034;
         public static final int spinner_textView2=0x7f070035;
+        public static final int spinner_textView3=0x7f070036;
         public static final int start_button=0x7f070029;
         public static final int tableRow1=0x7f070023;
         public static final int tableRow2=0x7f070027;

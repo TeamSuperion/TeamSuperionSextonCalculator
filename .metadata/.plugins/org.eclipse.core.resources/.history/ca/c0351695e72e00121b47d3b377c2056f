@@ -25,9 +25,7 @@ public class PunchActivity extends Activity implements OnClickListener {
 		homeButton.setOnClickListener(this);
 		checkoutButton = (Button) findViewById(R.id.checkout_button);
 		checkoutButton.setOnClickListener(this);
-		
-		initializeDB();
-		
+
 	}
 
 	@Override
@@ -36,7 +34,6 @@ public class PunchActivity extends Activity implements OnClickListener {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void initializeDB(){
 
         foodData = new FoodData(this);
@@ -51,14 +48,11 @@ public class PunchActivity extends Activity implements OnClickListener {
 		//String temp = category[1];
 		//System.out.println(temp);
 		
-		String[] from = new String[] { foodData.NAME, foodData.PRICE, foodData.CALORIES};
-		int[] to =new int[] { R.id.spinner_textView1, R.id.spinner_textView2, R.id.spinner_textView3};
-		
 		Cursor cursor = foodData.all(this);
-		startManagingCursor(cursor);
-		
-		SimpleCursorAdapter foodCursor = new SimpleCursorAdapter(this, R.layout.activity_punch_row, cursor, from, to);
-		entreeSpinner.setAdapter(foodCursor);
+		@SuppressWarnings("deprecation")
+		SimpleCursorAdapter foodCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row,
+				cursor, new String[] { foodData.NAME, foodData.PRICE }, new int[] { R.id.spinner_textView1, R.id.spinner_textView2 });
+		entreeSpinner.setAdapter(foodCursorAdapter);
 		
 		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
