@@ -10,7 +10,16 @@
         android:layout_height="wrap_content"
         layout="@layout/activity_header" />
 
-        <TextView
+    <ListView
+        android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="113dp" >
+    </ListView>
+
+    <TextView
         android:id="@+id/totalPrice_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,35 +28,5 @@
         android:text="@string/totalPrice_textView"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff" />
-
-
-
-    <ListView
-        android:id="@+id/android:list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/totalPrice_textView"
-        android:layout_below="@+id/activity_header"
-        android:layout_centerHorizontal="true" >
-
-    </ListView>
-
-    <Button
-        android:id="@+id/totalPrice_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="calculateTotal"
-        android:text="Calculate" />
-    
-        <TextView
-        android:id="@+id/shoppingCart_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		android:layout_marginLeft="100dp"
-        android:layout_marginTop="300dp"
-        android:text="@string/TextView" />
 
 </RelativeLayout>

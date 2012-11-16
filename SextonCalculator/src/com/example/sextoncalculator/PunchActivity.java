@@ -26,7 +26,6 @@ public class PunchActivity extends Activity implements OnClickListener {
 		checkoutButton = (Button) findViewById(R.id.checkout_button);
 		checkoutButton.setOnClickListener(this);
 		
-
 		initializeDB();
 		
 	}
@@ -42,15 +41,17 @@ public class PunchActivity extends Activity implements OnClickListener {
 
         foodData = new FoodData(this);
 		entreeSpinner = (Spinner) findViewById(R.id.spinner1);
-		sideSpinner = (Spinner) findViewById(R.id.spinner2);
-		drinkSpinner = (Spinner) findViewById(R.id.spinner3);
+		//sideSpinner = (Spinner) findViewById(R.id.spinner2);
+		//drinkSpinner = (Spinner) findViewById(R.id.spinner3);
 		if(foodData.count() == 0){
 			foodData.load();
 		}
 		
-		
-		String[] from = new String[] { foodData.NAME, foodData.CALORIES};
-		int[] to =new int[] { R.id.spinner_textView1, R.id.spinner_textView2};
+		//String[] category = new String[] {foodData.NAME, foodData.CATEGORY};
+		//String temp = category[1];
+		//System.out.println(temp);
+		String[] from = new String[] { foodData.NAME, foodData.PRICE, foodData.CALORIES};
+		int[] to =new int[] { R.id.spinner_textView1, R.id.spinner_textView2, R.id.spinner_textView3};
 		
 		Cursor cursor = foodData.all(this);
 		startManagingCursor(cursor);

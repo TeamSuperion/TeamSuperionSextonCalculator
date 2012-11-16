@@ -15,6 +15,15 @@
         android:id="@+id/spinner_textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1"
+        android:text="@string/TextView" />
+    
+    <TextView
+        android:id="@+id/spinner_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_weight="1"
         android:text="@string/TextView" />
 
