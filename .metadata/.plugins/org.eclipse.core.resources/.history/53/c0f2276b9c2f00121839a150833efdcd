@@ -49,7 +49,7 @@ public class PunchActivity extends Activity implements OnClickListener {
 		}
 		
 		
-		String[] from = new String[] { FoodData.NAME, FoodData.CALORIES};
+		String[] from = new String[] { foodData.NAME, foodData.CALORIES};
 		int[] to =new int[] { R.id.spinner_textView1, R.id.spinner_textView2};
 		
 		Cursor cursor = foodData.all(this);
@@ -57,8 +57,6 @@ public class PunchActivity extends Activity implements OnClickListener {
 		
 		SimpleCursorAdapter foodCursor = new SimpleCursorAdapter(this, R.layout.activity_punch_row, cursor, from, to);
 		entreeSpinner.setAdapter(foodCursor);
-		sideSpinner.setAdapter(foodCursor);
-		drinkSpinner.setAdapter(foodCursor);
 		
 		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
