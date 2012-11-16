@@ -82,7 +82,7 @@ public final class R {
         public static final int calorie_button=0x7f070024;
         public static final int cashPay_editText=0x7f07001a;
         public static final int cash_button=0x7f07002b;
-        public static final int checkout_button=0x7f07001f;
+        public static final int checkout_button=0x7f07001e;
         public static final int chkIos=0x7f070016;
         public static final int content=0x7f070010;
         public static final int continueText=0x7f070029;
@@ -107,7 +107,7 @@ public final class R {
         public static final int punchValue_textView=0x7f07001c;
         public static final int punch_button=0x7f070022;
         public static final int random_button=0x7f070012;
-        public static final int reset_button=0x7f07001e;
+        public static final int reset_button=0x7f07001f;
         public static final int sides_button=0x7f07000b;
         public static final int sides_list=0x7f07000c;
         public static final int slidingDrawer1=0x7f07000f;
