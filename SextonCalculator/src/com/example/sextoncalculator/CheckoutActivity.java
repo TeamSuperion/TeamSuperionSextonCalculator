@@ -23,36 +23,38 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double sidePrice;
 	double drinkPrice;
 	String punchCounter;
-	
-	protected Button homeButton, resetButton, checkoutButton, punchButton, flexButton, cashButton;
-	
+
+	protected Button homeButton, resetButton, checkoutButton, punchButton,
+			flexButton, cashButton;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_checkout);
-
-		//extras = getIntent().getExtras();
-		//entrePrice = extras.getDouble("entrePrice");
-		//sidePrice = extras.getDouble("sidePrice");
-		//drinkPrice = extras.getDouble("drinkPrice");
-		//totalPrice = entrePrice + sidePrice + drinkPrice;
-		//DecimalFormat df = new DecimalFormat("#.##");
-		//totalPrice = Double.parseDouble(df.format(totalPrice));
-		//total = (TextView) findViewById(R.id.amountRemaining_textView);
-		//total.setText("$" + String.valueOf(totalPrice));
 		
+		// extras = getIntent().getExtras();
+		// entrePrice = extras.getDouble("entrePrice");
+		// sidePrice = extras.getDouble("sidePrice");
+		// drinkPrice = extras.getDouble("drinkPrice");
+		// totalPrice = entrePrice + sidePrice + drinkPrice;
+		// DecimalFormat df = new DecimalFormat("#.##");
+		// totalPrice = Double.parseDouble(df.format(totalPrice));
+		// total = (TextView) findViewById(R.id.amountRemaining_textView);
+		// total.setText("$" + String.valueOf(totalPrice));
+
 		homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setOnClickListener(this);
 		resetButton = (Button) findViewById(R.id.reset_button);
 		resetButton.setOnClickListener(this);
-		checkoutButton = (Button) findViewById(R.id.checkout_button);
-		checkoutButton.setOnClickListener(this);
 		punchButton = (Button) findViewById(R.id.punch_button);
 		punchButton.setOnClickListener(this);
 		flexButton = (Button) findViewById(R.id.flex_button);
 		flexButton.setOnClickListener(this);
 		cashButton = (Button) findViewById(R.id.cash_button);
 		cashButton.setOnClickListener(this);
+
+		checkoutButton = (Button) findViewById(R.id.checkout_button);
+		checkoutButton.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -67,30 +69,34 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			intent = new Intent(this, HomeActivity.class);
 			startActivity(intent);
 		} else if (v == resetButton) {
-			//intent = new Intent(this, y.class);
-			//startActivity(intent);
-		} else if (v == checkoutButton) {
-			intent = new Intent(this, CheckoutActivity.class);
-			startActivity(intent);
+			restartActivity(this);
 		} else if (v == punchButton) {
-			
+			punchActivity();
 		} else if (v == flexButton) {
-			
+
 		} else if (v == cashButton) {
-			
+
 		}
 	}
 
-	public void punchActivity(View view) {
+	public void restartActivity(Activity act) {
+		Intent intent = new Intent();
+		act.finish();
+		intent.setClass(act, act.getClass());
+		act.startActivity(intent);
+	}
+
+	public void punchActivity() {
 		final TextView newTotal = (TextView) findViewById(R.id.amountRemaining_textView);
 		totalPrice = totalPrice - entrePrice - sidePrice - drinkPrice;
 		if (totalPrice > 0.00) {
-			DecimalFormat df = new DecimalFormat("#.##");
-			totalPrice = Double.parseDouble(df.format(totalPrice));
-			newTotal.setText("$" + String.valueOf(totalPrice));
+			DecimalFormat df = new DecimalFormat("0.00");
+			String totalPriceString = df.format(totalPrice);
+			newTotal.setText("$" + totalPriceString);
 			if (totalPrice == 0.00) {
 				newTotal.setText("$0.00");
 			}
+
 			EditText edit = (EditText) findViewById(R.id.cashPay_editText);
 			punchCounter = edit.getText().toString();
 			int aInt = Integer.parseInt(punchCounter);
