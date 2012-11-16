@@ -55,6 +55,8 @@ public class PunchActivity extends Activity implements OnClickListener {
 		
 		SimpleCursorAdapter foodCursor = new SimpleCursorAdapter(this, R.layout.activity_punch_row, cursor, from, to);
 		entreeSpinner.setAdapter(foodCursor);
+		sideSpinner.setAdapter(foodCursor);
+		drinkSpinner.setAdapter(foodCursor);
 		
 		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
