@@ -81,7 +81,7 @@ public class FoodData extends SQLiteOpenHelper {
 		insert("Orange",86,"0.70",2);
 		insert("Banana",105,"0.70",2);
 		insert("Cut Fresh Fruit",10,"2.75",2);
-		insert("Chef Salad w/cheese & meat",200,"3.00",2);
+		insert("Garden Salad",200,"3.00",2);
 		insert("Raw Veggies",50,"2.00",2);
 		insert("Tuna Sandwich",220,"2.75",1);
 		insert("Egg Salad Sandwich",230,"2.75",1);
