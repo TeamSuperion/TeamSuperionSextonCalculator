@@ -22,6 +22,8 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	// protected Spinner spinner;
 	protected FoodData foodData;
 	protected Button homeButton, resetButton, checkoutButton;
+	String totalString;
+	List<FoodItem> foodList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,8 +67,23 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			restartActivity(this);
 		} else if (v == checkoutButton) {
 			intent = new Intent(this, CheckoutActivity.class);
+			intent.putExtra("totalString", getTotalString());
+			//String[] foodListIntance = new String[foodList.size()];
+			//for (int i=0; i<=foodList.size(); i++) {
+			//	foodListIntance[i]=foodList.get(i).toString();
+			//}
+			//intent.putExtra("foodListIntance", foodListIntance);
 			startActivity(intent);
 		}
+	}
+	
+	public double getTotalString() {
+		double newD = Double.parseDouble(this.totalString);
+		return newD;
+	}
+	
+	public void setTotalString(String totalString){
+		this.totalString = totalString;
 	}
 
 	public void restartActivity(Activity act) {
@@ -97,7 +114,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	}
 
 	public List<FoodItem> generateFoodList() {
-		List<FoodItem> foodList = new ArrayList<FoodItem>();
+		foodList = new ArrayList<FoodItem>();
 		TextView itemName;
 		TextView itemPrice;
 		TextView itemQuantity;
@@ -134,15 +151,16 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			totalPrice.setText("Total Price: $0.00");
 		} else if (total > 0.00) {
 			DecimalFormat df = new DecimalFormat("0.00");
-			String totalString = df.format(total);
+			totalString = df.format(total);
 			totalPrice.setText("Total Price: $" + totalString);
 		}
+		setTotalString(totalString);
 	}
 	
-	public void checkoutActivity(View view) {
+	/*public void checkoutActivity(View view) {
 		Intent intent = new Intent(this, CheckoutActivity.class);
 		
-		/*
+		
 		RadioButton cheeseburgerButton = (RadioButton) findViewById(R.id.cheeseburger);
 		RadioButton pizzaButton = (RadioButton) findViewById(R.id.pizza);
 		RadioButton friesButton = (RadioButton) findViewById(R.id.fries);
@@ -167,8 +185,8 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		if (coffeeButton.isChecked()) {
 			intent.putExtra("drinkPrice", 1.49);
 		}
-		*/
+		
 		startActivity(intent);
-	}
+	}*/
 
 }
