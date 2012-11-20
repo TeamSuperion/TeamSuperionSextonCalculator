@@ -94,9 +94,6 @@ public class FoodData extends SQLiteOpenHelper {
 	}
 	
 	public void load(){
-		//insert("Apple", .50 , 1);
-		//insert("Banana", .75 , 1);
-		//insert("Orange", 1.00 , 1);
 		
 		insert("Apple",110,"0.70",2);
 		insert("Orange",86,"0.70",2);
