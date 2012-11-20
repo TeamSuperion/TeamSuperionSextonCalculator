@@ -94,7 +94,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		} else if (v == flexButton) {
 			flexActivity();
 		} else if (v == cashButton) {
-			//cashActivity();
+			cashActivity();
 		}
 	}
 
