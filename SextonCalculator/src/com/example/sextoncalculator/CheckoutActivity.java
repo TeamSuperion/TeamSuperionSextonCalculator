@@ -29,6 +29,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double punchValue =5.5;
 	ArrayList<FoodItem> foodList;
 	
+	String flexValue;
+	String cashValue;
+	double totalPriceInstance;
 	double totalString;
 
 	protected Button homeButton, resetButton, checkoutButton, punchButton,
@@ -47,8 +50,6 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		listView1.setAdapter(adapter);
 		extras = getIntent().getExtras();
 		totalPrice = extras.getDouble("totalString");
-		 extras = getIntent().getExtras();
-		 totalString = extras.getDouble("totalString");
 		// entrePrice = extras.getDouble("entrePrice");
 		// sidePrice = extras.getDouble("sidePrice");
 		// drinkPrice = extras.getDouble("drinkPrice");
@@ -57,7 +58,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		totalPrice = Double.parseDouble(df.format(totalPrice));
 		total = (TextView) findViewById(R.id.amountRemaining_textView);
 		total.setText("$" + String.valueOf(totalPrice));
-		//total.setText("$"+foodListIntance[1]+"$");
+		setTotalPrice(totalPrice);
+		
 
 		homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setOnClickListener(this);
@@ -92,7 +94,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		} else if (v == flexButton) {
 			flexActivity();
 		} else if (v == cashButton) {
-
+			cashActivity();
 		}
 	}
 
@@ -103,36 +105,76 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		act.startActivity(intent);
 	}
 
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
 	public void punchActivity() {
-		final TextView newTotal = (TextView) findViewById(R.id.amountRemaining_textView);
-		totalPrice = totalPrice - entrePrice - sidePrice - drinkPrice;
-		if (totalPrice > 0.00) {
-			DecimalFormat df = new DecimalFormat("0.00");
-			String totalPriceString = df.format(totalPrice);
-			newTotal.setText("$" + totalPriceString);
-			if (totalPrice == 0.00) {
-				newTotal.setText("$0.00");
+		//final TextView newTotal = (TextView) findViewById(R.id.amountRemaining_textView);
+		// totalPrice = totalPrice - entrePrice - sidePrice - drinkPrice;
+		totalPriceInstance = getTotalPrice();
+		if (totalPriceInstance > 5.50) {
+			totalPriceInstance = totalPriceInstance - 5.50;
+			setTotalPrice(totalPriceInstance);
+			if (totalPriceInstance > 0.00) {
+				DecimalFormat df = new DecimalFormat("0.00");
+				String totalPriceString = df.format(totalPriceInstance);
+				total.setText("$" + totalPriceString);
+				if (totalPriceInstance == 0.00) {
+					total.setText("$0.00");
+				}
+
+				EditText edit = (EditText) findViewById(R.id.punchPay_editText);
+				punchCounter = edit.getText().toString();
+				int punchIntCounter = Integer.parseInt(punchCounter);
+				punchIntCounter = punchIntCounter + 1;
+				punchCounter = Integer.toString(punchIntCounter);
+				//punchCounter = Double.toString(getTotalPrice());
+				edit.setText(punchCounter);
 			}
-
-			EditText edit = (EditText) findViewById(R.id.cashPay_editText);
-			punchCounter = edit.getText().toString();
-			int aInt = Integer.parseInt(punchCounter);
-			aInt = aInt + 1;
-			punchCounter = Integer.toString(aInt);
-			edit.setText(punchCounter);
-
-			totalPrice = totalPrice-punchValue;
-			newTotal.setText("$" + df.format(totalPrice));
 		}
 	}
 	
 	public void flexActivity() {
-		if(totalPrice > 0.00){
-			
+		totalPriceInstance = getTotalPrice();
+		if (totalPriceInstance == 0.00) {
+			//do nothing
 		}
-		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
-		punchCounter = edit.getText().toString();
-		
+		else if (totalPriceInstance > 0.00) {
+			EditText edit = (EditText) findViewById(R.id.flexPay_editText);
+			flexValue = edit.getText().toString();
+			double flexDoubleValue = Double.parseDouble(flexValue);
+			flexDoubleValue = flexDoubleValue + totalPriceInstance;
+			DecimalFormat df = new DecimalFormat("0.00");
+			String flexValue = df.format(flexDoubleValue);
+			edit.setText("$" +flexValue);
+			
+			setTotalPrice(0.00);
+			total.setText("$0.00");
+		}
+	}
+	
+	public void cashActivity() {
+		totalPriceInstance = getTotalPrice();
+		if (totalPriceInstance == 0.00) {
+			//do nothing
+		}
+		else if (totalPriceInstance > 0.00) {
+			EditText edit = (EditText) findViewById(R.id.cashPay_editText);
+			cashValue = edit.getText().toString();
+			double cashDoubleValue = Double.parseDouble(cashValue);
+			cashDoubleValue = cashDoubleValue + totalPriceInstance;
+			DecimalFormat df = new DecimalFormat("0.00");
+			String cashValue = df.format(cashDoubleValue);
+			edit.setText("$" +cashValue);
+			
+			setTotalPrice(0.00);
+			total.setText("$0.00");
+		}
 	}
 
 }

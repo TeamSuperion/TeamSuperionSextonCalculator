@@ -79,8 +79,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	}
 	
 	public double getTotalString() {
-		double newD = Double.parseDouble(this.totalString);
-		return newD;
+		return Double.parseDouble(this.totalString);
 	}
 	
 	public void setTotalString(String totalString){
