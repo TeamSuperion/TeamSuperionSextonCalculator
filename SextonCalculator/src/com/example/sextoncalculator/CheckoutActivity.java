@@ -94,15 +94,15 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		} else if (v == flexButton) {
 			flexActivity();
 		} else if (v == cashButton) {
-			cashActivity();
+			//cashActivity();
 		}
 	}
 
 	public void restartActivity(Activity act) {
-		Intent intent = new Intent();
-		act.finish();
-		intent.setClass(act, act.getClass());
-		act.startActivity(intent);
+		//Intent intent = new Intent();
+		//act.finish();
+		//intent.setClass(act, act.getClass());
+		//act.startActivity(intent);
 	}
 
 	public void setTotalPrice(double totalPrice) {
