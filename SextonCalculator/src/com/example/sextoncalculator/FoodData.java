@@ -61,8 +61,29 @@ public class FoodData extends SQLiteOpenHelper {
 	public Cursor cat1(Activity activity){
 		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY };
 		String order = NAME;
+		String selection = CATEGORY + " = 1";
 		SQLiteDatabase db = getReadableDatabase();
-		Cursor cursor = db.query(TABLE_NAME, from, null, null, null, null, order);
+		Cursor cursor = db.query(TABLE_NAME, from, selection, null, null, null, order);
+		activity.startManagingCursor(cursor);
+		return cursor;
+	}
+
+	public Cursor cat2(Activity activity){
+		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY };
+		String order = NAME;
+		String selection = CATEGORY + " = 2";
+		SQLiteDatabase db = getReadableDatabase();
+		Cursor cursor = db.query(TABLE_NAME, from, selection, null, null, null, order);
+		activity.startManagingCursor(cursor);
+		return cursor;
+	}
+
+	public Cursor cat3(Activity activity){
+		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY };
+		String order = NAME;
+		String selection = CATEGORY + " = 3";
+		SQLiteDatabase db = getReadableDatabase();
+		Cursor cursor = db.query(TABLE_NAME, from, selection, null, null, null, order);
 		activity.startManagingCursor(cursor);
 		return cursor;
 	}

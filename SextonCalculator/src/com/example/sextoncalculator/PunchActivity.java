@@ -27,6 +27,7 @@ public class PunchActivity extends Activity implements OnClickListener {
 		checkoutButton.setOnClickListener(this);
 		resetButton = (Button) findViewById(R.id.reset_button);
 		resetButton.setOnClickListener(this);
+		
 		initializeDB();
 		
 	}
@@ -42,8 +43,8 @@ public class PunchActivity extends Activity implements OnClickListener {
 
         foodData = new FoodData(this);
 		entreeSpinner = (Spinner) findViewById(R.id.spinner1);
-		//sideSpinner = (Spinner) findViewById(R.id.spinner2);
-		//drinkSpinner = (Spinner) findViewById(R.id.spinner3);
+		sideSpinner = (Spinner) findViewById(R.id.spinner2);
+		drinkSpinner = (Spinner) findViewById(R.id.spinner3);
 		if(foodData.count() == 0){
 			foodData.load();
 		}
@@ -51,11 +52,19 @@ public class PunchActivity extends Activity implements OnClickListener {
 		String[] from = new String[] { FoodData.NAME, FoodData.CALORIES};
 		int[] to =new int[] { R.id.spinner_textView1, R.id.spinner_textView2};
 		
-		Cursor cursor = foodData.cat1(this);
-		startManagingCursor(cursor);
+		Cursor entreeCursor = foodData.cat1(this);
+		startManagingCursor(entreeCursor);
+		Cursor sidesCursor = foodData.cat2(this);
+		startManagingCursor(entreeCursor);
+		Cursor drinksCursor = foodData.cat3(this);
+		startManagingCursor(entreeCursor);
 		
-		SimpleCursorAdapter foodCursor = new SimpleCursorAdapter(this, R.layout.activity_punch_row, cursor, from, to);
-		entreeSpinner.setAdapter(foodCursor);
+		SimpleCursorAdapter entreeCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row, entreeCursor, from, to);
+		entreeSpinner.setAdapter(entreeCursorAdapter);
+		SimpleCursorAdapter sidesCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row, sidesCursor, from, to);
+		sideSpinner.setAdapter(sidesCursorAdapter);
+		SimpleCursorAdapter drinksCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row, drinksCursor, from, to);
+		drinkSpinner.setAdapter(drinksCursorAdapter);
 		
 		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
