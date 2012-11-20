@@ -43,7 +43,7 @@ public class FoodItem implements Parcelable {
 	}
 
 	public String toString() {
-		return name + " " + price + " " + quantity;
+		return name + " $" + price + " X " + quantity;
 	}
 
 	public int describeContents() {
