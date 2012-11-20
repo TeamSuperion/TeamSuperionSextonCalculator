@@ -60,9 +60,9 @@ public class FoodData extends SQLiteOpenHelper {
 	
 	public Cursor cat1(Activity activity){
 		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY };
-		String order = CATEGORY;
+		String order = NAME;
 		SQLiteDatabase db = getReadableDatabase();
-		Cursor cursor = db.query(TABLE_NAME, from, CATEGORY="1", null, null, null, order);
+		Cursor cursor = db.query(TABLE_NAME, from, null, null, null, null, order);
 		activity.startManagingCursor(cursor);
 		return cursor;
 	}
@@ -73,9 +73,6 @@ public class FoodData extends SQLiteOpenHelper {
 	}
 	
 	public void load(){
-		//insert("Apple", .50 , 1);
-		//insert("Banana", .75 , 1);
-		//insert("Orange", 1.00 , 1);
 		
 		insert("Apple",110,"0.70",2);
 		insert("Orange",86,"0.70",2);

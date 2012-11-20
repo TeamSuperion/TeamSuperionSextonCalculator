@@ -23,6 +23,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double sidePrice;
 	double drinkPrice;
 	String punchCounter;
+	double punchValue =5.5;
 	
 	double totalString;
 
@@ -82,7 +83,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		} else if (v == punchButton) {
 			punchActivity();
 		} else if (v == flexButton) {
-
+			flexActivity();
 		} else if (v == cashButton) {
 
 		}
@@ -112,7 +113,19 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			aInt = aInt + 1;
 			punchCounter = Integer.toString(aInt);
 			edit.setText(punchCounter);
+
+			totalPrice = totalPrice-punchValue;
+			newTotal.setText("$" + df.format(totalPrice));
 		}
+	}
+	
+	public void flexActivity() {
+		if(totalPrice > 0.00){
+			
+		}
+		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
+		punchCounter = edit.getText().toString();
+		
 	}
 
 }
