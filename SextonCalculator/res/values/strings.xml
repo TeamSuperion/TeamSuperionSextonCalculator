@@ -31,8 +31,8 @@
     <string name="back_button">Back</string>
     <string name="drinks_button">Drinks</string>
     <string name="punchTotal_editText">0</string>
-    <string name="flexTotal_editText">0.00</string>
-    <string name="cashTotal_editText">0.00</string>
+    <string name="flexTotal_editText">$0.00</string>
+    <string name="cashTotal_editText">$0.00</string>
     <string name="pressToContinue">Press To Continue</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_header">HeaderActivity</string>
