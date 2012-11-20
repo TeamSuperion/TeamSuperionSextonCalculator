@@ -14,7 +14,7 @@ import android.widget.Spinner;
 public class PunchActivity extends Activity implements OnClickListener {
 	protected Spinner entreeSpinner, sideSpinner, drinkSpinner;
 	protected FoodData foodData;
-	protected Button homeButton, checkoutButton;
+	protected Button homeButton, checkoutButton, resetButton;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,8 @@ public class PunchActivity extends Activity implements OnClickListener {
 		homeButton.setOnClickListener(this);
 		checkoutButton = (Button) findViewById(R.id.checkout_button);
 		checkoutButton.setOnClickListener(this);
-		
+		resetButton = (Button) findViewById(R.id.reset_button);
+		resetButton.setOnClickListener(this);
 		initializeDB();
 		
 	}
@@ -50,13 +51,20 @@ public class PunchActivity extends Activity implements OnClickListener {
 		String[] from = new String[] { FoodData.NAME, FoodData.CALORIES};
 		int[] to =new int[] { R.id.spinner_textView1, R.id.spinner_textView2};
 		
-		Cursor cursor = foodData.all(this);
+		Cursor cursor = foodData.cat1(this);
 		startManagingCursor(cursor);
 		
 		SimpleCursorAdapter foodCursor = new SimpleCursorAdapter(this, R.layout.activity_punch_row, cursor, from, to);
 		entreeSpinner.setAdapter(foodCursor);
 		
 		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	}
+
+	public void restartActivity(Activity act) {
+		Intent intent = new Intent();
+		act.finish();
+		intent.setClass(act, act.getClass());
+		act.startActivity(intent);
 	}
 
 	public void onClick(View v) {
@@ -67,6 +75,8 @@ public class PunchActivity extends Activity implements OnClickListener {
 		} else if (v == checkoutButton) {
 			intent = new Intent(this, CheckoutActivity.class);
 			startActivity(intent);
+		} else if (v == resetButton) {
+			restartActivity(this);
 		}
 	}
 

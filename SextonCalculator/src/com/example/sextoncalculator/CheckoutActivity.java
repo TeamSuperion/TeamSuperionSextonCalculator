@@ -109,7 +109,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			EditText edit = (EditText) findViewById(R.id.cashPay_editText);
 			punchCounter = edit.getText().toString();
 			int aInt = Integer.parseInt(punchCounter);
-			aInt = aInt - 1;
+			aInt = aInt + 1;
 			punchCounter = Integer.toString(aInt);
 			edit.setText(punchCounter);
 		}
