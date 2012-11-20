@@ -1,5 +1,7 @@
 package com.example.sextoncalculator;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,13 +10,19 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class PunchActivity extends Activity implements OnClickListener {
 	protected Spinner entreeSpinner, sideSpinner, drinkSpinner;
 	protected FoodData foodData;
 	protected Button homeButton, checkoutButton, resetButton;
+	ArrayList<FoodItem> foodList;
+	String punchValue = "5.50";
+	String totalString = punchValue;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,24 @@ public class PunchActivity extends Activity implements OnClickListener {
 		act.finish();
 		intent.setClass(act, act.getClass());
 		act.startActivity(intent);
+	}	
+	
+	public double getTotalString() {
+		return Double.parseDouble(this.totalString);
+	}
+	
+	public ArrayList<FoodItem> generateFoodList() {
+		foodList = new ArrayList<FoodItem>();
+		TextView itemName;
+		String name;
+		double price;
+		int quantity;
+		itemName = (TextView) findViewById(R.id.spinner_textView1);
+		name = itemName.getText().toString();
+		price = 0.00;
+		quantity = 1;
+		foodList.add(new FoodItem(name, price, quantity));
+		return foodList;
 	}
 
 	public void onClick(View v) {
@@ -83,6 +109,8 @@ public class PunchActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 		} else if (v == checkoutButton) {
 			intent = new Intent(this, CheckoutActivity.class);
+			intent.putParcelableArrayListExtra("foodList", generateFoodList());
+			intent.putExtra("totalString", getTotalString());
 			startActivity(intent);
 		} else if (v == resetButton) {
 			restartActivity(this);
