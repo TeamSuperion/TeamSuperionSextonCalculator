@@ -23,7 +23,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	protected FoodData foodData;
 	protected Button homeButton, resetButton, checkoutButton;
 	String totalString;
-	List<FoodItem> foodList;
+	ArrayList<FoodItem> foodList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			restartActivity(this);
 		} else if (v == checkoutButton) {
 			intent = new Intent(this, CheckoutActivity.class);
+			intent.putParcelableArrayListExtra("foodList", generateFoodList());
 			intent.putExtra("totalString", getTotalString());
 			//String[] foodListIntance = new String[foodList.size()];
 			//for (int i=0; i<=foodList.size(); i++) {
@@ -113,7 +114,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		calculateTotal();
 	}
 
-	public List<FoodItem> generateFoodList() {
+	public ArrayList<FoodItem> generateFoodList() {
 		foodList = new ArrayList<FoodItem>();
 		TextView itemName;
 		TextView itemPrice;

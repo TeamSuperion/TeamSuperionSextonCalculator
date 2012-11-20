@@ -1,6 +1,9 @@
 package com.example.sextoncalculator;
 
-public class FoodItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class FoodItem implements Parcelable {
 
 	private String name;
 	private double price;
@@ -43,4 +46,30 @@ public class FoodItem {
 		return name + " " + price + " " + quantity;
 	}
 
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(name);
+		dest.writeDouble(price);
+		dest.writeInt(quantity);
+	}
+
+	public static final Parcelable.Creator<FoodItem> CREATOR = new Parcelable.Creator<FoodItem>() {
+		public FoodItem createFromParcel(Parcel in) {
+			return new FoodItem(in);
+		}
+
+		public FoodItem[] newArray(int size) {
+			return new FoodItem[size];
+		}
+	};
+
+	private FoodItem(Parcel in) {
+		name = in.readString();
+		price = in.readDouble();
+		quantity = in.readInt();
+	}
 }

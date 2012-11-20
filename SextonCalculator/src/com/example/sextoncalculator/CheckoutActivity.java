@@ -1,6 +1,7 @@
 package com.example.sextoncalculator;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,8 +10,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 @SuppressLint("UseValueOf")
@@ -24,6 +27,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double drinkPrice;
 	String punchCounter;
 	double punchValue =5.5;
+	ArrayList<FoodItem> foodList;
 	
 	double totalString;
 
@@ -36,8 +40,11 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		
 		//Intent intent = getIntent();
 		//String[] foodListIntance = intent.getStringArrayExtra("foodListIntance");
-		
-		setContentView(R.layout.activity_checkout);
+		setContentView(R.layout.activity_checkout);	
+		foodList = getIntent().getExtras().getParcelableArrayList("foodList");
+		ListView listView1 = (ListView) findViewById(R.id.food_listView);
+		ArrayAdapter<FoodItem> adapter = new ArrayAdapter<FoodItem>(this, android.R.layout.simple_list_item_1, foodList);
+		listView1.setAdapter(adapter);
 		extras = getIntent().getExtras();
 		totalPrice = extras.getDouble("totalString");
 		 extras = getIntent().getExtras();
