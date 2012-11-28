@@ -27,22 +27,20 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double drinkPrice;
 	String punchCounter;
 	double punchValue =5.5;
-	int flexCounter = 0;
-	int cashCounter = 0;
 	ArrayList<FoodItem> foodList;
-
+	
 	String flexValue;
 	String cashValue;
 	double totalPriceInstance;
 	double totalString;
 
 	protected Button homeButton, resetButton, checkoutButton, punchButton,
-	flexButton, cashButton;
+			flexButton, cashButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		//Intent intent = getIntent();
 		//String[] foodListIntance = intent.getStringArrayExtra("foodListIntance");
 		setContentView(R.layout.activity_checkout);	
@@ -61,7 +59,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		total = (TextView) findViewById(R.id.amountRemaining_textView);
 		total.setText("$" + String.valueOf(totalPrice));
 		setTotalPrice(totalPrice);
-
+		
 
 		homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setOnClickListener(this);
@@ -110,7 +108,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-
+	
 	public double getTotalPrice() {
 		return totalPrice;
 	}
@@ -122,46 +120,36 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		if (totalPriceInstance > 0.00) {
 			totalPriceInstance = totalPriceInstance - punchValue;
 			setTotalPrice(totalPriceInstance);
-			EditText edit = (EditText) findViewById(R.id.punchPay_editText);
-			punchCounter = edit.getText().toString();
-			int punchIntCounter = Integer.parseInt(punchCounter);
-			punchIntCounter = punchIntCounter + 1;
-			punchCounter = Integer.toString(punchIntCounter);
-			edit.setText(punchCounter);
-		}
-		TextView newTotal = (TextView) findViewById(R.id.amountRemaining_textView);
-		newTotal.setText(Double.toString(getTotalPrice()));
-	}
 
+				EditText edit = (EditText) findViewById(R.id.punchPay_editText);
+				punchCounter = edit.getText().toString();
+				int punchIntCounter = Integer.parseInt(punchCounter);
+				punchIntCounter = punchIntCounter + 1;
+				punchCounter = Integer.toString(punchIntCounter);
+				//punchCounter = Double.toString(getTotalPrice());
+				edit.setText(punchCounter);
+		}
+	}
+	
 	public void flexActivity() {
 		totalPriceInstance = getTotalPrice();
-		if (totalPriceInstance > 0.00) {
+		if (totalPriceInstance == 0.00) {
+			//do nothing
+		}
+		else if (totalPriceInstance > 0.00) {
 			EditText edit = (EditText) findViewById(R.id.flexPay_editText);
 			flexValue = edit.getText().toString();
 			double flexDoubleValue = Double.parseDouble(flexValue);
-			if (flexDoubleValue == 0.00){
-				flexDoubleValue = flexDoubleValue + totalPriceInstance;
-				DecimalFormat df = new DecimalFormat("0.00");
-				String flexValue = df.format(flexDoubleValue);
-				edit.setText("$" +flexValue);
-
-				setTotalPrice(0.00);
-				total.setText("$0.00");
-			}
-			else {
-				totalPriceInstance = totalPriceInstance - flexDoubleValue;
-				setTotalPrice(totalPriceInstance);
-				flexCounter++;
-				if (flexCounter > 1){
-					Double temp = flexDoubleValue + flexDoubleValue;
-					edit.setText(Double.toString(temp));
-				}
-			}
-			TextView newTotal = (TextView) findViewById(R.id.amountRemaining_textView);
-			newTotal.setText(Double.toString(getTotalPrice()));
+			flexDoubleValue = flexDoubleValue + totalPriceInstance;
+			DecimalFormat df = new DecimalFormat("0.00");
+			String flexValue = df.format(flexDoubleValue);
+			edit.setText("$" +flexValue);
+			
+			setTotalPrice(0.00);
+			total.setText("$0.00");
 		}
 	}
-
+	
 	public void cashActivity() {
 		totalPriceInstance = getTotalPrice();
 		if (totalPriceInstance == 0.00) {
@@ -175,7 +163,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			DecimalFormat df = new DecimalFormat("0.00");
 			String cashValue = df.format(cashDoubleValue);
 			edit.setText("$" +cashValue);
-
+			
 			setTotalPrice(0.00);
 			total.setText("$0.00");
 		}

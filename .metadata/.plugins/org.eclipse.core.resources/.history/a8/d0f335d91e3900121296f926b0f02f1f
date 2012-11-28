@@ -27,8 +27,6 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double drinkPrice;
 	String punchCounter;
 	double punchValue =5.5;
-	int flexCounter = 0;
-	int cashCounter = 0;
 	ArrayList<FoodItem> foodList;
 
 	String flexValue;
@@ -149,6 +147,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 				total.setText("$0.00");
 			}
 			else {
+				int flexCounter = 0;
 				totalPriceInstance = totalPriceInstance - flexDoubleValue;
 				setTotalPrice(totalPriceInstance);
 				flexCounter++;

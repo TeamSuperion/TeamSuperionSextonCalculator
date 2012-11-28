@@ -1,4 +1,3 @@
 INDEX VERSION 1.126+C:\Users\Justin\Documents\Homework\Junior Year\CSCI 330\TeamSuperionSextonCalculator\.metadata\.plugins\org.eclipse.jdt.core
 1492244955.index
-3674015712.index
 4118408409.index
