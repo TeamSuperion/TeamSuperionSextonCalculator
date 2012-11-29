@@ -27,13 +27,14 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double drinkPrice;
 	String punchCounter;
 	double punchValue =5.5;
+	int flexCounter = 0;
+	int cashCounter = 0;
 	ArrayList<FoodItem> foodList;
 
 	String flexValue;
 	String cashValue;
 	double totalPriceInstance;
 	double totalString;
-	double currentFlex = 0.00, currentCash = 0.00;
 
 	protected Button homeButton, resetButton, checkoutButton, punchButton,
 	flexButton, cashButton;
@@ -114,32 +115,6 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		return totalPrice;
 	}
 
-	public void setCurrentFlex(double currentFlex) {
-		this.currentFlex = currentFlex;
-	}
-
-	public double getCurrentFlex(){
-		return currentFlex;
-	}
-
-	public void setFlexText(Double currentFlex){
-		EditText edit = (EditText) findViewById(R.id.flexPay_editText);
-		edit.setText(Double.toString(currentFlex));
-	}	
-	
-	public void setCurrentCash(double currentCash) {
-		this.currentCash = currentCash;
-	}
-
-	public double getCurrentCash(){
-		return currentCash;
-	}
-
-	public void setCashText(Double currentCash){
-		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
-		edit.setText(Double.toString(currentCash));
-	}
-
 	public void punchActivity() {
 		//final TextView newTotal = (TextView) findViewById(R.id.amountRemaining_textView);
 		// totalPrice = totalPrice - entrePrice - sidePrice - drinkPrice;
@@ -166,8 +141,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			double flexDoubleValue = Double.parseDouble(flexValue);
 			if (flexDoubleValue == 0.00){
 				flexDoubleValue = flexDoubleValue + totalPriceInstance;
-				setFlexText(flexDoubleValue);
-				setCurrentFlex(flexDoubleValue);
+				DecimalFormat df = new DecimalFormat("0.00");
+				String flexValue = df.format(flexDoubleValue);
+				edit.setText("$" +flexValue);
 
 				setTotalPrice(0.00);
 				total.setText("$0.00");
@@ -175,9 +151,11 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			else {
 				totalPriceInstance = totalPriceInstance - flexDoubleValue;
 				setTotalPrice(totalPriceInstance);
-				Double temp = getCurrentFlex() + flexDoubleValue;
-				setCurrentFlex(temp);
-				setFlexText(temp);
+				flexCounter++;
+				if (flexCounter > 1){
+					Double temp = flexDoubleValue + flexDoubleValue;
+					edit.setText(Double.toString(temp));
+				}
 			}
 			TextView newTotal = (TextView) findViewById(R.id.amountRemaining_textView);
 			newTotal.setText(Double.toString(getTotalPrice()));
@@ -186,27 +164,20 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 
 	public void cashActivity() {
 		totalPriceInstance = getTotalPrice();
-		if (totalPriceInstance > 0.00) {
+		if (totalPriceInstance == 0.00) {
+			//do nothing
+		}
+		else if (totalPriceInstance > 0.00) {
 			EditText edit = (EditText) findViewById(R.id.cashPay_editText);
 			cashValue = edit.getText().toString();
 			double cashDoubleValue = Double.parseDouble(cashValue);
-			if (cashDoubleValue == 0.00){
-				cashDoubleValue = cashDoubleValue + totalPriceInstance;
-				setCashText(cashDoubleValue);
-				setCurrentCash(cashDoubleValue);
+			cashDoubleValue = cashDoubleValue + totalPriceInstance;
+			DecimalFormat df = new DecimalFormat("0.00");
+			String cashValue = df.format(cashDoubleValue);
+			edit.setText("$" +cashValue);
 
-				setTotalPrice(0.00);
-				total.setText("$0.00");
-			}
-			else {
-				totalPriceInstance = totalPriceInstance - cashDoubleValue;
-				setTotalPrice(totalPriceInstance);
-				Double temp = getCurrentCash() + cashDoubleValue;
-				setCurrentCash(temp);
-				setCashText(temp);
-			}
-			TextView newTotal = (TextView) findViewById(R.id.amountRemaining_textView);
-			newTotal.setText(Double.toString(getTotalPrice()));
+			setTotalPrice(0.00);
+			total.setText("$0.00");
 		}
 	}
 
