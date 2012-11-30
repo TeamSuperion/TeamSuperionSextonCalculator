@@ -24,6 +24,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	protected Button homeButton, resetButton, checkoutButton;
 	String totalString;
 	ArrayList<FoodItem> foodList;
+	protected SimpleCursorAdapter foodCursorAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,11 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			foodData.load();
 		}
 		Cursor cursor = foodData.all(this);
-		@SuppressWarnings("deprecation")
-		SimpleCursorAdapter foodCursorAdapter = new SimpleCursorAdapter(this,
+		//@SuppressWarnings("deprecation")
+		foodCursorAdapter = new SimpleCursorAdapter(this,
 				R.layout.activity_browse_row, cursor, new String[] {
-						foodData.NAME, foodData.PRICE }, new int[] {
-						R.id.itemName_textView, R.id.itemPrice_textView });
+						foodData.ID, foodData.NAME, foodData.PRICE, foodData.QUANTITY }, new int[] {
+						R.id.itemId_textView, R.id.itemName_textView, R.id.itemPrice_textView, R.id.itemQuantity_textView });
 		setListAdapter(foodCursorAdapter);
 		// foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		setContentView(R.layout.activity_browse);
@@ -95,10 +96,15 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 
 	public void increaseQuantity(View v) {
 		RelativeLayout layout = (RelativeLayout) v.getParent();
+		TextView itemId = (TextView) layout
+				.findViewById(R.id.itemId_textView);
+		int id = Integer.parseInt(itemId.getText().toString());
 		TextView itemQuantity = (TextView) layout
 				.findViewById(R.id.itemQuantity_textView);
 		int quantity = Integer.parseInt(itemQuantity.getText().toString());
-		itemQuantity.setText(String.valueOf(quantity + 1));
+		foodData.updateQuantity(id, quantity+1);
+		foodCursorAdapter.notifyDataSetChanged();
+		//itemQuantity.setText(String.valueOf(quantity + 1));
 		calculateTotal();
 	}
 
