@@ -103,18 +103,21 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 				.findViewById(R.id.itemQuantity_textView);
 		int quantity = Integer.parseInt(itemQuantity.getText().toString());
 		foodData.updateQuantity(id, quantity+1);
-		foodCursorAdapter.notifyDataSetChanged();
-		//itemQuantity.setText(String.valueOf(quantity + 1));
+		foodCursorAdapter.getCursor().requery();
 		calculateTotal();
 	}
 
 	public void decreaseQuantity(View v) {
 		RelativeLayout layout = (RelativeLayout) v.getParent();
+		TextView itemId = (TextView) layout
+				.findViewById(R.id.itemId_textView);
+		int id = Integer.parseInt(itemId.getText().toString());
 		TextView itemQuantity = (TextView) layout
 				.findViewById(R.id.itemQuantity_textView);
 		int quantity = Integer.parseInt(itemQuantity.getText().toString());
 		if (quantity > 0) {
-			itemQuantity.setText(String.valueOf(quantity - 1));
+			foodData.updateQuantity(id, quantity-1);
+			foodCursorAdapter.getCursor().requery();
 		}
 		calculateTotal();
 	}
