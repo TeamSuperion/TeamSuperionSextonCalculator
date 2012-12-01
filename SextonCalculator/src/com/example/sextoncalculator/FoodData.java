@@ -169,5 +169,12 @@ public class FoodData extends SQLiteOpenHelper {
 	  db.update(TABLE_NAME, values, ID+"="+id, null);
 	 }
 
+	 public void resetQuantity(){
+		  SQLiteDatabase db = getWritableDatabase();
+		  ContentValues values = new ContentValues();
+		  values.put(QUANTITY, 0);
+		  db.update(TABLE_NAME, values, null, null);
+		  //db.update(TABLE_NAME, values, null);
+		 }
 }
 

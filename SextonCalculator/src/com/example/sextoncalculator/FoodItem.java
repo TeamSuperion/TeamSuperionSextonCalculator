@@ -45,6 +45,14 @@ public class FoodItem implements Parcelable {
 	public String toString() {
 		return name + " $" + price + " X " + quantity;
 	}
+	
+	public boolean equals(Object obj){
+		boolean result = false;
+		if(obj instanceof FoodItem){
+			result = this.name.equals(((FoodItem)obj).getName());
+		}
+		return result;
+	}
 
 	public int describeContents() {
 		// TODO Auto-generated method stub

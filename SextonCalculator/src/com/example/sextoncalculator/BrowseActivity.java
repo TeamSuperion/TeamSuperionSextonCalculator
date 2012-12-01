@@ -23,7 +23,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	protected FoodData foodData;
 	protected Button homeButton, resetButton, checkoutButton;
 	String totalString;
-	ArrayList<FoodItem> foodList;
+	ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
 	protected SimpleCursorAdapter foodCursorAdapter;
 
 	@Override
@@ -35,6 +35,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		if (foodData.count() == 0) {
 			foodData.load();
 		}
+		foodData.resetQuantity();
 		Cursor cursor = foodData.all(this);
 		//@SuppressWarnings("deprecation")
 		foodCursorAdapter = new SimpleCursorAdapter(this,
@@ -88,6 +89,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	}
 
 	public void restartActivity(Activity act) {
+		foodData.resetQuantity();
 		Intent intent = new Intent();
 		act.finish();
 		intent.setClass(act, act.getClass());
@@ -99,11 +101,26 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		TextView itemId = (TextView) layout
 				.findViewById(R.id.itemId_textView);
 		int id = Integer.parseInt(itemId.getText().toString());
+		TextView itemName = (TextView) layout
+				.findViewById(R.id.itemName_textView);
+		TextView itemPrice = (TextView) layout
+				.findViewById(R.id.itemPrice_textView);
 		TextView itemQuantity = (TextView) layout
 				.findViewById(R.id.itemQuantity_textView);
+		String name = itemName.getText().toString();
+		double price = Double.parseDouble(itemPrice.getText().toString());
 		int quantity = Integer.parseInt(itemQuantity.getText().toString());
 		foodData.updateQuantity(id, quantity+1);
 		foodCursorAdapter.getCursor().requery();
+	    FoodItem foodItem = new FoodItem(name, price, 1);
+		if(foodList.indexOf(foodItem) == -1){
+			foodList.add(foodItem);
+		}
+		else{
+			FoodItem oldFoodItem = foodList.get(foodList.indexOf(foodItem));
+			int oldQuantity = oldFoodItem.getQuantity();
+			oldFoodItem.setQuantity(oldQuantity+1);
+		}
 		calculateTotal();
 	}
 
@@ -112,12 +129,22 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		TextView itemId = (TextView) layout
 				.findViewById(R.id.itemId_textView);
 		int id = Integer.parseInt(itemId.getText().toString());
+		TextView itemName = (TextView) layout
+				.findViewById(R.id.itemName_textView);
+		TextView itemPrice = (TextView) layout
+				.findViewById(R.id.itemPrice_textView);
 		TextView itemQuantity = (TextView) layout
 				.findViewById(R.id.itemQuantity_textView);
+		String name = itemName.getText().toString();
+		double price = Double.parseDouble(itemPrice.getText().toString());
 		int quantity = Integer.parseInt(itemQuantity.getText().toString());
 		if (quantity > 0) {
 			foodData.updateQuantity(id, quantity-1);
 			foodCursorAdapter.getCursor().requery();
+		    FoodItem foodItem = new FoodItem(name, price, quantity);
+			FoodItem oldFoodItem = foodList.get(foodList.indexOf(foodItem));
+			int oldQuantity = oldFoodItem.getQuantity();
+			oldFoodItem.setQuantity(oldQuantity-1);
 		}
 		calculateTotal();
 	}
@@ -149,7 +176,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	}
 
 	private void calculateTotal() {
-		List<FoodItem> foodList = generateFoodList();
+		//List<FoodItem> foodList = generateFoodList();
 		TextView totalPrice = (TextView) findViewById(R.id.totalPrice_textView);
 		double total = 0.00;
 		for (int i = 0; i < foodList.size(); i++) {
