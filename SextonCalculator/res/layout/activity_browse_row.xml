@@ -60,6 +60,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/itemName_textView"
         android:text="Small Text"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>
