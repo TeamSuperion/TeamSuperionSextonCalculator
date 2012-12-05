@@ -21,27 +21,27 @@ public class PunchActivity extends Activity implements OnClickListener {
 	ArrayList<FoodItem> foodList;
 	String punchValue = "5.50";
 	String totalString = punchValue;
-	
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_punch);
-		
+
 		homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setOnClickListener(this);
 		checkoutButton = (Button) findViewById(R.id.checkout_button);
 		checkoutButton.setOnClickListener(this);
 		resetButton = (Button) findViewById(R.id.reset_button);
 		resetButton.setOnClickListener(this);
-		
+
 		initializeDB();
-		
+
 	}
-/*
- * 
- * @param menu this object does that
- */
+
+	/*
+	 * 
+	 * @param menu this object does that
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_punch, menu);
@@ -49,54 +49,57 @@ public class PunchActivity extends Activity implements OnClickListener {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void initializeDB(){
+	public void initializeDB() {
 
-        foodData = new FoodData(this);
+		foodData = new FoodData(this);
 		entreeSpinner = (Spinner) findViewById(R.id.spinner1);
 		sideSpinner = (Spinner) findViewById(R.id.spinner2);
 		drinkSpinner = (Spinner) findViewById(R.id.spinner3);
-		if(foodData.count() == 0){
+		if (foodData.count() == 0) {
 			foodData.load();
 		}
-		
-		String[] from = new String[] { FoodData.NAME, FoodData.CALORIES};
-		int[] to =new int[] { R.id.spinner_textView1, R.id.spinner_textView2};
-		
+
+		String[] from = new String[] { FoodData.NAME, FoodData.CALORIES };
+		int[] to = new int[] { R.id.spinner_textView1, R.id.spinner_textView2 };
+
 		Cursor entreeCursor = foodData.cat1(this);
 		startManagingCursor(entreeCursor);
 		Cursor sidesCursor = foodData.cat2(this);
 		startManagingCursor(entreeCursor);
 		Cursor drinksCursor = foodData.cat3(this);
 		startManagingCursor(entreeCursor);
-		
-		SimpleCursorAdapter entreeCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row, entreeCursor, from, to);
+
+		SimpleCursorAdapter entreeCursorAdapter = new SimpleCursorAdapter(this,
+				R.layout.activity_punch_row, entreeCursor, from, to);
 		entreeSpinner.setAdapter(entreeCursorAdapter);
-		SimpleCursorAdapter sidesCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row, sidesCursor, from, to);
+		SimpleCursorAdapter sidesCursorAdapter = new SimpleCursorAdapter(this,
+				R.layout.activity_punch_row, sidesCursor, from, to);
 		sideSpinner.setAdapter(sidesCursorAdapter);
-		SimpleCursorAdapter drinksCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_punch_row, drinksCursor, from, to);
+		SimpleCursorAdapter drinksCursorAdapter = new SimpleCursorAdapter(this,
+				R.layout.activity_punch_row, drinksCursor, from, to);
 		drinkSpinner.setAdapter(drinksCursorAdapter);
-		
-		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		// foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 
 	public void restartActivity() {
-		//Intent intent = new Intent();
-		//act.finish();
-		//intent.setClass(act, act.getClass());
-		//act.startActivity(intent);
+		// Intent intent = new Intent();
+		// act.finish();
+		// intent.setClass(act, act.getClass());
+		// act.startActivity(intent);
 		Intent intent = getIntent();
-	    overridePendingTransition(0, 0);
-	    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-	    finish();
+		overridePendingTransition(0, 0);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		finish();
 
-	    overridePendingTransition(0, 0);
-	    startActivity(intent);
-	}	
-	
+		overridePendingTransition(0, 0);
+		startActivity(intent);
+	}
+
 	public double getTotalString() {
 		return Double.parseDouble(this.totalString);
 	}
-	
+
 	public ArrayList<FoodItem> generateFoodList() {
 		foodList = new ArrayList<FoodItem>();
 		TextView itemName;
