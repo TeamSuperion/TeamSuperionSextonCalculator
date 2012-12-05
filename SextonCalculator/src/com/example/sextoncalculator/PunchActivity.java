@@ -38,7 +38,10 @@ public class PunchActivity extends Activity implements OnClickListener {
 		initializeDB();
 		
 	}
-
+/*
+ * 
+ * @param menu this object does that
+ */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_punch, menu);
@@ -76,11 +79,18 @@ public class PunchActivity extends Activity implements OnClickListener {
 		//foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 
-	public void restartActivity(Activity act) {
-		Intent intent = new Intent();
-		act.finish();
-		intent.setClass(act, act.getClass());
-		act.startActivity(intent);
+	public void restartActivity() {
+		//Intent intent = new Intent();
+		//act.finish();
+		//intent.setClass(act, act.getClass());
+		//act.startActivity(intent);
+		Intent intent = getIntent();
+	    overridePendingTransition(0, 0);
+	    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+	    finish();
+
+	    overridePendingTransition(0, 0);
+	    startActivity(intent);
 	}	
 	
 	public double getTotalString() {
@@ -110,9 +120,10 @@ public class PunchActivity extends Activity implements OnClickListener {
 			intent = new Intent(this, CheckoutActivity.class);
 			intent.putParcelableArrayListExtra("foodList", generateFoodList());
 			intent.putExtra("totalString", getTotalString());
+			intent.putExtra("flag", 1);
 			startActivity(intent);
 		} else if (v == resetButton) {
-			restartActivity(this);
+			restartActivity();
 		}
 	}
 

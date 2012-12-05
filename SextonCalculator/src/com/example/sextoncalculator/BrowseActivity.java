@@ -66,11 +66,12 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			intent = new Intent(this, HomeActivity.class);
 			startActivity(intent);
 		} else if (v == resetButton) {
-			restartActivity(this);
+			restartActivity();
 		} else if (v == checkoutButton) {
 			intent = new Intent(this, CheckoutActivity.class);
 			intent.putParcelableArrayListExtra("foodList", generateFoodList());
 			intent.putExtra("totalString", getTotalString());
+			intent.putExtra("flag", 2);
 			//String[] foodListIntance = new String[foodList.size()];
 			//for (int i=0; i<=foodList.size(); i++) {
 			//	foodListIntance[i]=foodList.get(i).toString();
@@ -88,12 +89,19 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		this.totalString = totalString;
 	}
 
-	public void restartActivity(Activity act) {
+	public void restartActivity() {
 		foodData.resetQuantity();
-		Intent intent = new Intent();
-		act.finish();
-		intent.setClass(act, act.getClass());
-		act.startActivity(intent);
+		//Intent intent = new Intent();
+		//act.finish();
+		//intent.setClass(act, act.getClass());
+		//act.startActivity(intent);
+		Intent intent = getIntent();
+	    overridePendingTransition(0, 0);
+	    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+	    finish();
+
+	    overridePendingTransition(0, 0);
+	    startActivity(intent);
 	}
 
 	public void increaseQuantity(View v) {
