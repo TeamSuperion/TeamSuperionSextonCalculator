@@ -63,7 +63,7 @@ public class FoodData extends SQLiteOpenHelper {
 	public Cursor cat1(Activity activity){
 		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY };
 		String order = NAME;
-		String selection = CATEGORY + " = 1";
+		String selection = CATEGORY + " in (1, 4)";
 		SQLiteDatabase db = getReadableDatabase();
 		Cursor cursor = db.query(TABLE_NAME, from, selection, null, null, null, order);
 		activity.startManagingCursor(cursor);

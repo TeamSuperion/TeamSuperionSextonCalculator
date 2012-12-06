@@ -1,6 +1,7 @@
 package com.example.sextoncalculator;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 public class PunchActivity extends Activity implements OnClickListener {
 	protected Spinner entreeSpinner, sideSpinner, drinkSpinner;
 	protected FoodData foodData;
-	protected Button homeButton, checkoutButton, resetButton;
+	protected Button homeButton, checkoutButton, resetButton, randomButton;
 	ArrayList<FoodItem> foodList;
 	String punchValue = "5.50";
 	String totalString = punchValue;
@@ -33,6 +34,8 @@ public class PunchActivity extends Activity implements OnClickListener {
 		checkoutButton.setOnClickListener(this);
 		resetButton = (Button) findViewById(R.id.reset_button);
 		resetButton.setOnClickListener(this);
+		randomButton = (Button) findViewById(R.id.random_button);
+		randomButton.setOnClickListener(this);
 
 		initializeDB();
 
@@ -95,6 +98,17 @@ public class PunchActivity extends Activity implements OnClickListener {
 		overridePendingTransition(0, 0);
 		startActivity(intent);
 	}
+	
+	public void randomActivity(){
+		
+		Random generator = new Random();
+		int count = entreeSpinner.getChildCount();
+		System.out.println(count);
+		int random = generator.nextInt(count);
+		System.out.println(random);
+		entreeSpinner.setSelection(random);
+		
+	}
 
 	public double getTotalString() {
 		return Double.parseDouble(this.totalString);
@@ -104,12 +118,10 @@ public class PunchActivity extends Activity implements OnClickListener {
 		foodList = new ArrayList<FoodItem>();
 		TextView itemName;
 		String name;
-		double price;
-		int quantity;
+		double price = 0.00;
+		int quantity = 1;
 		itemName = (TextView) findViewById(R.id.spinner_textView1);
 		name = itemName.getText().toString();
-		price = 0.00;
-		quantity = 1;
 		foodList.add(new FoodItem(name, price, quantity));
 		return foodList;
 	}
@@ -127,6 +139,8 @@ public class PunchActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 		} else if (v == resetButton) {
 			restartActivity();
+		} else if (v == randomButton){
+			randomActivity();
 		}
 	}
 
