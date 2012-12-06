@@ -69,15 +69,33 @@
         android:layout_below="@+id/activity_pay_method"
         android:orientation="horizontal" >
 
+        <Button
+        android:id="@+id/punchDecrease_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/minus" />
+        
         <EditText
             android:id="@+id/punchPay_editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:text="@string/punchTotal_editText" />
 
+        <Button
+        android:id="@+id/punchIncrease_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/plus" />
+        
         <EditText
             android:id="@+id/flexPay_editText"
             android:layout_width="wrap_content"
@@ -86,6 +104,15 @@
             android:gravity="center"
             android:inputType="numberDecimal"
             android:text="@string/flexTotal_editText" />
+        
+        <Button
+        android:id="@+id/resetFlex_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/reset_button" />
 
         <EditText
             android:id="@+id/cashPay_editText"
@@ -95,6 +122,14 @@
             android:gravity="center"
             android:inputType="numberDecimal"
             android:text="@string/cashTotal_editText" />
+        <Button
+        android:id="@+id/resetCash_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/reset_button" />
     </LinearLayout>
 
 </RelativeLayout>

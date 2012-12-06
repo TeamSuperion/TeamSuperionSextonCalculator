@@ -42,8 +42,10 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double cashDoubleValueTemp, cashDoubleValue;
 
 	protected Button homeButton, resetButton, checkoutButton, punchButton,
-			flexButton, cashButton;
+			flexButton, cashButton, resetFlexButton, resetCashButton, punchIncreaseButton, punchDecreaseButton;
 
+	int flag;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,7 +56,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 
 		Intent myIntent = getIntent();
 		extras = myIntent.getExtras();
-		int flag = myIntent.getIntExtra("flag", 0);
+		flag = myIntent.getIntExtra("flag", 0);
 		if (flag == 1) {
 
 			// Intent intent = getIntent();
@@ -82,6 +84,10 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 
 			punchButton = (Button) findViewById(R.id.punch_button);
 			punchButton.setOnClickListener(this);
+			punchIncreaseButton = (Button) findViewById(R.id.punchIncrease_button);
+			punchIncreaseButton.setOnClickListener(this);
+			punchDecreaseButton = (Button) findViewById(R.id.punchDecrease_button);
+			punchDecreaseButton.setOnClickListener(this);
 
 		} else if (flag == 2) {
 			// Intent intent = getIntent();
@@ -110,8 +116,12 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			punchButton.setOnClickListener(this);
 			flexButton = (Button) findViewById(R.id.flex_button);
 			flexButton.setOnClickListener(this);
+			resetFlexButton = (Button) findViewById(R.id.resetFlex_button);
+			resetFlexButton.setOnClickListener(this);
 			cashButton = (Button) findViewById(R.id.cash_button);
 			cashButton.setOnClickListener(this);
+			resetCashButton = (Button) findViewById(R.id.resetCash_button);
+			resetCashButton.setOnClickListener(this);
 		}
 		homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setOnClickListener(this);
@@ -141,6 +151,128 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			flexActivity();
 		} else if (v == cashButton) {
 			cashActivity();
+		}else if (v == punchIncreaseButton) {
+			punchIncreaseActivity();
+		}else if (v == punchDecreaseButton) {
+			punchDecreaseActivity();
+		}else if (v == resetFlexButton) {
+			flexResetActivity();
+		}else if (v == resetCashButton) {
+			cashResetActivity();
+		}
+	}
+	
+	public void punchIncreaseActivity() {
+		totalPriceInstance = getTotalPrice();
+
+		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
+		punchCounterTemp = edit.getText().toString();
+		punchIntCounterTemp = Integer.parseInt(punchCounterTemp);
+		if (flag == 1) {
+			punchIntCounter = getPunchIntCounter();
+			if (punchIntCounter == 0) {
+			punchIntCounter = punchIntCounter + 1;
+			setPunchIntCounter(punchIntCounter);
+			punchCounter = Integer.toString(punchIntCounter);
+			edit.setText(punchCounter);
+			totalPriceInstance = totalPriceInstance - punchValue;
+			setTotalPrice(totalPriceInstance);
+			setTotalText(totalPriceInstance);
+			}
+			else {
+				// do nothing because you can only punch once
+			}
+		}
+		else if (flag == 2) {
+			punchIntCounter = getPunchIntCounter();
+			if (punchIntCounter >=0) {
+			punchIntCounter = punchIntCounter + 1;
+			setPunchIntCounter(punchIntCounter);
+			punchCounter = Integer.toString(punchIntCounter);
+			edit.setText(punchCounter);
+			totalPriceInstance = totalPriceInstance - punchValue;
+			setTotalPrice(totalPriceInstance);
+			setTotalText(totalPriceInstance);
+			}
+			else {
+				// do nothing because you can only punch once
+			}
+		}
+	}
+	
+	public void punchDecreaseActivity() {
+		totalPriceInstance = getTotalPrice();
+
+		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
+		punchCounterTemp = edit.getText().toString();
+		punchIntCounterTemp = Integer.parseInt(punchCounterTemp);
+		if (flag == 1) {
+			punchIntCounter = getPunchIntCounter();
+			if (punchIntCounter == 1) {
+			punchIntCounter = punchIntCounter - 1;
+			setPunchIntCounter(punchIntCounter);
+			punchCounter = Integer.toString(punchIntCounter);
+			edit.setText(punchCounter);
+			totalPriceInstance = totalPriceInstance - punchValue;
+			setTotalPrice(totalPriceInstance);
+			setTotalText(totalPriceInstance);
+			}
+			else {
+				// do nothing because punch can't be negative
+			}
+		}
+		else if (flag == 2) {
+			punchIntCounter = getPunchIntCounter();
+			if (punchIntCounter > 0) {
+			punchIntCounter = punchIntCounter - 1;
+			setPunchIntCounter(punchIntCounter);
+			punchCounter = Integer.toString(punchIntCounter);
+			edit.setText(punchCounter);
+			totalPriceInstance = totalPriceInstance - punchValue;
+			setTotalPrice(totalPriceInstance);
+			setTotalText(totalPriceInstance);
+			}
+			else {
+				// do nothing because you can only punch once
+			}
+		}
+	}
+	
+	public void flexResetActivity() {
+		totalPriceInstance = getTotalPrice();
+		EditText edit = (EditText) findViewById(R.id.flexPay_editText);
+		flexValue = edit.getText().toString();
+		flexDoubleValueTemp = Double.parseDouble(flexValue);
+		flexDoubleValue = getCurrentFlex();
+		if (flexDoubleValueTemp > 0.00) {
+			double newDoubleTotal = totalPriceInstance+flexDoubleValueTemp;
+			setTotalPrice(newDoubleTotal);
+			total.setText("$" + newDoubleTotal);
+			
+			setFlexText(0.00);
+			setCurrentFlex(0.00);
+		}
+		else {
+			//current flex value is 0
+		}
+	}
+	
+	public void cashResetActivity() {
+		totalPriceInstance = getTotalPrice();
+		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
+		cashValue = edit.getText().toString();
+		cashDoubleValueTemp = Double.parseDouble(cashValue);
+		cashDoubleValue = getCurrentCash();
+		if (cashDoubleValueTemp > 0.00) {
+			double newDoubleTotal = totalPriceInstance+cashDoubleValueTemp;
+			setTotalPrice(newDoubleTotal);
+			total.setText("$" + newDoubleTotal);
+			
+			setCashText(0.00);
+			setCurrentCash(0.00);
+		}
+		else {
+			//current cash value is 0
 		}
 	}
 
@@ -227,13 +359,11 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		// findViewById(R.id.amountRemaining_textView);
 		// totalPrice = totalPrice - entrePrice - sidePrice - drinkPrice;
 		int punchIntDifference;
-		double punchDoubleCounterTemp;
 		totalPriceInstance = getTotalPrice();
 
 		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
 		punchCounterTemp = edit.getText().toString();
-		punchDoubleCounterTemp = Double.parseDouble(punchCounterTemp);
-		punchIntCounterTemp = (int)punchDoubleCounterTemp;
+		punchIntCounterTemp = Integer.parseInt(punchCounterTemp);
 		if ((punchIntCounterTemp == punchIntCounter)
 				&& (totalPriceInstance > 0.00)) {
 			totalPriceInstance = totalPriceInstance - punchValue;
