@@ -18,6 +18,11 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+/**
+ * BrowseActivity creates interface to browse all food items available. Total
+ * price is calculated when adding and removing food items to/from shopping
+ * cart.
+ */
 public class BrowseActivity extends ListActivity implements OnClickListener {
 	// protected Spinner spinner;
 	protected FoodData foodData;
@@ -26,6 +31,10 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
 	protected SimpleCursorAdapter foodCursorAdapter;
 
+	/**
+	 * Called when interface is created. Sets up list view to display food item
+	 * information. Sets up click listener for buttons.
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,12 +65,14 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		checkoutButton.setOnClickListener(this);
 	}
 
+	/** Called when interface is created. Sets up option menu. */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_browse, menu);
 		return true;
 	}
 
+	/** Sets actions for clicked buttons. */
 	public void onClick(View v) {
 		Intent intent;
 		if (v == homeButton) {
@@ -71,31 +82,34 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			restartActivity();
 		} else if (v == checkoutButton) {
 			if (foodList.isEmpty()) {
-				//return message telling user that there is no item in the foodList so there is nothing to checkout
-			}
-			else {
-			intent = new Intent(this, CheckoutActivity.class);
-			intent.putParcelableArrayListExtra("foodList", foodList);
-			intent.putExtra("totalString", getTotalString());
-			intent.putExtra("flag", 2);
-			// String[] foodListIntance = new String[foodList.size()];
-			// for (int i=0; i<=foodList.size(); i++) {
-			// foodListIntance[i]=foodList.get(i).toString();
-			// }
-			// intent.putExtra("foodListIntance", foodListIntance);
-			startActivity(intent);
+				// return message telling user that there is no item in the
+				// foodList so there is nothing to checkout
+			} else {
+				intent = new Intent(this, CheckoutActivity.class);
+				intent.putParcelableArrayListExtra("foodList", foodList);
+				intent.putExtra("totalString", getTotalString());
+				intent.putExtra("flag", 2);
+				// String[] foodListIntance = new String[foodList.size()];
+				// for (int i=0; i<=foodList.size(); i++) {
+				// foodListIntance[i]=foodList.get(i).toString();
+				// }
+				// intent.putExtra("foodListIntance", foodListIntance);
+				startActivity(intent);
 			}
 		}
 	}
 
+	/** Gets the total price. */
 	public double getTotalString() {
 		return Double.parseDouble(this.totalString);
 	}
 
+	/** Sets the total price. */
 	public void setTotalString(String totalString) {
 		this.totalString = totalString;
 	}
 
+	/** Resets display to default interface prior to selections. */
 	public void restartActivity() {
 		foodData.resetQuantity();
 		// Intent intent = new Intent();
@@ -111,6 +125,10 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		startActivity(intent);
 	}
 
+	/**
+	 * Increases selected food item quantity by one. Adds selected food item to
+	 * shopping cart or updates quantity if food item already exists.
+	 */
 	public void increaseQuantity(View v) {
 		RelativeLayout layout = (RelativeLayout) v.getParent();
 		TextView itemId = (TextView) layout.findViewById(R.id.itemId_textView);
@@ -137,6 +155,11 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		calculateTotal();
 	}
 
+	/**
+	 * Decreases selected food item quantity by one. Updates quantity of food
+	 * item in shopping cart or removes food item when quantity reaches zero
+	 * after change.
+	 */
 	public void decreaseQuantity(View v) {
 		RelativeLayout layout = (RelativeLayout) v.getParent();
 		TextView itemId = (TextView) layout.findViewById(R.id.itemId_textView);
@@ -157,8 +180,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			FoodItem oldFoodItem = foodList.get(foodList.indexOf(foodItem));
 			int oldQuantity = oldFoodItem.getQuantity();
 			oldFoodItem.setQuantity(oldQuantity - 1);
-		}
-		else if (quantity == 1){
+		} else if (quantity == 1) {
 			foodData.updateQuantity(id, quantity - 1);
 			foodCursorAdapter.getCursor().requery();
 			FoodItem foodItem = new FoodItem(name, price, quantity);
@@ -184,6 +206,10 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	 * foodList.add(new FoodItem(name, price, quantity)); } } return foodList; }
 	 */
 
+	/**
+	 * Calculates and displays total price. Uses food item array in shopping
+	 * cart.
+	 */
 	private void calculateTotal() {
 		// List<FoodItem> foodList = generateFoodList();
 		TextView totalPrice = (TextView) findViewById(R.id.totalPrice_textView);
