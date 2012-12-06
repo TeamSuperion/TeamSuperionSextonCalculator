@@ -116,12 +116,30 @@ public class PunchActivity extends Activity implements OnClickListener {
 
 	public ArrayList<FoodItem> generateFoodList() {
 		foodList = new ArrayList<FoodItem>();
-		TextView itemName;
+		TextView itemName, itemCal;
 		String name;
-		double price = 0.00;
+		double price, counter = 0.0;
 		int quantity = 1;
-		itemName = (TextView) findViewById(R.id.spinner_textView1);
+		itemName = (TextView) entreeSpinner.findViewById(R.id.spinner_textView1);
+		itemCal = (TextView) entreeSpinner.findViewById(R.id.spinner_textView2);
 		name = itemName.getText().toString();
+		price = Double.parseDouble(itemCal.getText().toString());
+		counter = counter + price;
+		foodList.add(new FoodItem(name, price, quantity));
+		itemName = (TextView) sideSpinner.findViewById(R.id.spinner_textView1);
+		itemCal = (TextView) sideSpinner.findViewById(R.id.spinner_textView2);
+		name = itemName.getText().toString();
+		price = Double.parseDouble(itemCal.getText().toString());
+		counter = counter + price;
+		foodList.add(new FoodItem(name, price, quantity));
+		itemName = (TextView) drinkSpinner.findViewById(R.id.spinner_textView1);
+		itemCal = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
+		name = itemName.getText().toString();
+		price = Double.parseDouble(itemCal.getText().toString());
+		counter = counter + price;
+		foodList.add(new FoodItem(name, price, quantity));
+		name = "Total Calories";
+		price = counter;
 		foodList.add(new FoodItem(name, price, quantity));
 		return foodList;
 	}
