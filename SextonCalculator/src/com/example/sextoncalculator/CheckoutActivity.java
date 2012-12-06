@@ -227,12 +227,13 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		// findViewById(R.id.amountRemaining_textView);
 		// totalPrice = totalPrice - entrePrice - sidePrice - drinkPrice;
 		int punchIntDifference;
+		double punchDoubleCounterTemp;
 		totalPriceInstance = getTotalPrice();
 
 		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
 		punchCounterTemp = edit.getText().toString();
-		punchIntCounterTemp = Integer.parseInt(punchCounterTemp);
-
+		punchDoubleCounterTemp = Double.parseDouble(punchCounterTemp);
+		punchIntCounterTemp = (int)punchDoubleCounterTemp;
 		if ((punchIntCounterTemp == punchIntCounter)
 				&& (totalPriceInstance > 0.00)) {
 			totalPriceInstance = totalPriceInstance - punchValue;
@@ -259,6 +260,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			} else {
 				// throw exception telling user that they are using excessive
 				// punches
+				punchIntCounter = getPunchIntCounter();
+				punchCounter = Integer.toString(punchIntCounter);
+				edit.setText(punchCounter);
 			}
 		} else if (punchIntCounterTemp < punchIntCounter) {
 			punchIntDifference = punchIntCounter - punchIntCounterTemp;
@@ -290,7 +294,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		flexValueTemp = edit.getText().toString();
 		flexDoubleValueTemp = Double.parseDouble(flexValueTemp);
 		flexDoubleValue = getCurrentFlex();
-		if (flexDoubleValueTemp == 0.00) {
+		if (totalPriceInstance >= 0.00) {
+			if (flexDoubleValueTemp == 0.00) {
 			flexDoubleValue = flexDoubleValue + totalPriceInstance;
 			setFlexText(flexDoubleValue);
 			setCurrentFlex(flexDoubleValue);
@@ -304,12 +309,19 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 				flexDoubleDifference = flexDoubleValueTemp - flexDoubleValue;
 				totalPriceInstance = totalPriceInstance
 						- (flexDoubleDifference);
+				if (totalPriceInstance >= 0.00) {
 				setTotalPrice(totalPriceInstance);
 				setTotalText(totalPriceInstance);
 				// double temp = getCurrentFlex() + flexDoubleValue;
 				flexDoubleValueTemp = getCurrentFlex() + flexDoubleDifference;
 				setCurrentFlex(flexDoubleValueTemp);
 				setFlexText(flexDoubleValueTemp);
+				}
+				else {
+					//do nothing because the new totalPriceInstance is negative
+					setCurrentFlex(flexDoubleValue);
+					setFlexText(flexDoubleValue);
+				}
 			} else if (flexDoubleValueTemp < flexDoubleValue) {
 				flexDoubleDifference = flexDoubleValue - flexDoubleValueTemp;
 				totalPriceInstance = totalPriceInstance
@@ -320,12 +332,16 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 				flexDoubleValueTemp = getCurrentFlex() - flexDoubleDifference;
 				setCurrentFlex(flexDoubleValueTemp);
 				setFlexText(flexDoubleValueTemp);
+				}
 			}
+	}
+		else {
+			//do nothing because the current totalPriceInstance is a negative value
+		}
 
 			// TextView newTotal = (TextView)
 			// findViewById(R.id.amountRemaining_textView);
 			// newTotal.setText(Double.toString(getTotalPrice()));
-		}
 		// }
 	}
 
@@ -337,7 +353,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		cashValue = edit.getText().toString();
 		cashDoubleValueTemp = Double.parseDouble(cashValue);
 		cashDoubleValue = getCurrentCash();
-		if (cashDoubleValueTemp == 0.00) {
+		if (totalPriceInstance >= 0.00) {
+			if (cashDoubleValueTemp == 0.00) {
 			cashDoubleValue = cashDoubleValue + totalPriceInstance;
 			setCashText(cashDoubleValue);
 			setCurrentCash(cashDoubleValue);
@@ -350,12 +367,19 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			} else if (cashDoubleValueTemp > cashDoubleValue) {
 				cashDoubleDifference = cashDoubleValueTemp - cashDoubleValue;
 				totalPriceInstance = totalPriceInstance - cashDoubleDifference;
+				if (totalPriceInstance >= 0.00) {
 				setTotalPrice(totalPriceInstance);
 				setTotalText(totalPriceInstance);
 				// Double temp = getCurrentCash() + cashDoubleValue;
 				flexDoubleValueTemp = getCurrentCash() + cashDoubleDifference;
 				setCurrentCash(flexDoubleValueTemp);
 				setCashText(flexDoubleValueTemp);
+				}
+				else {
+					//do nothing because the new totalPriceInstance is negative
+					setCurrentCash(flexDoubleValue);
+					setCashText(flexDoubleValue);
+				}
 			} else if (cashDoubleValueTemp < cashDoubleValue) {
 				cashDoubleDifference = cashDoubleValue - cashDoubleValueTemp;
 				totalPriceInstance = totalPriceInstance + cashDoubleDifference;
@@ -366,6 +390,10 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 				setCurrentCash(flexDoubleValueTemp);
 				setCashText(flexDoubleValueTemp);
 			}
+		}
+		}
+		else {
+			//do nothing because the current totalPriceInstance is a negative value
 		}
 		// TextView newTotal = (TextView)
 		// findViewById(R.id.amountRemaining_textView);

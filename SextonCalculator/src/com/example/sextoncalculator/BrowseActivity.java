@@ -70,6 +70,10 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		} else if (v == resetButton) {
 			restartActivity();
 		} else if (v == checkoutButton) {
+			if (foodList.isEmpty()) {
+				//return message telling user that there is no item in the foodList so there is nothing to checkout
+			}
+			else {
 			intent = new Intent(this, CheckoutActivity.class);
 			intent.putParcelableArrayListExtra("foodList", foodList);
 			intent.putExtra("totalString", getTotalString());
@@ -80,6 +84,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			// }
 			// intent.putExtra("foodListIntance", foodListIntance);
 			startActivity(intent);
+			}
 		}
 	}
 
@@ -145,13 +150,20 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		String name = itemName.getText().toString();
 		double price = Double.parseDouble(itemPrice.getText().toString());
 		int quantity = Integer.parseInt(itemQuantity.getText().toString());
-		if (quantity > 0) {
+		if (quantity > 1) {
 			foodData.updateQuantity(id, quantity - 1);
 			foodCursorAdapter.getCursor().requery();
 			FoodItem foodItem = new FoodItem(name, price, quantity);
 			FoodItem oldFoodItem = foodList.get(foodList.indexOf(foodItem));
 			int oldQuantity = oldFoodItem.getQuantity();
 			oldFoodItem.setQuantity(oldQuantity - 1);
+		}
+		else if (quantity == 1){
+			foodData.updateQuantity(id, quantity - 1);
+			foodCursorAdapter.getCursor().requery();
+			FoodItem foodItem = new FoodItem(name, price, quantity);
+			FoodItem oldFoodItem = foodList.get(foodList.indexOf(foodItem));
+			foodList.remove(oldFoodItem);
 		}
 		calculateTotal();
 	}
