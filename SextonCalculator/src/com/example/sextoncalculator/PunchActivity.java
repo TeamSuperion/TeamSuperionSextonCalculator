@@ -16,6 +16,11 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * 
+ * @author Justin Springer, Adam Bachmeier, Johnathan Ly, Tsuehue Xiong
+ *
+ */
 public class PunchActivity extends Activity implements OnClickListener, OnItemSelectedListener {
 	protected Spinner entreeSpinner, sideSpinner, drinkSpinner;
 	protected FoodData foodData;
@@ -26,7 +31,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	TextView calories;
 
 	/**
-	 * 
+	 * Generic onCreate method
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	}
 
 	/**
-	 * 
+	 * Generic onCreateOptionsMenu method
 	 * @param menu this object does that
 	 */
 	@Override
@@ -57,7 +62,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	}
 
 	/**
-	 * 
+	 * Creates the FoodData database to be used on this page
 	 */
 	@SuppressWarnings("deprecation")
 	public void initializeDB() {
@@ -96,13 +101,9 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	}
 
 	/**
-	 * 
+	 * Restarts this page
 	 */
 	public void restartActivity() {
-		// Intent intent = new Intent();
-		// act.finish();
-		// intent.setClass(act, act.getClass());
-		// act.startActivity(intent);
 		Intent intent = getIntent();
 		overridePendingTransition(0, 0);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -113,10 +114,12 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	}
 
 	/**
-	 * 
+	 * Randomly selects items in each of the spinners
 	 */
 	public void randomActivity(){
 
+		//generator generates a random number to be used to select an item in the spinner
+		//generator uses count to get the number of items in each spinner
 		Random generator = new Random();
 		int count = entreeSpinner.getCount();
 		int random = generator.nextInt(count);
@@ -130,13 +133,20 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 
 	}
 	
+	/**
+	 * Updates the total calories each time a new item is selected in one of the spinners
+	 */
 	public void calorieUpdate(){
+		
+		//grabs each calorie from the spinner locations and adds them together
 		calories = (TextView) findViewById(R.id.calorieView);
 		Double calTotal = 0.0, eCal, sCal, dCal;
 		TextView eView, sView, dView, itemCat;
 		eView = (TextView) entreeSpinner.findViewById(R.id.spinner_textView2);
 		eCal = Double.parseDouble(eView.getText().toString());
 		calTotal = calTotal + eCal;
+		
+		//the following code checks if entree is category 4 in order to ignore the side calories
 		itemCat = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
 		String cat = itemCat.getText().toString();
 		if (!cat.equals("4")){
@@ -144,6 +154,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		sCal = Double.parseDouble(sView.getText().toString());
 		calTotal = calTotal + sCal;
 		}
+		
 		dView = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
 		dCal = Double.parseDouble(dView.getText().toString());
 		calTotal = calTotal + dCal;
@@ -151,17 +162,19 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Returns the TotalString variable
+	 * @return totalString
 	 */
 	public double getTotalString() {
 		return Double.parseDouble(this.totalString);
 	}
 
 	/**
-	 * 
+	 * Returns a foodList to be passed on to the checkout page to be displayed
+	 * @return foodList- ArrayList of FoodItems
 	 */
 	public ArrayList<FoodItem> generateFoodList() {
+		//adds each spinner info to the foodlist to be passed on to checkout
 		foodList = new ArrayList<FoodItem>();
 		TextView itemName, itemCal, itemCat;
 		String name;
@@ -173,6 +186,8 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		price = Double.parseDouble(itemCal.getText().toString());
 		counter = counter + price;
 		foodList.add(new FoodItem(name, price, quantity));
+		
+		//the following code checks if entree is category 4 in order to ignore the side info
 		itemCat = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
 		String cat = itemCat.getText().toString();
 		if (!cat.equals("4")){
@@ -183,6 +198,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 			counter = counter + price;
 			foodList.add(new FoodItem(name, price, quantity));
 		}
+		
 		itemName = (TextView) drinkSpinner.findViewById(R.id.spinner_textView1);
 		itemCal = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
 		name = itemName.getText().toString();
@@ -196,7 +212,8 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	}
 
 	/**
-	 * 
+	 * onClick method to activate events when certain buttons are pressed
+	 * @param v- the current View associated with the buttons
 	 */
 	public void onClick(View v) {
 		Intent intent;
@@ -217,7 +234,11 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	}
 
 	/**
-	 * 
+	 * onItemSelected method to activate events when an item is selected in any of the spinners
+	 * @param parentView- needed for interface implementation
+	 * @param selectedItemView- needed for interface implementation
+	 * @param position- needed for interface implementation
+	 * @param id- needed for interface implementation
 	 */
 	public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 		TextView category = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
@@ -231,6 +252,10 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		calorieUpdate();
 	}
 
+	/**
+	 * onNothingSelected does nothing
+	 * @param parentView- needed for interface implementation
+	 */
 	public void onNothingSelected(AdapterView<?> parentView) {
 		// Do Nothing
 	}
