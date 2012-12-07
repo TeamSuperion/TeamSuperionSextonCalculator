@@ -8,10 +8,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * HeaderActivity is used to give the buttons of the Header xml file some functionality
+ * @author Adam Bachmeier, Justin Springer, Tsuehue Xiong, Jonathan Ly
+ *
+ */
 public class HeaderActivity extends Activity implements OnClickListener {
 
 	protected Button homeButton, resetButton, checkoutButton;
 
+	/**
+	 * Generic onCreate method
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,12 +33,18 @@ public class HeaderActivity extends Activity implements OnClickListener {
 		checkoutButton.setOnClickListener(this);
 	}
 
+	/**
+	 * Generic onCreateOptionsMenu method
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_header, menu);
 		return true;
 	}
 
+	/**
+	 * Handles when a button is pressed/clicked
+	 */
 	public void onClick(View v) {
 		Intent intent;
 		if (v == homeButton) {

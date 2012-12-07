@@ -18,6 +18,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * Handles the functionality of the Checkout xml file
+ * @author Tsuehue Xiong, Jonathan Ly, Adam Bachmeier, Justin Springer
+ *
+ */
 @SuppressLint("UseValueOf")
 public class CheckoutActivity extends Activity implements OnClickListener {
 
@@ -29,12 +34,15 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	Bundle extras;
 	ArrayList<FoodItem> foodList;
 	String flexValue, flexValueTemp, cashValue, cashValueTemp, punchCounter,
-			punchCounterTemp;
+	punchCounterTemp;
 	int punchIntCounterTemp, punchIntCounter, flag;
 	protected Button homeButton, resetButton, checkoutButton, punchButton,
-			flexButton, cashButton, resetFlexButton, resetCashButton,
-			punchIncreaseButton, punchDecreaseButton;
+	flexButton, cashButton, resetFlexButton, resetCashButton,
+	punchIncreaseButton, punchDecreaseButton;
 
+	/**
+	 * Generic onCreate method
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,7 +77,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 
 			// get the initial total of the items in foodList
 			totalInitialPrice = extras.getDouble("totalString");
-			
+
 			//include tax into the initial total
 			totalInitialPrice = totalInitialPrice * tax;
 
@@ -100,7 +108,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 
 			// get the initial total of the items in foodList
 			totalInitialPrice = extras.getDouble("totalString");
-			
+
 			//include tax into the initial total
 			totalInitialPrice = totalInitialPrice * tax;
 
@@ -135,14 +143,18 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		checkoutButton.setVisibility(View.INVISIBLE);
 	}
 
+	/**
+	 * Generic onCreateOptionsMenu method
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_checkout, menu);
 		return true;
 	}
 
-	// an onClickListener that performs different functions depending on what
-	// button is clicked
+	/**
+	 * Handles the events when a button is pressed/clicked
+	 */
 	public void onClick(View v) {
 		Intent intent;
 		if (v == homeButton) {
@@ -165,13 +177,18 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	//a convert that converts a string to a decimal with 2 decimal places
+	/**
+	 * a convert that converts a string to a decimal with 2 decimal places
+	 * @return dFormat the decimal format to be used
+	 */
 	public DecimalFormat formatIntoDecimal() {
 		DecimalFormat dFormat = new DecimalFormat("0.00");
 		return dFormat;
 	}
 
-	//decrease the current value of punchIntCounter by 1
+	/**
+	 * decrease the current value of punchIntCounter by 1
+	 */
 	public void punchDecreaseActivity() {
 		totalPriceInstance = getTotalPrice();
 		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
@@ -215,7 +232,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	//reset the value of flex back to 0.00
+	/**
+	 * reset the value of flex back to 0.00
+	 */
 	public void flexResetActivity() {
 		//if the current flex value is 0.00, set flex to 0.00
 		if (getCurrentFlex() == 0.00) {
@@ -235,7 +254,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	//reset the value of cash back to 0.00 and return the value of cash back to the total remaining
+	/**
+	 * reset the value of cash back to 0.00 and return the value of cash back to the total remaining
+	 */
 	public void cashResetActivity() {
 		//if the current cash value is 0.00, set cash to 0.00
 		if (getCurrentCash() == 0.00) {
@@ -255,7 +276,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	//reset the page back to what it looked like when you first got to the page
+	/**
+	 * reset the page back to what it looked like when you first got to the page
+	 */
 	public void restartActivity() {
 		Intent intent = getIntent();
 		overridePendingTransition(0, 0);
@@ -266,36 +289,67 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		startActivity(intent);
 	}
 
+	/**
+	 * Sets the total price
+	 * @param totalPrice price to be set
+	 */
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
+	/**
+	 * Sets the TextView to the totalPrice
+	 * @param totalPrice price to set the textview to
+	 */
 	public void setTotalText(double totalPrice) {
 		String formattedCurrentTotalString = formatIntoDecimal().format(
 				totalPrice);
 		total.setText("$" + formattedCurrentTotalString);
 	}
 
+	/**
+	 * Gets the TotalPrice
+	 * @return totalPrice the totalPrice
+	 */
 	public double getTotalPrice() {
 		return totalPrice;
 	}
 
+	/**
+	 * Sets the punchIntCounterTemp to the given variable
+	 * @param punchIntCounterTemp variable to set it to
+	 */
 	public void setPunchIntCounterTemp(int punchIntCounterTemp) {
 		this.punchIntCounterTemp = punchIntCounterTemp;
 	}
 
+	/**
+	 * Gets the punchIntCounterTemp
+	 * @return punchIntCounterTemp the variable being returned
+	 */
 	public int getPunchIntCounterTemp() {
 		return punchIntCounterTemp;
 	}
 
+	/**
+	 * Sets the punchIntCounter
+	 * @param punchIntCounter variable to set it to
+	 */
 	public void setPunchIntCounter(int punchIntCounter) {
 		this.punchIntCounter = punchIntCounter;
 	}
 
+	/**
+	 * Gets the punchIntCounter
+	 * @return punchIntCounter the variable being returned
+	 */
 	public int getPunchIntCounter() {
 		return punchIntCounter;
 	}
 
+	/**
+	 * Handles when punch is pressed and the functionalities of it
+	 */
 	public void punchActivity() {
 		totalPriceInstance = getTotalPrice();
 		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
@@ -357,7 +411,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 					punchCounter = Integer.toString(punchIntCounter);
 					edit.setText(punchCounter);
 				}			
-				}
+			}
 			//if the input value of punch is smaller than the current value, punch will account for the change of punchIntCounter
 			//setting the value of punchIntCounter and totalPriceInstance to their new values
 			else if (punchIntCounterTemp < punchIntCounter) {
@@ -382,21 +436,36 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * Sets the currentFlex
+	 * @param currentFlex variable to set it to
+	 */
 	public void setCurrentFlex(double currentFlex) {
 		this.currentFlex = currentFlex;
 	}
 
+	/**
+	 * Gets the currentFlex
+	 * @return currentFlex the variable being returned
+	 */
 	public double getCurrentFlex() {
 		return currentFlex;
 	}
 
+	/**
+	 * Sets the TextView flexText to the currentFlex
+	 * @param currentFlex teh variable to set the textView to
+	 */
 	public void setFlexText(double currentFlex) {
 		String formattedCurrentFlexString = formatIntoDecimal().format(
 				currentFlex);
 		EditText edit = (EditText) findViewById(R.id.flexPay_editText);
 		edit.setText(formattedCurrentFlexString);
 	}
-	
+
+	/**
+	 * Handles when the flex button is pressed and all the functionalities of it
+	 */
 	public void flexActivity() {
 		double flexDoubleDifference;
 		totalPriceInstance = getTotalPrice();
@@ -463,21 +532,36 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * Sets the currentCash
+	 * @param currentCash the variable to set it to
+	 */
 	public void setCurrentCash(double currentCash) {
 		this.currentCash = currentCash;
 	}
 
+	/**
+	 * Gets the currentCash
+	 * @return currentCash the current cash total
+	 */
 	public double getCurrentCash() {
 		return currentCash;
 	}
 
+	/**
+	 * Sets the textView CashText to the current cash
+	 * @param currentCash the variable to set it to
+	 */
 	public void setCashText(double currentCash) {
 		String formattedCurrentCashString = formatIntoDecimal().format(
 				currentCash);
 		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
 		edit.setText(formattedCurrentCashString);
 	}
-	
+
+	/**
+	 * Handles when the Cash button is pressed and the functionalities of it
+	 */
 	public void cashActivity() {
 		double cashDoubleDifference;
 		totalPriceInstance = getTotalPrice();

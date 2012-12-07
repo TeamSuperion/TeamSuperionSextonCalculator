@@ -23,6 +23,8 @@ import android.widget.TextView;
  * BrowseActivity creates interface to browse all food items available. Total
  * price is calculated when adding and removing food items to/from shopping
  * cart.
+ * @author Jonathan Ly, Adam Bachmeier, Tsuehue Xiong, Justin Springer
+ *
  */
 public class BrowseActivity extends ListActivity implements OnClickListener {
 	// protected Spinner spinner;
@@ -50,10 +52,10 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		// @SuppressWarnings("deprecation")
 		foodCursorAdapter = new SimpleCursorAdapter(this,
 				R.layout.activity_browse_row, cursor, new String[] {
-						foodData.ID, foodData.NAME, foodData.PRICE,
-						foodData.QUANTITY }, new int[] { R.id.itemId_textView,
-						R.id.itemName_textView, R.id.itemPrice_textView,
-						R.id.itemQuantity_textView });
+				foodData.ID, foodData.NAME, foodData.PRICE,
+				foodData.QUANTITY }, new int[] { R.id.itemId_textView,
+				R.id.itemName_textView, R.id.itemPrice_textView,
+				R.id.itemQuantity_textView });
 		setListAdapter(foodCursorAdapter);
 		// foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		setContentView(R.layout.activity_browse);
@@ -66,14 +68,18 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		checkoutButton.setOnClickListener(this);
 	}
 
-	/** Called when interface is created. Sets up option menu. */
+	/**
+	 * Called when interface is created. Sets up option menu.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_browse, menu);
 		return true;
 	}
 
-	/** Sets actions for clicked buttons. */
+	/**
+	 * Sets actions for clicked buttons.
+	 */
 	public void onClick(View v) {
 		Intent intent;
 		if (v == homeButton) {
@@ -101,17 +107,25 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		}
 	}
 
-	/** Gets the total price. */
+	/**
+	 * Gets the total price.
+	 * @return totalString as a double value
+	 */
 	public double getTotalString() {
 		return Double.parseDouble(this.totalString);
 	}
 
-	/** Sets the total price. */
+	/**
+	 * Sets the total price.
+	 * @param totalString the variable to set it to
+	 */
 	public void setTotalString(String totalString) {
 		this.totalString = totalString;
 	}
 
-	/** Resets display to default interface prior to selections. */
+	/**
+	 * Resets display to default interface prior to selections.
+	 */
 	public void restartActivity() {
 		foodData.resetQuantity();
 		// Intent intent = new Intent();
@@ -130,6 +144,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	/**
 	 * Increases selected food item quantity by one. Adds selected food item to
 	 * shopping cart or updates quantity if food item already exists.
+	 * @param v the view being used
 	 */
 	public void increaseQuantity(View v) {
 		RelativeLayout layout = (RelativeLayout) v.getParent();
@@ -161,6 +176,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	 * Decreases selected food item quantity by one. Updates quantity of food
 	 * item in shopping cart or removes food item when quantity reaches zero
 	 * after change.
+	 * @param v the view being used
 	 */
 	public void decreaseQuantity(View v) {
 		RelativeLayout layout = (RelativeLayout) v.getParent();

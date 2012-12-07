@@ -12,6 +12,7 @@ import android.provider.BaseColumns;
 /**
  * FoodData creates a database used to store food item information. It also
  * provides methods to perform queries on the database.
+ * @author Tsuehue Xiong, Adam Bachmeier, Jonathan Ly, Justin Springer
  */
 public class FoodData extends SQLiteOpenHelper {
 
@@ -25,7 +26,10 @@ public class FoodData extends SQLiteOpenHelper {
 	public static final String CATEGORY = "category";
 	public static final String QUANTITY = "quantity";
 
-	/** Default constructor for FoodData. */
+	/**
+	 * Default constructor for FoodData
+	 * @param context
+	 */
 	public FoodData(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -48,7 +52,9 @@ public class FoodData extends SQLiteOpenHelper {
 		db.execSQL(createSql);
 	}
 
-	/** Called when database version changes. Replaces old table with new one. */
+	/**
+	 * Called when database version changes. Replaces old table with new one.
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		String dropSql = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -59,6 +65,11 @@ public class FoodData extends SQLiteOpenHelper {
 	/**
 	 * Inserts new food item record into database. Information includes name,
 	 * calories, price, and quantity.
+	 * @param name
+	 * @param calories
+	 * @param price
+	 * @param category
+	 * @param quantity
 	 */
 	public void insert(String name, int calories, String price, int category,
 			int quantity) {
@@ -72,7 +83,11 @@ public class FoodData extends SQLiteOpenHelper {
 		db.insertOrThrow(TABLE_NAME, null, values);
 	}
 
-	/** Returns all food item records from database. */
+	/**
+	 * Returns all food item records from database.
+	 * @param activity
+	 * @return
+	 */
 	public Cursor all(Activity activity) {
 		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY, QUANTITY };
 		String order = NAME;
@@ -83,7 +98,11 @@ public class FoodData extends SQLiteOpenHelper {
 		return cursor;
 	}
 
-	/** Returns all category 1 (entre) food item records from database. */
+	/**
+	 * Returns all category 1 (entre) food item records from database.
+	 * @param activity
+	 * @return
+	 */
 	public Cursor cat1(Activity activity) {
 		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY };
 		String order = NAME;
@@ -95,7 +114,11 @@ public class FoodData extends SQLiteOpenHelper {
 		return cursor;
 	}
 
-	/** Returns all category 2 (side) food item records from database. */
+	/**
+	 * Returns all category 2 (side) food item records from database.
+	 * @param activity
+	 * @return
+	 */
 	public Cursor cat2(Activity activity) {
 		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY };
 		String order = NAME;
@@ -107,7 +130,11 @@ public class FoodData extends SQLiteOpenHelper {
 		return cursor;
 	}
 
-	/** Returns all category 3 (drink) food item records from database. */
+	/**
+	 * Returns all category 3 (drink) food item records from database.
+	 * @param activity
+	 * @return
+	 */
 	public Cursor cat3(Activity activity) {
 		String[] from = { ID, NAME, CALORIES, PRICE, CATEGORY };
 		String order = NAME;
@@ -119,13 +146,18 @@ public class FoodData extends SQLiteOpenHelper {
 		return cursor;
 	}
 
-	/** Returns number of food item records in database. */
+	/**
+	 * Returns number of food item records in database.
+	 * @return
+	 */
 	public long count() {
 		SQLiteDatabase db = getReadableDatabase();
 		return DatabaseUtils.queryNumEntries(db, TABLE_NAME);
 	}
 
-	/** Loads database with food item information. */
+	/**
+	 * Loads database with food item information.
+	 */
 	public void load() {
 
 		insert("Apple", 110, "0.70", 2, 0);
@@ -170,21 +202,21 @@ public class FoodData extends SQLiteOpenHelper {
 		insert("Sausage Pizza", 315, "2.15", 1, 0);
 		insert("Cheese Pizza", 265, "2.15", 1, 0);
 		insert("Veggie Pizza", 270, "2.15", 1, 0);
-//		insert("Cappucino 12 oz", 100, "0.99", 3, 0);
+		//		insert("Cappucino 12 oz", 100, "0.99", 3, 0);
 		insert("Cappucino 16 oz", 150, "1.49", 3, 0);
-//		insert("Hot Chocolate 12 oz", 200, "0.99", 3, 0);
+		//		insert("Hot Chocolate 12 oz", 200, "0.99", 3, 0);
 		insert("Hot Chocolate 16 oz", 150, "1.49", 3, 0);
-//		insert("Hot Cider 12 oz", 200, "0.99", 3, 0);
+		//		insert("Hot Cider 12 oz", 200, "0.99", 3, 0);
 		insert("Hot Cider 16 oz", 180, "1.49", 3, 0);
-//		insert("Skim Milk 12 oz", 240, "0.99", 3, 0);
+		//		insert("Skim Milk 12 oz", 240, "0.99", 3, 0);
 		insert("Skim Milk 16 oz", 120, "1.49", 3, 0);
-//		insert("Chocolate Milk 12 oz", 260, "0.99", 3, 0);
+		//		insert("Chocolate Milk 12 oz", 260, "0.99", 3, 0);
 		insert("Chocolate Milk 16 oz", 225, "1.49", 3, 0);
-//		insert("Black Coffee 12 oz", 5, "0.99", 3, 0);
+		//		insert("Black Coffee 12 oz", 5, "0.99", 3, 0);
 		insert("Black Coffee 16 oz", 10, "1.49", 3, 0);
-//		insert("Tea 12 oz", 100, "0.99", 3, 0);
+		//		insert("Tea 12 oz", 100, "0.99", 3, 0);
 		insert("Tea 16 oz", 130, "1.49", 3, 0);
-//		insert("Pop 12 oz", 140, "0.99", 3, 0);
+		//		insert("Pop 12 oz", 140, "0.99", 3, 0);
 		insert("Pop 16 oz", 190, "1.49", 3, 0);
 		// Cat 1 Main
 		// Cat 2 Side
@@ -193,7 +225,11 @@ public class FoodData extends SQLiteOpenHelper {
 		// Cat 5 Misc
 	}
 
-	/** Updates quantity for a food item record. */
+	/**
+	 * Updates quantity for a food item record.
+	 * @param id
+	 * @param quantity
+	 */
 	public void updateQuantity(int id, int quantity) {
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -201,7 +237,9 @@ public class FoodData extends SQLiteOpenHelper {
 		db.update(TABLE_NAME, values, ID + "=" + id, null);
 	}
 
-	/** Resets quantity to zero for all food item records. */
+	/**
+	 *  Resets quantity to zero for all food item records.
+	 */
 	public void resetQuantity() {
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
