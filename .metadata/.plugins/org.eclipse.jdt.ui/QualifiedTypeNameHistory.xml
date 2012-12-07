@@ -2,5 +2,9 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.widget.LinearLayout"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="com.example.sextoncalculator.R.id"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemSelectedListener"/>
 </qualifiedTypeNameHistroy>

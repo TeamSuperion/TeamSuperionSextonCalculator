@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class PunchActivity extends Activity implements OnClickListener {
+public class PunchActivity extends Activity implements OnClickListener, OnItemSelectedListener {
 	protected Spinner entreeSpinner, sideSpinner, drinkSpinner;
 	protected FoodData foodData;
 	protected Button homeButton, checkoutButton, resetButton, randomButton;
@@ -62,8 +64,8 @@ public class PunchActivity extends Activity implements OnClickListener {
 			foodData.load();
 		}
 
-		String[] from = new String[] { FoodData.NAME, FoodData.CALORIES };
-		int[] to = new int[] { R.id.spinner_textView1, R.id.spinner_textView2 };
+		String[] from = new String[] { FoodData.NAME, FoodData.CATEGORY, FoodData.CALORIES };
+		int[] to = new int[] { R.id.spinner_textView1, R.id.spinner_category, R.id.spinner_textView2 };
 
 		Cursor entreeCursor = foodData.cat1(this);
 		startManagingCursor(entreeCursor);
@@ -98,16 +100,16 @@ public class PunchActivity extends Activity implements OnClickListener {
 		overridePendingTransition(0, 0);
 		startActivity(intent);
 	}
-	
+
 	public void randomActivity(){
-		
+
 		Random generator = new Random();
 		int count = entreeSpinner.getChildCount();
 		System.out.println(count);
 		int random = generator.nextInt(count);
 		System.out.println(random);
 		entreeSpinner.setSelection(random);
-		
+
 	}
 
 	public double getTotalString() {
@@ -116,7 +118,7 @@ public class PunchActivity extends Activity implements OnClickListener {
 
 	public ArrayList<FoodItem> generateFoodList() {
 		foodList = new ArrayList<FoodItem>();
-		TextView itemName, itemCal;
+		TextView itemName, itemCal, itemCat;
 		String name;
 		double price, counter = 0.0;
 		int quantity = 1;
@@ -126,12 +128,16 @@ public class PunchActivity extends Activity implements OnClickListener {
 		price = Double.parseDouble(itemCal.getText().toString());
 		counter = counter + price;
 		foodList.add(new FoodItem(name, price, quantity));
-		itemName = (TextView) sideSpinner.findViewById(R.id.spinner_textView1);
-		itemCal = (TextView) sideSpinner.findViewById(R.id.spinner_textView2);
-		name = itemName.getText().toString();
-		price = Double.parseDouble(itemCal.getText().toString());
-		counter = counter + price;
-		foodList.add(new FoodItem(name, price, quantity));
+		itemCat = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
+		String cat = itemCat.getText().toString();
+		if (!cat.equals("4")){
+			itemName = (TextView) sideSpinner.findViewById(R.id.spinner_textView1);
+			itemCal = (TextView) sideSpinner.findViewById(R.id.spinner_textView2);
+			name = itemName.getText().toString();
+			price = Double.parseDouble(itemCal.getText().toString());
+			counter = counter + price;
+			foodList.add(new FoodItem(name, price, quantity));
+		}
 		itemName = (TextView) drinkSpinner.findViewById(R.id.spinner_textView1);
 		itemCal = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
 		name = itemName.getText().toString();
@@ -160,6 +166,23 @@ public class PunchActivity extends Activity implements OnClickListener {
 		} else if (v == randomButton){
 			randomActivity();
 		}
+	}
+
+	public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+		if (selectedItemView == entreeSpinner){
+			TextView category = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
+			String cat = category.getText().toString();
+			if (cat.equals("4")){
+				sideSpinner.setVisibility(View.GONE);
+			}
+			else {
+				sideSpinner.setVisibility(View.VISIBLE);
+			}
+		}
+	}
+
+	public void onNothingSelected(AdapterView<?> parentView) {
+		// your code here
 	}
 
 }
