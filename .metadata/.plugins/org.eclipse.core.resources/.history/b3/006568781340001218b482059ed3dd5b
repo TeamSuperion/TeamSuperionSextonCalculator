@@ -60,7 +60,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 
 		foodData = new FoodData(this);
 		entreeSpinner = (Spinner) findViewById(R.id.spinner1);
-		entreeSpinner.setOnItemSelectedListener(this);
 		sideSpinner = (Spinner) findViewById(R.id.spinner2);
 		drinkSpinner = (Spinner) findViewById(R.id.spinner3);
 		if (foodData.count() == 0) {
@@ -179,7 +178,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		TextView category = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
 		String cat = category.getText().toString();
 		if (cat.equals("4")){
-			sideSpinner.setVisibility(View.INVISIBLE);
+			sideSpinner.setVisibility(View.GONE);
 		}
 		else {
 			sideSpinner.setVisibility(View.VISIBLE);
