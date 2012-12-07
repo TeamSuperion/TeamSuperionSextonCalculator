@@ -1,5 +1,7 @@
 package com.example.sextoncalculator;
 
+import java.util.Comparator;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,7 +9,7 @@ import android.os.Parcelable;
  * FoodItem is used to create a food item that is available for purchase. Food
  * items have a name, price, and quantity.
  */
-public class FoodItem implements Parcelable {
+public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	private String name;
 	private double price;
@@ -102,5 +104,11 @@ public class FoodItem implements Parcelable {
 		name = in.readString();
 		price = in.readDouble();
 		quantity = in.readInt();
+	}
+
+	public int compareTo(FoodItem another) {
+		String thisFoodItem = this.getName();
+		String anotherFoodItem = another.getName();
+		return thisFoodItem.compareTo(anotherFoodItem);
 	}
 }

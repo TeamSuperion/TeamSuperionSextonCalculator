@@ -2,6 +2,7 @@ package com.example.sextoncalculator;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -86,6 +87,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 				// foodList so there is nothing to checkout
 			} else {
 				intent = new Intent(this, CheckoutActivity.class);
+				Collections.sort(foodList);
 				intent.putParcelableArrayListExtra("foodList", foodList);
 				intent.putExtra("totalString", getTotalString());
 				intent.putExtra("flag", 2);
