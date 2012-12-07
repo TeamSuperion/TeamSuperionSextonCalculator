@@ -21,113 +21,116 @@ import android.widget.TextView;
 @SuppressLint("UseValueOf")
 public class CheckoutActivity extends Activity implements OnClickListener {
 
-	TextView total;
-	double totalPrice;
+	TextView total, punchValue_textView;
+	double totalInitialPrice, totalPrice, entrePrice, sidePrice, drinkPrice, punchValue = 5.5,
+			totalPriceInstance, totalString, currentFlex, currentCash,
+			flexDoubleValueTemp, flexDoubleValue, cashDoubleValueTemp,
+			cashDoubleValue, tax = 1.06875;
 	Bundle extras;
-	double entrePrice;
-	double sidePrice;
-	double drinkPrice;
-	String punchCounter, punchCounterTemp;
-	double punchValue = 5.5;
 	ArrayList<FoodItem> foodList;
-
-	String flexValue, flexValueTemp;
-	String cashValue, cashValueTemp;
-	double totalPriceInstance;
-	double totalString;
-	double currentFlex, currentCash;
-
-	int punchIntCounterTemp, punchIntCounter;
-	double flexDoubleValueTemp, flexDoubleValue;
-	double cashDoubleValueTemp, cashDoubleValue;
-
+	String flexValue, flexValueTemp, cashValue, cashValueTemp, punchCounter,
+			punchCounterTemp;
+	int punchIntCounterTemp, punchIntCounter, flag;
 	protected Button homeButton, resetButton, checkoutButton, punchButton,
-			flexButton, cashButton, resetFlexButton, resetCashButton, punchIncreaseButton, punchDecreaseButton;
+			flexButton, cashButton, resetFlexButton, resetCashButton,
+			punchIncreaseButton, punchDecreaseButton;
 
-	int flag;
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		String formattedString;
+
+		// set initial setup for punchCounter, currentFlex, currentCash, and
+		// punchIntCounter
 		setPunchIntCounter(0);
 		setCurrentFlex(0.00);
 		setCurrentCash(0.00);
+		setPunchIntCounterTemp(0);
 
+		// pulls variables from connecting pages (either activity_browse or
+		// activity_punch)
 		Intent myIntent = getIntent();
 		extras = myIntent.getExtras();
 		flag = myIntent.getIntExtra("flag", 0);
+
+		// not sure what it does, ask johnny about it cause he added it
+		setContentView(R.layout.activity_checkout);
+
+		// initial setup if the previous page that lead to this page is
+		// activity_punch
 		if (flag == 1) {
-
-			// Intent intent = getIntent();
-			// String[] foodListIntance =
-			// intent.getStringArrayExtra("foodListIntance");
-			setContentView(R.layout.activity_checkout);
-			foodList = getIntent().getExtras().getParcelableArrayList(
-					"foodList");
+			// obtain the passed foodList and display it into a listView
+			foodList = extras.getParcelableArrayList("foodList");
 			ListView listView1 = (ListView) findViewById(R.id.food_listView);
 			ArrayAdapter<FoodItem> adapter = new ArrayAdapter<FoodItem>(this,
 					android.R.layout.simple_list_item_1, foodList);
 			listView1.setAdapter(adapter);
-			// extras = getIntent().getExtras();
-			totalPrice = extras.getDouble("totalString");
-			// entrePrice = extras.getDouble("entrePrice");
-			// sidePrice = extras.getDouble("sidePrice");
-			// drinkPrice = extras.getDouble("drinkPrice");
-			// totalPrice = entrePrice + sidePrice + drinkPrice;
 
-			DecimalFormat dFormat = new DecimalFormat("0.00");
-			String formattedString = dFormat.format(totalPrice);
+			// get the initial total of the items in foodList
+			totalInitialPrice = extras.getDouble("totalString");
+			
+			//include tax into the initial total
+			totalInitialPrice = totalInitialPrice * tax;
+
+			// convert the passed totalString value from a string to a double
+			// and set it as the totalPrice
+
+			// DecimalFormat dFormat = new DecimalFormat("0.00");
+			formattedString = formatIntoDecimal().format(totalInitialPrice);
 			total = (TextView) findViewById(R.id.amountRemaining_textView);
 			total.setText("$" + formattedString);
-			setTotalPrice(totalPrice);
+			setTotalPrice(totalInitialPrice);
 
-			punchButton = (Button) findViewById(R.id.punch_button);
-			punchButton.setOnClickListener(this);
-			punchIncreaseButton = (Button) findViewById(R.id.punchIncrease_button);
-			punchIncreaseButton.setOnClickListener(this);
-			punchDecreaseButton = (Button) findViewById(R.id.punchDecrease_button);
-			punchDecreaseButton.setOnClickListener(this);
-
-		} else if (flag == 2) {
-			// Intent intent = getIntent();
-			// String[] foodListIntance =
-			// intent.getStringArrayExtra("foodListIntance");
-			setContentView(R.layout.activity_checkout);
-			foodList = getIntent().getExtras().getParcelableArrayList(
-					"foodList");
-			ListView listView1 = (ListView) findViewById(R.id.food_listView);
-			ArrayAdapter<FoodItem> adapter = new ArrayAdapter<FoodItem>(this,
-					android.R.layout.simple_list_item_1, foodList);
-			listView1.setAdapter(adapter);
-			// extras = getIntent().getExtras();
-			totalPrice = extras.getDouble("totalString");
-			// entrePrice = extras.getDouble("entrePrice");
-			// sidePrice = extras.getDouble("sidePrice");
-			// drinkPrice = extras.getDouble("drinkPrice");
-			// totalPrice = entrePrice + sidePrice + drinkPrice;
-			DecimalFormat dFormat = new DecimalFormat("0.00");
-			String formattedString = dFormat.format(totalPrice);
-			total = (TextView) findViewById(R.id.amountRemaining_textView);
-			total.setText("$" + formattedString);
-			setTotalPrice(totalPrice);
-
-			punchButton = (Button) findViewById(R.id.punch_button);
-			punchButton.setOnClickListener(this);
-			flexButton = (Button) findViewById(R.id.flex_button);
-			flexButton.setOnClickListener(this);
-			resetFlexButton = (Button) findViewById(R.id.resetFlex_button);
-			resetFlexButton.setOnClickListener(this);
-			cashButton = (Button) findViewById(R.id.cash_button);
-			cashButton.setOnClickListener(this);
-			resetCashButton = (Button) findViewById(R.id.resetCash_button);
-			resetCashButton.setOnClickListener(this);
+			// finds and set the visibility of punchView_textView to invisible
+			punchValue_textView = (TextView) findViewById(R.id.punchValue_textView);
+			punchValue_textView.setVisibility(View.INVISIBLE);
 		}
+
+		// initial setup if the previous page that lead to this page is
+		// activity_punch
+		else if (flag == 2) {
+			// obtain the passed foodList and display it into a listView
+			foodList = getIntent().getExtras().getParcelableArrayList(
+					"foodList");
+			ListView listView1 = (ListView) findViewById(R.id.food_listView);
+			ArrayAdapter<FoodItem> adapter = new ArrayAdapter<FoodItem>(this,
+					android.R.layout.simple_list_item_1, foodList);
+			listView1.setAdapter(adapter);
+
+			// get the initial total of the items in foodList
+			totalInitialPrice = extras.getDouble("totalString");
+			
+			//include tax into the initial total
+			totalInitialPrice = totalInitialPrice * tax;
+
+			// convert the passed totalString value from a string to a double
+			// and set it as the totalPrice
+			formattedString = formatIntoDecimal().format(totalInitialPrice);
+			total = (TextView) findViewById(R.id.amountRemaining_textView);
+			total.setText("$" + formattedString);
+			setTotalPrice(totalInitialPrice);
+		}
+
+		// find buttons on the page and set them to an onClickListener to call a
+		// method when the button is clicked
+		punchButton = (Button) findViewById(R.id.punch_button);
+		punchButton.setOnClickListener(this);
+		punchDecreaseButton = (Button) findViewById(R.id.punchDecrease_button);
+		punchDecreaseButton.setOnClickListener(this);
+		flexButton = (Button) findViewById(R.id.flex_button);
+		flexButton.setOnClickListener(this);
+		resetFlexButton = (Button) findViewById(R.id.resetFlex_button);
+		resetFlexButton.setOnClickListener(this);
+		cashButton = (Button) findViewById(R.id.cash_button);
+		cashButton.setOnClickListener(this);
+		resetCashButton = (Button) findViewById(R.id.resetCash_button);
+		resetCashButton.setOnClickListener(this);
 		homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setOnClickListener(this);
 		resetButton = (Button) findViewById(R.id.reset_button);
 		resetButton.setOnClickListener(this);
-
+		// finds and set the visibility of checkout to invisible
 		checkoutButton = (Button) findViewById(R.id.checkout_button);
 		checkoutButton.setVisibility(View.INVISIBLE);
 	}
@@ -138,6 +141,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		return true;
 	}
 
+	// an onClickListener that performs different functions depending on what
+	// button is clicked
 	public void onClick(View v) {
 		Intent intent;
 		if (v == homeButton) {
@@ -151,136 +156,107 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			flexActivity();
 		} else if (v == cashButton) {
 			cashActivity();
-		}else if (v == punchIncreaseButton) {
-			punchIncreaseActivity();
-		}else if (v == punchDecreaseButton) {
+		} else if (v == punchDecreaseButton) {
 			punchDecreaseActivity();
-		}else if (v == resetFlexButton) {
+		} else if (v == resetFlexButton) {
 			flexResetActivity();
-		}else if (v == resetCashButton) {
+		} else if (v == resetCashButton) {
 			cashResetActivity();
 		}
 	}
-	
-	public void punchIncreaseActivity() {
-		totalPriceInstance = getTotalPrice();
 
-		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
-		punchCounterTemp = edit.getText().toString();
-		punchIntCounterTemp = Integer.parseInt(punchCounterTemp);
-		if (flag == 1) {
-			punchIntCounter = getPunchIntCounter();
-			if (punchIntCounter == 0) {
-			punchIntCounter = punchIntCounter + 1;
-			setPunchIntCounter(punchIntCounter);
-			punchCounter = Integer.toString(punchIntCounter);
-			edit.setText(punchCounter);
-			totalPriceInstance = totalPriceInstance - punchValue;
-			setTotalPrice(totalPriceInstance);
-			setTotalText(totalPriceInstance);
-			}
-			else {
-				// do nothing because you can only punch once
-			}
-		}
-		else if (flag == 2) {
-			punchIntCounter = getPunchIntCounter();
-			if (punchIntCounter >=0) {
-			punchIntCounter = punchIntCounter + 1;
-			setPunchIntCounter(punchIntCounter);
-			punchCounter = Integer.toString(punchIntCounter);
-			edit.setText(punchCounter);
-			totalPriceInstance = totalPriceInstance - punchValue;
-			setTotalPrice(totalPriceInstance);
-			setTotalText(totalPriceInstance);
-			}
-			else {
-				// do nothing because you can only punch once
-			}
-		}
+	//a convert that converts a string to a decimal with 2 decimal places
+	public DecimalFormat formatIntoDecimal() {
+		DecimalFormat dFormat = new DecimalFormat("0.00");
+		return dFormat;
 	}
-	
+
+	//decrease the current value of punchIntCounter by 1
 	public void punchDecreaseActivity() {
 		totalPriceInstance = getTotalPrice();
-
 		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
 		punchCounterTemp = edit.getText().toString();
 		punchIntCounterTemp = Integer.parseInt(punchCounterTemp);
+		//decrease the value of punchIntCounter if the previous page was PunchActivity
 		if (flag == 1) {
 			punchIntCounter = getPunchIntCounter();
+			//if punchIntCounter is 1, decrease to value to 0 and set the value of totalPriceInstance back to its original price
 			if (punchIntCounter == 1) {
-			punchIntCounter = punchIntCounter - 1;
-			setPunchIntCounter(punchIntCounter);
-			punchCounter = Integer.toString(punchIntCounter);
-			edit.setText(punchCounter);
-			totalPriceInstance = totalPriceInstance - punchValue;
-			setTotalPrice(totalPriceInstance);
-			setTotalText(totalPriceInstance);
+				punchIntCounter = punchIntCounter - 1;
+				setPunchIntCounter(punchIntCounter);
+				punchCounter = Integer.toString(punchIntCounter);
+				edit.setText(punchCounter);
+				totalPriceInstance = totalPriceInstance + totalInitialPrice;
+				setTotalPrice(totalPriceInstance);
+				setTotalText(totalPriceInstance);
 			}
+			//punchIntCounter is not equal to 1, do nothing
+			else {
+				// do nothing because punch can't be negative or larger than 1
+			}
+		}
+		//decrease the value of punchIntCounter if the previous page was BrowseActivity
+		else if (flag == 2) {
+			punchIntCounter = getPunchIntCounter();
+			//if punchIntCounter is larger than 0, decrease its value by 1 and set add punchValue(5.50) back into totalPriceInstance
+			if (punchIntCounter > 0) {
+				punchIntCounter = punchIntCounter - 1;
+				setPunchIntCounter(punchIntCounter);
+				punchCounter = Integer.toString(punchIntCounter);
+				edit.setText(punchCounter);
+				totalPriceInstance = totalPriceInstance + punchValue;
+				setTotalPrice(totalPriceInstance);
+				setTotalText(totalPriceInstance);
+			}
+			//if punchIntCounter is equal to 0 or smaller, do nothing
 			else {
 				// do nothing because punch can't be negative
 			}
 		}
-		else if (flag == 2) {
-			punchIntCounter = getPunchIntCounter();
-			if (punchIntCounter > 0) {
-			punchIntCounter = punchIntCounter - 1;
-			setPunchIntCounter(punchIntCounter);
-			punchCounter = Integer.toString(punchIntCounter);
-			edit.setText(punchCounter);
-			totalPriceInstance = totalPriceInstance - punchValue;
-			setTotalPrice(totalPriceInstance);
-			setTotalText(totalPriceInstance);
-			}
-			else {
-				// do nothing because you can only punch once
-			}
-		}
 	}
-	
+
+	//reset the value of flex back to 0.00
 	public void flexResetActivity() {
-		totalPriceInstance = getTotalPrice();
-		EditText edit = (EditText) findViewById(R.id.flexPay_editText);
-		flexValue = edit.getText().toString();
-		flexDoubleValueTemp = Double.parseDouble(flexValue);
-		flexDoubleValue = getCurrentFlex();
-		if (flexDoubleValueTemp > 0.00) {
-			double newDoubleTotal = totalPriceInstance+flexDoubleValueTemp;
-			setTotalPrice(newDoubleTotal);
-			total.setText("$" + newDoubleTotal);
-			
+		//if the current flex value is 0.00, set flex to 0.00
+		if (getCurrentFlex() == 0.00) {
 			setFlexText(0.00);
 			setCurrentFlex(0.00);
 		}
-		else {
-			//current flex value is 0
+		//if the current flex value is larger than 0.00, set flex to 0.00 and return the value of flex back to the total remaining
+		else if (getCurrentFlex() > 0.00) {
+			setTotalText(getCurrentFlex() + getTotalPrice());
+			setTotalPrice(getCurrentFlex() + getTotalPrice());
+			setFlexText(0.00);
+			setCurrentFlex(0.00);
 		}
-	}
-	
-	public void cashResetActivity() {
-		totalPriceInstance = getTotalPrice();
-		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
-		cashValue = edit.getText().toString();
-		cashDoubleValueTemp = Double.parseDouble(cashValue);
-		cashDoubleValue = getCurrentCash();
-		if (cashDoubleValueTemp > 0.00) {
-			double newDoubleTotal = totalPriceInstance+cashDoubleValueTemp;
-			setTotalPrice(newDoubleTotal);
-			total.setText("$" + newDoubleTotal);
-			
-			setCashText(0.00);
-			setCurrentCash(0.00);
-		}
+		//if the current flex value is negative, do nothing
 		else {
-			//current cash value is 0
+			// current cash value is negative
 		}
 	}
 
+	//reset the value of cash back to 0.00 and return the value of cash back to the total remaining
+	public void cashResetActivity() {
+		//if the current cash value is 0.00, set cash to 0.00
+		if (getCurrentCash() == 0.00) {
+			setCashText(0.00);
+			setCurrentCash(0.00);
+		}
+		//if the current cash value is larger than 0.00, set cash to 0.00 and return the value of cash back to the total remaining
+		else if (getCurrentCash() > 0.00) {
+			setTotalText(getCurrentCash() + getTotalPrice());
+			setTotalPrice(getCurrentCash() + getTotalPrice());
+			setCashText(0.00);
+			setCurrentCash(0.00);
+		}
+		//if the current cash value is negative, do nothing
+		else {
+			// current cash value is negative
+		}
+	}
+
+	//reset the page back to what it looked like when you first got to the page
 	public void restartActivity() {
-		// Intent intent = new Intent();
-		// act.finish();
-		// intent.setClass(act, act.getClass());
-		// act.startActivity(intent);
 		Intent intent = getIntent();
 		overridePendingTransition(0, 0);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -295,47 +271,13 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	}
 
 	public void setTotalText(double totalPrice) {
-		DecimalFormat dFormat = new DecimalFormat("0.00");
-		String formattedCurrentTotalString = dFormat.format(totalPrice);
-		// EditText edit = (EditText)
-		// findViewById(R.id.amountRemaining_textView);
+		String formattedCurrentTotalString = formatIntoDecimal().format(
+				totalPrice);
 		total.setText("$" + formattedCurrentTotalString);
 	}
 
 	public double getTotalPrice() {
 		return totalPrice;
-	}
-
-	public void setCurrentFlex(double currentFlex) {
-		this.currentFlex = currentFlex;
-	}
-
-	public double getCurrentFlex() {
-		return currentFlex;
-	}
-
-	public void setFlexText(double currentFlex) {
-		DecimalFormat dFormat = new DecimalFormat("0.00");
-		String formattedCurrentFlexString = dFormat.format(currentFlex);
-		EditText edit = (EditText) findViewById(R.id.flexPay_editText);
-		// edit.setText("$" + formattedCurrentFlexString);
-		edit.setText(formattedCurrentFlexString);
-	}
-
-	public void setCurrentCash(double currentCash) {
-		this.currentCash = currentCash;
-	}
-
-	public double getCurrentCash() {
-		return currentCash;
-	}
-
-	public void setCashText(double currentCash) {
-		DecimalFormat dFormat = new DecimalFormat("0.00");
-		String formattedCurrentCashString = dFormat.format(currentCash);
-		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
-		// edit.setText("$" + formattedCurrentCashString);
-		edit.setText(formattedCurrentCashString);
 	}
 
 	public void setPunchIntCounterTemp(int punchIntCounterTemp) {
@@ -355,180 +297,252 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	}
 
 	public void punchActivity() {
-		// final TextView newTotal = (TextView)
-		// findViewById(R.id.amountRemaining_textView);
-		// totalPrice = totalPrice - entrePrice - sidePrice - drinkPrice;
-		int punchIntDifference;
 		totalPriceInstance = getTotalPrice();
-
 		EditText edit = (EditText) findViewById(R.id.punchPay_editText);
-		punchCounterTemp = edit.getText().toString();
-		punchIntCounterTemp = Integer.parseInt(punchCounterTemp);
-		if ((punchIntCounterTemp == punchIntCounter)
-				&& (totalPriceInstance > 0.00)) {
-			totalPriceInstance = totalPriceInstance - punchValue;
-			setTotalPrice(totalPriceInstance);
-			setTotalText(totalPriceInstance);
-			punchIntCounter = getPunchIntCounter();
-			punchIntCounter = punchIntCounter + 1;
-			setPunchIntCounter(punchIntCounter);
-			punchCounter = Integer.toString(punchIntCounter);
-			edit.setText(punchCounter);
-		} else if ((punchIntCounterTemp > punchIntCounter)
-				&& (totalPriceInstance > 0.00)) {
-			punchIntDifference = punchIntCounterTemp - punchIntCounter;
-			totalPriceInstance = totalPriceInstance
-					- (punchValue * punchIntDifference);
-			if (totalPriceInstance > -5.50) {
+		punchIntCounter = getPunchIntCounter();
+		// this method is executed because the page prior to CheckoutActivity is
+		// PunchActivity
+		if (flag == 1) {
+			// punch is incremented by 1 because punchIntCounter is equal to 0
+			// you can only punch once for a meal
+			if ((punchIntCounter == 0) && (getCurrentCash() == 0.00)
+					&& (getCurrentFlex() == 0.00)) {
+				totalPriceInstance = 0.00;
 				setTotalPrice(totalPriceInstance);
 				setTotalText(totalPriceInstance);
-				punchIntCounter = getPunchIntCounter();
-				punchIntCounter = punchIntCounter + punchIntDifference;
+				punchIntCounter = punchIntCounter + 1;
 				setPunchIntCounter(punchIntCounter);
 				punchCounter = Integer.toString(punchIntCounter);
 				edit.setText(punchCounter);
 			} else {
-				// throw exception telling user that they are using excessive
-				// punches
-				punchIntCounter = getPunchIntCounter();
-				punchCounter = Integer.toString(punchIntCounter);
-				edit.setText(punchCounter);
-			}
-		} else if (punchIntCounterTemp < punchIntCounter) {
-			punchIntDifference = punchIntCounter - punchIntCounterTemp;
-			totalPriceInstance = totalPriceInstance
-					+ (punchValue * punchIntDifference);
-			if (punchIntCounterTemp < 0) {
-				// tell users that they can't input negative punches
-			} else {
-				setTotalPrice(totalPriceInstance);
-				setTotalText(totalPriceInstance);
-				punchIntCounter = getPunchIntCounter();
-				punchIntCounter = punchIntCounter - punchIntDifference;
-				setPunchIntCounter(punchIntCounter);
-				punchCounter = Integer.toString(punchIntCounter);
-				edit.setText(punchCounter);
+				// do nothing because you can only punch once for a meal
 			}
 		}
-		// TextView newTotal = (TextView)
-		// findViewById(R.id.amountRemaining_textView);
-		// newTotal.setText(Double.toString(getTotalPrice()));
+		// this method is executed because the page prior to CheckoutActivity is
+		// BrowseActivity
+		else if (flag == 2) {
+			int punchIntDifference;
+			punchCounterTemp = edit.getText().toString();
+			punchIntCounterTemp = Integer.parseInt(punchCounterTemp);
+			//clicking the punchButton will increment punch by 1 only if totalPriceInstance is larger than $0.00
+			if ((punchIntCounterTemp == punchIntCounter)
+					&& (totalPriceInstance > 0.00)) {
+				totalPriceInstance = totalPriceInstance - (punchValue * tax);
+				setTotalPrice(totalPriceInstance);
+				setTotalText(totalPriceInstance);
+				punchIntCounter = getPunchIntCounter() + 1;
+				setPunchIntCounter(punchIntCounter);
+				punchCounter = Integer.toString(punchIntCounter);
+				edit.setText(punchCounter);
+			}
+			//if the input value of punch is larger than the current value, punch will account for the change of punchIntCounter
+			else if ((punchIntCounterTemp > punchIntCounter)
+					&& (totalPriceInstance > 0.00)) {
+				punchIntDifference = punchIntCounterTemp - punchIntCounter;
+				totalPriceInstance = totalPriceInstance
+						- (punchValue * punchIntDifference * tax);
+				//punch can only implement the change in punchIntCounterTemp if the value doesn't use necessary punch(es)
+				if (totalPriceInstance > (-1 * punchValue *  tax)) {
+					setTotalPrice(totalPriceInstance);
+					setTotalText(totalPriceInstance);
+					punchIntCounter = getPunchIntCounter() + punchIntDifference;
+					setPunchIntCounter(punchIntCounter);
+					punchCounter = Integer.toString(punchIntCounter);
+					edit.setText(punchCounter);
+				}
+				//the user is inputting an excessive amount of punches
+				else {
+					// telling user that they are using excessive punches
+					//punchIntCounter = getPunchIntCounter();
+					punchCounter = Integer.toString(punchIntCounter);
+					edit.setText(punchCounter);
+				}			
+				}
+			//if the input value of punch is smaller than the current value, punch will account for the change of punchIntCounter
+			//setting the value of punchIntCounter and totalPriceInstance to their new values
+			else if (punchIntCounterTemp < punchIntCounter) {
+				punchIntDifference = punchIntCounter - punchIntCounterTemp;
+				totalPriceInstance = totalPriceInstance
+						+ (punchValue * punchIntDifference * tax);
+				//if the input value for punch is negative, nothing will happen
+				if (punchIntCounterTemp < 0) {
+					// tell users that they can't input negative value for punch
+				}
+				//if the input value for punch is smaller than the current punch value, punch will account for the change in punchIntCounter
+				//setting the value of punchIntCounter and totalPriceInstance to their new values
+				else {
+					setTotalPrice(totalPriceInstance);
+					setTotalText(totalPriceInstance);
+					punchIntCounter = getPunchIntCounter() - punchIntDifference;
+					setPunchIntCounter(punchIntCounter);
+					punchCounter = Integer.toString(punchIntCounter);
+					edit.setText(punchCounter);
+				}
+			}
+		}
 	}
 
+	public void setCurrentFlex(double currentFlex) {
+		this.currentFlex = currentFlex;
+	}
+
+	public double getCurrentFlex() {
+		return currentFlex;
+	}
+
+	public void setFlexText(double currentFlex) {
+		String formattedCurrentFlexString = formatIntoDecimal().format(
+				currentFlex);
+		EditText edit = (EditText) findViewById(R.id.flexPay_editText);
+		edit.setText(formattedCurrentFlexString);
+	}
+	
 	public void flexActivity() {
 		double flexDoubleDifference;
 		totalPriceInstance = getTotalPrice();
 
-		// if (totalPriceInstance > 0.00) {
 		EditText edit = (EditText) findViewById(R.id.flexPay_editText);
 		flexValueTemp = edit.getText().toString();
 		flexDoubleValueTemp = Double.parseDouble(flexValueTemp);
 		flexDoubleValue = getCurrentFlex();
+		//if the totalPriceInstance is equal to 0.00, continue with flexActivity
 		if (totalPriceInstance >= 0.00) {
+			//set the value of flexDoubleValue to totalPriceInstance and set the value of totalPriceInstance to 0.00 if the current value of flexDoubleValueTemp is equal to 0.00
 			if (flexDoubleValueTemp == 0.00) {
-			flexDoubleValue = flexDoubleValue + totalPriceInstance;
-			setFlexText(flexDoubleValue);
-			setCurrentFlex(flexDoubleValue);
-
-			setTotalPrice(0.00);
-			total.setText("$0.00");
-		} else {
-			if (flexDoubleValueTemp == flexDoubleValue) {
-				// do nothing if there is no changes in the entered value
-			} else if (flexDoubleValueTemp > flexDoubleValue) {
-				flexDoubleDifference = flexDoubleValueTemp - flexDoubleValue;
-				totalPriceInstance = totalPriceInstance
-						- (flexDoubleDifference);
-				if (totalPriceInstance >= 0.00) {
-				setTotalPrice(totalPriceInstance);
-				setTotalText(totalPriceInstance);
-				// double temp = getCurrentFlex() + flexDoubleValue;
-				flexDoubleValueTemp = getCurrentFlex() + flexDoubleDifference;
-				setCurrentFlex(flexDoubleValueTemp);
-				setFlexText(flexDoubleValueTemp);
+				flexDoubleValue = flexDoubleValue + totalPriceInstance;
+				setFlexText(flexDoubleValue);
+				setCurrentFlex(flexDoubleValue);
+				setTotalPrice(0.00);
+				total.setText("$0.00");
+			}
+			//if flexDoubleValueTemp isn't equal to 0.00, continue...
+			else {
+				//if there are no changes in the input value for flexDoubleValueTemp, nothing is calculated
+				if (flexDoubleValueTemp == flexDoubleValue) {
+					// do nothing since there is no changes in the entered value for flexDoubleValueTemp
 				}
-				else {
-					//do nothing because the new totalPriceInstance is negative
-					setCurrentFlex(flexDoubleValue);
-					setFlexText(flexDoubleValue);
+				//if the new input value for flexDoubleValueTemp is larger than flexDoubleValue,calculate and set the changes for flexDoubleValue and totalPriceInstance
+				else if (flexDoubleValueTemp > flexDoubleValue) {
+					flexDoubleDifference = flexDoubleValueTemp
+							- flexDoubleValue;
+					totalPriceInstance = totalPriceInstance
+							- (flexDoubleDifference);
+					//if the new totalPriceInstance is larger than 0.00, continue with the calculation
+					if (totalPriceInstance >= 0.00) {
+						setTotalPrice(totalPriceInstance);
+						setTotalText(totalPriceInstance);
+						flexDoubleValueTemp = getCurrentFlex()
+								+ flexDoubleDifference;
+						setCurrentFlex(flexDoubleValueTemp);
+						setFlexText(flexDoubleValueTemp);
+					}
+					//if the new totalPriceInstance is smaller than 0.00, reset the values for flexDoubleValue
+					else {
+						setCurrentFlex(flexDoubleValue);
+						setFlexText(flexDoubleValue);
+					}
 				}
-			} else if (flexDoubleValueTemp < flexDoubleValue) {
-				flexDoubleDifference = flexDoubleValue - flexDoubleValueTemp;
-				totalPriceInstance = totalPriceInstance
-						+ (flexDoubleDifference);
-				setTotalPrice(totalPriceInstance);
-				setTotalText(totalPriceInstance);
-				// double temp = getCurrentFlex() + flexDoubleValue;
-				flexDoubleValueTemp = getCurrentFlex() - flexDoubleDifference;
-				setCurrentFlex(flexDoubleValueTemp);
-				setFlexText(flexDoubleValueTemp);
+				//if the new input value for flexDoubleValueTemp is smaller than flexDoubleValue,calculate and set the changes for flexDoubleValue and totalPriceInstance
+				else if (flexDoubleValueTemp < flexDoubleValue) {
+					flexDoubleDifference = flexDoubleValue
+							- flexDoubleValueTemp;
+					totalPriceInstance = totalPriceInstance
+							+ (flexDoubleDifference);
+					setTotalPrice(totalPriceInstance);
+					setTotalText(totalPriceInstance);
+					flexDoubleValueTemp = getCurrentFlex()
+							- flexDoubleDifference;
+					setCurrentFlex(flexDoubleValueTemp);
+					setFlexText(flexDoubleValueTemp);
 				}
 			}
-	}
-		else {
-			//do nothing because the current totalPriceInstance is a negative value
 		}
-
-			// TextView newTotal = (TextView)
-			// findViewById(R.id.amountRemaining_textView);
-			// newTotal.setText(Double.toString(getTotalPrice()));
-		// }
+		//if the new input value for flexDoubleValueTemp is negative, don't calculate the new changes
+		else {
+			// do nothing because the current totalPriceInstance is a negative value
+		}
 	}
 
+	public void setCurrentCash(double currentCash) {
+		this.currentCash = currentCash;
+	}
+
+	public double getCurrentCash() {
+		return currentCash;
+	}
+
+	public void setCashText(double currentCash) {
+		String formattedCurrentCashString = formatIntoDecimal().format(
+				currentCash);
+		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
+		edit.setText(formattedCurrentCashString);
+	}
+	
 	public void cashActivity() {
 		double cashDoubleDifference;
 		totalPriceInstance = getTotalPrice();
-		// if (totalPriceInstance > 0.00) {
 		EditText edit = (EditText) findViewById(R.id.cashPay_editText);
 		cashValue = edit.getText().toString();
 		cashDoubleValueTemp = Double.parseDouble(cashValue);
 		cashDoubleValue = getCurrentCash();
+		//if the totalPriceInstance is equal to 0.00, continue with cashActivity
 		if (totalPriceInstance >= 0.00) {
+			//set the value of cashDoubleValue to totalPriceInstance and set the value of totalPriceInstance to 0.00 if the current value of cashDoubleValueTemp is equal to 0.00
 			if (cashDoubleValueTemp == 0.00) {
-			cashDoubleValue = cashDoubleValue + totalPriceInstance;
-			setCashText(cashDoubleValue);
-			setCurrentCash(cashDoubleValue);
+				cashDoubleValue = cashDoubleValue + totalPriceInstance;
+				setCashText(cashDoubleValue);
+				setCurrentCash(cashDoubleValue);
 
-			setTotalPrice(0.00);
-			total.setText("$0.00");
-		} else {
-			if (cashDoubleValueTemp == cashDoubleValue) {
-				// do nothing if there are no changes in the entered value
-			} else if (cashDoubleValueTemp > cashDoubleValue) {
-				cashDoubleDifference = cashDoubleValueTemp - cashDoubleValue;
-				totalPriceInstance = totalPriceInstance - cashDoubleDifference;
-				if (totalPriceInstance >= 0.00) {
-				setTotalPrice(totalPriceInstance);
-				setTotalText(totalPriceInstance);
-				// Double temp = getCurrentCash() + cashDoubleValue;
-				flexDoubleValueTemp = getCurrentCash() + cashDoubleDifference;
-				setCurrentCash(flexDoubleValueTemp);
-				setCashText(flexDoubleValueTemp);
+				setTotalPrice(0.00);
+				total.setText("$0.00");
+			}
+			//if cashDoubleValueTemp isn't equal to 0.00, continue...
+			else {
+				//if there are no changes in the input value for cashDoubleValueTemp, nothing is calculated
+				if (cashDoubleValueTemp == cashDoubleValue) {
+					// do nothing if there are no changes in the entered value
 				}
-				else {
-					//do nothing because the new totalPriceInstance is negative
-					setCurrentCash(flexDoubleValue);
-					setCashText(flexDoubleValue);
+				//if the new input value for cashDoubleValueTemp is larger than cashDoubleValue,calculate and set the changes for cashDoubleValue and totalPriceInstance
+				else if (cashDoubleValueTemp > cashDoubleValue) {
+					cashDoubleDifference = cashDoubleValueTemp
+							- cashDoubleValue;
+					totalPriceInstance = totalPriceInstance
+							- cashDoubleDifference;
+					//if the new totalPriceInstance is larger than 0.00, continue with the calculation
+					if (totalPriceInstance >= 0.00) {
+						setTotalPrice(totalPriceInstance);
+						setTotalText(totalPriceInstance);
+						cashDoubleValueTemp = getCurrentCash()
+								+ cashDoubleDifference;
+						setCurrentCash(cashDoubleValueTemp);
+						setCashText(cashDoubleValueTemp);
+					}
+					//if the new totalPriceInstance is smaller than 0.00, reset the values for flexDoubleValue
+					else {
+						// do nothing because the new totalPriceInstance is negative
+						setCurrentCash(flexDoubleValue);
+						setCashText(flexDoubleValue);
+					}
 				}
-			} else if (cashDoubleValueTemp < cashDoubleValue) {
-				cashDoubleDifference = cashDoubleValue - cashDoubleValueTemp;
-				totalPriceInstance = totalPriceInstance + cashDoubleDifference;
-				setTotalPrice(totalPriceInstance);
-				setTotalText(totalPriceInstance);
-				// Double temp = getCurrentCash() + cashDoubleValue;
-				flexDoubleValueTemp = getCurrentCash() - cashDoubleDifference;
-				setCurrentCash(flexDoubleValueTemp);
-				setCashText(flexDoubleValueTemp);
+				//if the new input value for cashDoubleValueTemp is smaller than cashDoubleValue,calculate and set the changes for cashDoubleValue and totalPriceInstance
+				else if (cashDoubleValueTemp < cashDoubleValue) {
+					cashDoubleDifference = cashDoubleValue
+							- cashDoubleValueTemp;
+					totalPriceInstance = totalPriceInstance
+							+ cashDoubleDifference;
+					setTotalPrice(totalPriceInstance);
+					setTotalText(totalPriceInstance);
+					cashDoubleValueTemp = getCurrentCash()
+							- cashDoubleDifference;
+					setCurrentCash(cashDoubleValueTemp);
+					setCashText(cashDoubleValueTemp);
+				}
 			}
 		}
-		}
+		//if the new input value for flexDoubleValueTemp is negative, don't calculate the new changes
 		else {
-			//do nothing because the current totalPriceInstance is a negative value
+			// do nothing because the current totalPriceInstance is a negative value
 		}
-		// TextView newTotal = (TextView)
-		// findViewById(R.id.amountRemaining_textView);
-		// newTotal.setText(Double.toString(getTotalPrice()));
-		// }
 	}
 
 }

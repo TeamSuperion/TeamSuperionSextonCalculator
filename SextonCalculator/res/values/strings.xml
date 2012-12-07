@@ -47,5 +47,7 @@
     <string name="zero">0</string>
     <string name="TextView">TextView</string>
     <string name="calorie">Calories</string>
+    <string name="resetFlex_button">Reset Flex</string>
+    <string name="resetCash_button">Reset Cash</string>
 
 </resources>

@@ -60,76 +60,67 @@
         android:layout_marginTop="36dp"
         layout="@layout/activity_pay_method" />
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/activity_pay_method"
-        android:orientation="horizontal" >
+   <LinearLayout
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       android:id="@+id/linearLayout1"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentLeft="true"
+       android:layout_below="@+id/activity_pay_method"
+       android:orientation="horizontal" >
 
-        <Button
-        android:id="@+id/punchDecrease_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/minus" />
-        
-        <EditText
-            android:id="@+id/punchPay_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="number"
-            android:text="@string/punchTotal_editText" />
+       <EditText
+           android:id="@+id/punchPay_editText"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:gravity="center"
+           android:inputType="number"
+           android:text="@string/punchTotal_editText" />
 
-        <Button
-        android:id="@+id/punchIncrease_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/plus" />
-        
-        <EditText
-            android:id="@+id/flexPay_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="numberDecimal"
-            android:text="@string/flexTotal_editText" />
-        
-        <Button
-        android:id="@+id/resetFlex_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/reset_button" />
+       <Button
+           android:id="@+id/punchDecrease_button"
+           style="?android:attr/buttonStyleSmall"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+           android:layout_alignParentTop="true"
+           android:layout_weight="1"
+           android:text="@string/minus" />
 
-        <EditText
-            android:id="@+id/cashPay_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="numberDecimal"
-            android:text="@string/cashTotal_editText" />
-        <Button
-        android:id="@+id/resetCash_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/reset_button" />
-    </LinearLayout>
+       <EditText
+           android:id="@+id/flexPay_editText"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:gravity="center"
+           android:inputType="numberDecimal"
+           android:text="@string/flexTotal_editText" />
+
+       <Button
+           android:id="@+id/resetFlex_button"
+           style="?android:attr/buttonStyleSmall"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:text="@string/resetFlex_button" />
+
+       <EditText
+           android:id="@+id/cashPay_editText"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:gravity="center"
+           android:inputType="numberDecimal"
+           android:text="@string/cashTotal_editText" />
+
+       <Button
+           android:id="@+id/resetCash_button"
+           style="?android:attr/buttonStyleSmall"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:text="@string/resetCash_button" />
+   </LinearLayout>
 
 </RelativeLayout>
