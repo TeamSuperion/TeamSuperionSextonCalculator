@@ -49,5 +49,6 @@
     <string name="calorie">Calories</string>
     <string name="resetFlex_button">Reset Flex</string>
     <string name="resetCash_button">Reset Cash</string>
+    <string name="decreasePunch_button">Decrease</string>
 
 </resources>
