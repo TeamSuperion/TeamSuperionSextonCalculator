@@ -178,14 +178,17 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		foodList = new ArrayList<FoodItem>();
 		TextView itemName, itemCal, itemCat;
 		String name;
-		double price, counter = 0.0;
+		int calories, counter = 0;
 		int quantity = 1;
 		itemName = (TextView) entreeSpinner.findViewById(R.id.spinner_textView1);
 		itemCal = (TextView) entreeSpinner.findViewById(R.id.spinner_textView2);
 		name = itemName.getText().toString();
-		price = Double.parseDouble(itemCal.getText().toString());
-		counter = counter + price;
-		foodList.add(new FoodItem(name, price, quantity));
+		calories = Integer.parseInt(itemCal.getText().toString());
+		counter = counter + calories;
+		FoodItem entreeFoodItem = new FoodItem();
+		entreeFoodItem.setName(name);
+		entreeFoodItem.setCalories(calories);
+		foodList.add(entreeFoodItem);
 		
 		//the following code checks if entree is category 4 in order to ignore the side info
 		itemCat = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
@@ -194,20 +197,29 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 			itemName = (TextView) sideSpinner.findViewById(R.id.spinner_textView1);
 			itemCal = (TextView) sideSpinner.findViewById(R.id.spinner_textView2);
 			name = itemName.getText().toString();
-			price = Double.parseDouble(itemCal.getText().toString());
-			counter = counter + price;
-			foodList.add(new FoodItem(name, price, quantity));
+			calories = Integer.parseInt(itemCal.getText().toString());
+			counter = counter + calories;
+			FoodItem sideFoodItem = new FoodItem();
+			sideFoodItem.setName(name);
+			sideFoodItem.setCalories(calories);
+			foodList.add(sideFoodItem);
 		}
 		
 		itemName = (TextView) drinkSpinner.findViewById(R.id.spinner_textView1);
 		itemCal = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
 		name = itemName.getText().toString();
-		price = Double.parseDouble(itemCal.getText().toString());
-		counter = counter + price;
-		foodList.add(new FoodItem(name, price, quantity));
-		name = "Total Calories";
-		price = counter;
-		foodList.add(new FoodItem(name, price, quantity));
+		calories = Integer.parseInt(itemCal.getText().toString());
+		counter = counter + calories;
+		FoodItem drinkFoodItem = new FoodItem();
+		drinkFoodItem.setName(name);
+		drinkFoodItem.setCalories(calories);
+		foodList.add(drinkFoodItem);
+		name = "Total ";
+		calories = counter;
+		FoodItem newFoodItem = new FoodItem();
+		newFoodItem.setName(name);
+		newFoodItem.setCalories(calories);
+		foodList.add(newFoodItem);
 		return foodList;
 	}
 

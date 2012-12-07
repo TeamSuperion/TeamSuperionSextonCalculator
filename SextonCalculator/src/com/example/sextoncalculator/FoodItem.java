@@ -14,12 +14,16 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 	private String name;
 	private double price;
 	private int quantity;
+	private int calories = 0;
 
 	/** Default constructor for FoodItem */
 	public FoodItem() {
 	}
 
-	/** Constructor for FoodItem. Initializes name, price, and quantity. */
+	/**
+	 * Constructor for FoodItem. Initializes name, price, quantity, and
+	 * calories.
+	 */
 	public FoodItem(String name, double price, int quantity) {
 		this.name = name;
 		this.price = price;
@@ -37,8 +41,13 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 	}
 
 	/** Sets the quantity of the food item. */
-	public void setQuantity(int calories) {
-		this.quantity = calories;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	/** Sets the calories of the food item. */
+	public void setCalories(int calories) {
+		this.calories = calories;
 	}
 
 	/** Gets the name of the food item. */
@@ -56,9 +65,18 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 		return quantity;
 	}
 
+	/** Gets the calories of the food item. */
+	public int getCalories() {
+		return calories;
+	}
+
 	/** Returns food item description. */
 	public String toString() {
-		return name + " $" + price + " X " + quantity;
+		if (calories == 0) {
+			return name + " $" + price + " X " + quantity;
+		} else {
+			return name + " calories: " + calories;
+		}
 	}
 
 	/** Checks if two food items have the same name. */
@@ -86,6 +104,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 		dest.writeString(name);
 		dest.writeDouble(price);
 		dest.writeInt(quantity);
+		dest.writeInt(calories);
 	}
 
 	/** Creates parcelable food item. */
@@ -104,6 +123,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 		name = in.readString();
 		price = in.readDouble();
 		quantity = in.readInt();
+		calories = in.readInt();
 	}
 
 	public int compareTo(FoodItem another) {
