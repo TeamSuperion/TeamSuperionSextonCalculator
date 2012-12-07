@@ -10,7 +10,9 @@ import android.widget.Button;
 
 public class HomeActivity extends Activity implements OnClickListener {
 
-	protected Button punchButton, calorieButton, browseButton;
+	protected Button punchButton, 
+	//calorieButton, 
+	browseButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -19,8 +21,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 
 		punchButton = (Button) findViewById(R.id.punch_button);
 		punchButton.setOnClickListener(this);
-		calorieButton = (Button) findViewById(R.id.calorie_button);
-		calorieButton.setOnClickListener(this);
+//		calorieButton = (Button) findViewById(R.id.calorie_button);
+//		calorieButton.setOnClickListener(this);
 		browseButton = (Button) findViewById(R.id.browse_button);
 		browseButton.setOnClickListener(this);
 	}
@@ -36,9 +38,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 		if (v == punchButton) {
 			intent = new Intent(this, PunchActivity.class);
 			startActivity(intent);
-		} else if (v == calorieButton) {
-			intent = new Intent(this, CalorieActivity.class);
-			startActivity(intent);
+
 		} else if (v == browseButton) {
 			intent = new Intent(this, BrowseActivity.class);
 			startActivity(intent);

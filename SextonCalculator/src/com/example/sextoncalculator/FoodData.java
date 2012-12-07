@@ -136,7 +136,7 @@ public class FoodData extends SQLiteOpenHelper {
 		insert("Raw Veggies", 50, "2.00", 2, 0);
 		insert("Tuna Sandwich", 220, "2.75", 1, 0);
 		insert("Egg Salad Sandwich", 230, "2.75", 1, 0);
-		insert("Chicken Salad Sandwich", 175, "3.00", 1, 0);
+		insert("Chiken Salad Club", 175, "3.00", 1, 0);
 		insert("White Sub 1/3", 125, "2.75", 5, 0);
 		insert("Wheat Sub 1/3", 134, "2.75", 5, 0);
 		insert("White Sub 1/2", 190, "4.10", 1, 0);
@@ -151,7 +151,7 @@ public class FoodData extends SQLiteOpenHelper {
 		insert("Bagel", 250, "1.10", 5, 0);
 		insert("Monster Cookie", 340, "0.75", 5, 0);
 		insert("Peanut Butter Cookie", 300, "0.75", 5, 0);
-		insert("Chocolate Chip Cookie", 300, "0.75", 5, 0);
+		insert("Choc-Chip Cookie", 300, "0.75", 5, 0);
 		insert("French Fries", 450, "1.49", 2, 0);
 		insert("Onion Rings", 470, "2.25", 2, 0);
 		insert("Curly Fries", 445, "1.49", 2, 0);
@@ -161,7 +161,7 @@ public class FoodData extends SQLiteOpenHelper {
 		insert("Gardenburger", 225, "3.89", 1, 0);
 		insert("Grilled Chicken Fillet", 240, "3.79", 1, 0);
 		insert("Fish Burger", 400, "3.10", 1, 0);
-		insert("Breaded Chicken Patty", 370, "3.50", 1, 0);
+		insert("Chicken Burger", 370, "3.50", 1, 0);
 		insert("Chicken Fingers", 640, "4.50", 4, 0);
 		insert("Nachos", 725, "2.50", 4, 0);
 		insert("Soft Pretzal", 480, "2.25", 5, 0);

@@ -37,20 +37,6 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp" >
-
-            <Button
-                android:id="@+id/calorie_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/calorie_button"
-                android:textColor="#ffffff" />
-        </TableRow>
-
-        <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
