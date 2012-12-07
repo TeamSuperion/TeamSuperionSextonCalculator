@@ -170,21 +170,21 @@ public class FoodData extends SQLiteOpenHelper {
 		insert("Sausage Pizza", 315, "2.15", 1, 0);
 		insert("Cheese Pizza", 265, "2.15", 1, 0);
 		insert("Veggie Pizza", 270, "2.15", 1, 0);
-		insert("Cappucino 12 oz", 100, "0.99", 3, 0);
+//		insert("Cappucino 12 oz", 100, "0.99", 3, 0);
 		insert("Cappucino 16 oz", 150, "1.49", 3, 0);
-		insert("Hot Chocolate 12 oz", 200, "0.99", 3, 0);
+//		insert("Hot Chocolate 12 oz", 200, "0.99", 3, 0);
 		insert("Hot Chocolate 16 oz", 150, "1.49", 3, 0);
-		insert("Hot Cider 12 oz", 200, "0.99", 3, 0);
+//		insert("Hot Cider 12 oz", 200, "0.99", 3, 0);
 		insert("Hot Cider 16 oz", 180, "1.49", 3, 0);
-		insert("Skim Milk 12 oz", 240, "0.99", 3, 0);
+//		insert("Skim Milk 12 oz", 240, "0.99", 3, 0);
 		insert("Skim Milk 16 oz", 120, "1.49", 3, 0);
-		insert("Chocolate Milk 12 oz", 260, "0.99", 3, 0);
+//		insert("Chocolate Milk 12 oz", 260, "0.99", 3, 0);
 		insert("Chocolate Milk 16 oz", 225, "1.49", 3, 0);
-		insert("Black Coffee 12 oz", 5, "0.99", 3, 0);
+//		insert("Black Coffee 12 oz", 5, "0.99", 3, 0);
 		insert("Black Coffee 16 oz", 10, "1.49", 3, 0);
-		insert("Tea 12 oz", 100, "0.99", 3, 0);
+//		insert("Tea 12 oz", 100, "0.99", 3, 0);
 		insert("Tea 16 oz", 130, "1.49", 3, 0);
-		insert("Pop 12 oz", 140, "0.99", 3, 0);
+//		insert("Pop 12 oz", 140, "0.99", 3, 0);
 		insert("Pop 16 oz", 190, "1.49", 3, 0);
 		// Cat 1 Main
 		// Cat 2 Side
