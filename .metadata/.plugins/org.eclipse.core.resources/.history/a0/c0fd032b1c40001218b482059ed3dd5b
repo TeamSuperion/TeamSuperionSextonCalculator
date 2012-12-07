@@ -46,6 +46,5 @@
     <string name="minus">-</string>
     <string name="zero">0</string>
     <string name="TextView">TextView</string>
-    <string name="calorie">Calories</string>
 
 </resources>

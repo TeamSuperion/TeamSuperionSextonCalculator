@@ -112,9 +112,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		startActivity(intent);
 	}
 
-	/**
-	 * 
-	 */
 	public void randomActivity(){
 
 		Random generator = new Random();
@@ -132,21 +129,15 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	
 	public void calorieUpdate(){
 		calories = (TextView) findViewById(R.id.calorieView);
-		Double calTotal = 0.0, eCal, sCal, dCal;
-		TextView eView, sView, dView, itemCat;
+		Double calTotal, eCal, sCal, dCal;
+		TextView eView, sView, dView;
 		eView = (TextView) entreeSpinner.findViewById(R.id.spinner_textView2);
 		eCal = Double.parseDouble(eView.getText().toString());
-		calTotal = calTotal + eCal;
-		itemCat = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
-		String cat = itemCat.getText().toString();
-		if (!cat.equals("4")){
 		sView = (TextView) sideSpinner.findViewById(R.id.spinner_textView2);
 		sCal = Double.parseDouble(sView.getText().toString());
-		calTotal = calTotal + sCal;
-		}
 		dView = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
 		dCal = Double.parseDouble(dView.getText().toString());
-		calTotal = calTotal + dCal;
+		calTotal = dCal + eCal + sCal;
 		calories.setText("Total Calories = " + calTotal);
 	}
 
@@ -228,7 +219,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		else {
 			sideSpinner.setVisibility(View.VISIBLE);
 		}
-		calorieUpdate();
 	}
 
 	public void onNothingSelected(AdapterView<?> parentView) {

@@ -2,7 +2,9 @@ package com.example.sextoncalculator;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PunchActivity extends Activity implements OnClickListener, OnItemSelectedListener {
 	protected Spinner entreeSpinner, sideSpinner, drinkSpinner;
@@ -23,11 +26,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	ArrayList<FoodItem> foodList;
 	String punchValue = "5.50";
 	String totalString = punchValue;
-	TextView calories;
 
-	/**
-	 * 
-	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +45,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 
 	}
 
-	/**
+	/*
 	 * 
 	 * @param menu this object does that
 	 */
@@ -56,9 +55,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		return true;
 	}
 
-	/**
-	 * 
-	 */
 	@SuppressWarnings("deprecation")
 	public void initializeDB() {
 
@@ -66,9 +62,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		entreeSpinner = (Spinner) findViewById(R.id.spinner1);
 		entreeSpinner.setOnItemSelectedListener(this);
 		sideSpinner = (Spinner) findViewById(R.id.spinner2);
-		sideSpinner.setOnItemSelectedListener(this);
 		drinkSpinner = (Spinner) findViewById(R.id.spinner3);
-		drinkSpinner.setOnItemSelectedListener(this);
 		if (foodData.count() == 0) {
 			foodData.load();
 		}
@@ -92,12 +86,10 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		SimpleCursorAdapter drinksCursorAdapter = new SimpleCursorAdapter(this,
 				R.layout.activity_punch_row, drinksCursor, from, to);
 		drinkSpinner.setAdapter(drinksCursorAdapter);
-		
+
+		// foodCursorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 
-	/**
-	 * 
-	 */
 	public void restartActivity() {
 		// Intent intent = new Intent();
 		// act.finish();
@@ -112,9 +104,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		startActivity(intent);
 	}
 
-	/**
-	 * 
-	 */
 	public void randomActivity(){
 
 		Random generator = new Random();
@@ -129,38 +118,11 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		drinkSpinner.setSelection(random, true);
 
 	}
-	
-	public void calorieUpdate(){
-		calories = (TextView) findViewById(R.id.calorieView);
-		Double calTotal = 0.0, eCal, sCal, dCal;
-		TextView eView, sView, dView, itemCat;
-		eView = (TextView) entreeSpinner.findViewById(R.id.spinner_textView2);
-		eCal = Double.parseDouble(eView.getText().toString());
-		calTotal = calTotal + eCal;
-		itemCat = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
-		String cat = itemCat.getText().toString();
-		if (!cat.equals("4")){
-		sView = (TextView) sideSpinner.findViewById(R.id.spinner_textView2);
-		sCal = Double.parseDouble(sView.getText().toString());
-		calTotal = calTotal + sCal;
-		}
-		dView = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
-		dCal = Double.parseDouble(dView.getText().toString());
-		calTotal = calTotal + dCal;
-		calories.setText("Total Calories = " + calTotal);
-	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public double getTotalString() {
 		return Double.parseDouble(this.totalString);
 	}
 
-	/**
-	 * 
-	 */
 	public ArrayList<FoodItem> generateFoodList() {
 		foodList = new ArrayList<FoodItem>();
 		TextView itemName, itemCal, itemCat;
@@ -195,9 +157,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		return foodList;
 	}
 
-	/**
-	 * 
-	 */
 	public void onClick(View v) {
 		Intent intent;
 		if (v == homeButton) {
@@ -216,9 +175,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		}
 	}
 
-	/**
-	 * 
-	 */
 	public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 		TextView category = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
 		String cat = category.getText().toString();
@@ -228,11 +184,10 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		else {
 			sideSpinner.setVisibility(View.VISIBLE);
 		}
-		calorieUpdate();
 	}
 
 	public void onNothingSelected(AdapterView<?> parentView) {
-		// Do Nothing
+		// your code here
 	}
 
 }

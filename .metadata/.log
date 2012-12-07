@@ -8538,3 +8538,12 @@ Binding(ALT+SHIFT+ARROW_LEFT,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+
+!ENTRY org.eclipse.ui 2 2 2012-12-06 21:02:27.868
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2012-12-06 21:13:41.688
+!MESSAGE activity_punch.xml: Couldn't resolve resource @string/calorie
+
+!ENTRY com.android.ide.eclipse.adt 2 0 2012-12-06 21:13:42.097
+!MESSAGE activity_punch.xml: Couldn't resolve resource @string/calorie

@@ -79,6 +79,7 @@ public final class R {
         public static final int amountRemaining_textView=0x7f07000c;
         public static final int appNameText=0x7f07001f;
         public static final int browse_button=0x7f07001d;
+        public static final int calorieView=0x7f070027;
         public static final int cashPay_editText=0x7f070014;
         public static final int cash_button=0x7f070022;
         public static final int checkout_button=0x7f070017;
@@ -95,7 +96,7 @@ public final class R {
         public static final int itemPrice_textView=0x7f070007;
         public static final int itemQuantity_textView=0x7f070006;
         public static final int linearLayout1=0x7f07000e;
-        public static final int menu_settings=0x7f07002d;
+        public static final int menu_settings=0x7f07002e;
         public static final int punchDecrease_button=0x7f07000f;
         public static final int punchIncrease_button=0x7f070011;
         public static final int punchPay_editText=0x7f070010;
@@ -106,16 +107,16 @@ public final class R {
         public static final int resetFlex_button=0x7f070013;
         public static final int reset_button=0x7f070018;
         public static final int spinner1=0x7f070025;
-        public static final int spinner2=0x7f070027;
-        public static final int spinner3=0x7f070028;
-        public static final int spinner_category=0x7f07002b;
-        public static final int spinner_textView1=0x7f07002a;
-        public static final int spinner_textView2=0x7f07002c;
+        public static final int spinner2=0x7f070028;
+        public static final int spinner3=0x7f070029;
+        public static final int spinner_category=0x7f07002c;
+        public static final int spinner_textView1=0x7f07002b;
+        public static final int spinner_textView2=0x7f07002d;
         public static final int start_button=0x7f07001e;
         public static final int tableRow1=0x7f07001a;
         public static final int tableRow2=0x7f07001c;
         public static final int textView1=0x7f070024;
-        public static final int textView2=0x7f070029;
+        public static final int textView2=0x7f07002a;
         public static final int textView3=0x7f070026;
         public static final int totalPrice_textView=0x7f070001;
         public static final int totalRemaining_textView=0x7f07000b;
@@ -148,6 +149,7 @@ public final class R {
         public static final int app_name=0x7f040000;
         public static final int back_button=0x7f04001c;
         public static final int browse_button=0x7f040005;
+        public static final int calorie=0x7f04002e;
         public static final int calorie_button=0x7f040004;
         public static final int cashPay_button=0x7f040010;
         public static final int cashTotal_editText=0x7f040020;

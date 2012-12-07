@@ -23,7 +23,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 	ArrayList<FoodItem> foodList;
 	String punchValue = "5.50";
 	String totalString = punchValue;
-	TextView calories;
 
 	/**
 	 * 
@@ -66,9 +65,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		entreeSpinner = (Spinner) findViewById(R.id.spinner1);
 		entreeSpinner.setOnItemSelectedListener(this);
 		sideSpinner = (Spinner) findViewById(R.id.spinner2);
-		sideSpinner.setOnItemSelectedListener(this);
 		drinkSpinner = (Spinner) findViewById(R.id.spinner3);
-		drinkSpinner.setOnItemSelectedListener(this);
 		if (foodData.count() == 0) {
 			foodData.load();
 		}
@@ -92,7 +89,7 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		SimpleCursorAdapter drinksCursorAdapter = new SimpleCursorAdapter(this,
 				R.layout.activity_punch_row, drinksCursor, from, to);
 		drinkSpinner.setAdapter(drinksCursorAdapter);
-		
+
 	}
 
 	/**
@@ -112,9 +109,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		startActivity(intent);
 	}
 
-	/**
-	 * 
-	 */
 	public void randomActivity(){
 
 		Random generator = new Random();
@@ -128,26 +122,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		random = generator.nextInt(count);
 		drinkSpinner.setSelection(random, true);
 
-	}
-	
-	public void calorieUpdate(){
-		calories = (TextView) findViewById(R.id.calorieView);
-		Double calTotal = 0.0, eCal, sCal, dCal;
-		TextView eView, sView, dView, itemCat;
-		eView = (TextView) entreeSpinner.findViewById(R.id.spinner_textView2);
-		eCal = Double.parseDouble(eView.getText().toString());
-		calTotal = calTotal + eCal;
-		itemCat = (TextView) entreeSpinner.findViewById(R.id.spinner_category);
-		String cat = itemCat.getText().toString();
-		if (!cat.equals("4")){
-		sView = (TextView) sideSpinner.findViewById(R.id.spinner_textView2);
-		sCal = Double.parseDouble(sView.getText().toString());
-		calTotal = calTotal + sCal;
-		}
-		dView = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
-		dCal = Double.parseDouble(dView.getText().toString());
-		calTotal = calTotal + dCal;
-		calories.setText("Total Calories = " + calTotal);
 	}
 
 	/**
@@ -228,7 +202,6 @@ public class PunchActivity extends Activity implements OnClickListener, OnItemSe
 		else {
 			sideSpinner.setVisibility(View.VISIBLE);
 		}
-		calorieUpdate();
 	}
 
 	public void onNothingSelected(AdapterView<?> parentView) {
