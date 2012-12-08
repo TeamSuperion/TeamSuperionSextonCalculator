@@ -31,7 +31,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	double totalPrice, entrePrice, sidePrice, drinkPrice, punchValue = 5.5,
 			totalPriceInstance, totalString, currentFlex, currentCash,
 			flexDoubleValueTemp, flexDoubleValue, cashDoubleValueTemp,
-			cashDoubleValue, tax = 1.06875, removeTax = .93125;
+			cashDoubleValue, tax = 1.06875, removeTax = .93125, originalTotal = 0;
 	Bundle extras;
 	ArrayList<FoodItem> foodList;
 	String flexValue, flexValueTemp, cashValue, cashValueTemp, punchCounter,
@@ -86,6 +86,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			total = (TextView) findViewById(R.id.amountRemaining_textView);
 			total.setText("$" + formattedString);
 			setTotalPrice(totalPrice);
+			originalTotal = totalPrice;
 		}
 
 		// initial setup if the previous page that lead to this page is
@@ -108,6 +109,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			total = (TextView) findViewById(R.id.amountRemaining_textView);
 			total.setText("$" + formattedString);
 			setTotalPrice(totalPrice);
+			originalTotal = totalPrice;
 		}
 
 		// find buttons on the page and set them to an onClickListener to call a
@@ -255,8 +257,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 		//if the current cash value is larger than 0.00, set cash to 0.00 and return the value of cash back to the total remaining
 		else if (getCurrentCash() > 0.00) {
-			setTotalText((getCurrentCash() * removeTax) + getTotalPrice());
-			setTotalPrice((getCurrentCash() * removeTax) + getTotalPrice());
+			setTotalText(originalTotal-(getPunchIntCounter()*punchValue+getCurrentFlex()));
+			setTotalPrice(originalTotal-(getPunchIntCounter()*punchValue+getCurrentFlex()));
 			setCashText(0.00);
 			setCurrentCash(0.00);
 		}
