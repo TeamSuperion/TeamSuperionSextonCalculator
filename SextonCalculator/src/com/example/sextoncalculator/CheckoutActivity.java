@@ -1,5 +1,6 @@
 package com.example.sextoncalculator;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -27,10 +28,10 @@ import android.widget.TextView;
 public class CheckoutActivity extends Activity implements OnClickListener {
 
 	TextView total, punchValue_textView;
-	double totalInitialPrice, totalPrice, entrePrice, sidePrice, drinkPrice, punchValue = 5.5,
+	double totalPrice, entrePrice, sidePrice, drinkPrice, punchValue = 5.5,
 			totalPriceInstance, totalString, currentFlex, currentCash,
 			flexDoubleValueTemp, flexDoubleValue, cashDoubleValueTemp,
-			cashDoubleValue, tax = 1.06875;
+			cashDoubleValue, tax = 1.06875, removeTax = .93125;
 	Bundle extras;
 	ArrayList<FoodItem> foodList;
 	String flexValue, flexValueTemp, cashValue, cashValueTemp, punchCounter,
@@ -39,7 +40,6 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 	protected Button homeButton, resetButton, checkoutButton, punchButton,
 	flexButton, cashButton, resetFlexButton, resetCashButton,
 	punchIncreaseButton, punchDecreaseButton;
-
 	/**
 	 * Generic onCreate method
 	 */
@@ -62,7 +62,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		extras = myIntent.getExtras();
 		flag = myIntent.getIntExtra("flag", 0);
 
-		// not sure what it does, ask johnny about it cause he added it
+		//sets the view to the current page to display the layout
 		setContentView(R.layout.activity_checkout);
 
 		// initial setup if the previous page that lead to this page is
@@ -76,23 +76,16 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			listView1.setAdapter(adapter);
 
 			// get the initial total of the items in foodList
-			totalInitialPrice = extras.getDouble("totalString");
-
-			//include tax into the initial total
-			totalInitialPrice = totalInitialPrice * tax;
+			totalPrice = extras.getDouble("totalString");
 
 			// convert the passed totalString value from a string to a double
 			// and set it as the totalPrice
 
 			// DecimalFormat dFormat = new DecimalFormat("0.00");
-			formattedString = formatIntoDecimal().format(totalInitialPrice);
+			formattedString = formatIntoDecimal().format(totalPrice);
 			total = (TextView) findViewById(R.id.amountRemaining_textView);
 			total.setText("$" + formattedString);
-			setTotalPrice(totalInitialPrice);
-
-			// finds and set the visibility of punchView_textView to invisible
-			punchValue_textView = (TextView) findViewById(R.id.punchValue_textView);
-			punchValue_textView.setVisibility(View.INVISIBLE);
+			setTotalPrice(totalPrice);
 		}
 
 		// initial setup if the previous page that lead to this page is
@@ -107,17 +100,14 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			listView1.setAdapter(adapter);
 
 			// get the initial total of the items in foodList
-			totalInitialPrice = extras.getDouble("totalString");
-
-			//include tax into the initial total
-			totalInitialPrice = totalInitialPrice * tax;
+			totalPrice = extras.getDouble("totalString");
 
 			// convert the passed totalString value from a string to a double
 			// and set it as the totalPrice
-			formattedString = formatIntoDecimal().format(totalInitialPrice);
+			formattedString = formatIntoDecimal().format(totalPrice);
 			total = (TextView) findViewById(R.id.amountRemaining_textView);
 			total.setText("$" + formattedString);
-			setTotalPrice(totalInitialPrice);
+			setTotalPrice(totalPrice);
 		}
 
 		// find buttons on the page and set them to an onClickListener to call a
@@ -203,7 +193,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 				setPunchIntCounter(punchIntCounter);
 				punchCounter = Integer.toString(punchIntCounter);
 				edit.setText(punchCounter);
-				totalPriceInstance = totalPriceInstance + totalInitialPrice;
+				totalPriceInstance = totalPriceInstance + totalPrice;
 				setTotalPrice(totalPriceInstance);
 				setTotalText(totalPriceInstance);
 			}
@@ -265,8 +255,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 		//if the current cash value is larger than 0.00, set cash to 0.00 and return the value of cash back to the total remaining
 		else if (getCurrentCash() > 0.00) {
-			setTotalText(getCurrentCash() + getTotalPrice());
-			setTotalPrice(getCurrentCash() + getTotalPrice());
+			setTotalText((getCurrentCash() * removeTax) + getTotalPrice());
+			setTotalPrice((getCurrentCash() * removeTax) + getTotalPrice());
 			setCashText(0.00);
 			setCurrentCash(0.00);
 		}
@@ -381,7 +371,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			//clicking the punchButton will increment punch by 1 only if totalPriceInstance is larger than $0.00
 			if ((punchIntCounterTemp == punchIntCounter)
 					&& (totalPriceInstance > 0.00)) {
-				totalPriceInstance = totalPriceInstance - (punchValue * tax);
+				totalPriceInstance = totalPriceInstance - punchValue;
 				setTotalPrice(totalPriceInstance);
 				setTotalText(totalPriceInstance);
 				punchIntCounter = getPunchIntCounter() + 1;
@@ -394,9 +384,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 					&& (totalPriceInstance > 0.00)) {
 				punchIntDifference = punchIntCounterTemp - punchIntCounter;
 				totalPriceInstance = totalPriceInstance
-						- (punchValue * punchIntDifference * tax);
+						- (punchValue * punchIntDifference);
 				//punch can only implement the change in punchIntCounterTemp if the value doesn't use necessary punch(es)
-				if (totalPriceInstance > (-1 * punchValue *  tax)) {
+				if (totalPriceInstance > (-1 * punchValue)) {
 					setTotalPrice(totalPriceInstance);
 					setTotalText(totalPriceInstance);
 					punchIntCounter = getPunchIntCounter() + punchIntDifference;
@@ -417,7 +407,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			else if (punchIntCounterTemp < punchIntCounter) {
 				punchIntDifference = punchIntCounter - punchIntCounterTemp;
 				totalPriceInstance = totalPriceInstance
-						+ (punchValue * punchIntDifference * tax);
+						+ (punchValue * punchIntDifference);
 				//if the input value for punch is negative, nothing will happen
 				if (punchIntCounterTemp < 0) {
 					// tell users that they can't input negative value for punch
@@ -573,7 +563,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		if (totalPriceInstance >= 0.00) {
 			//set the value of cashDoubleValue to totalPriceInstance and set the value of totalPriceInstance to 0.00 if the current value of cashDoubleValueTemp is equal to 0.00
 			if (cashDoubleValueTemp == 0.00) {
-				cashDoubleValue = cashDoubleValue + totalPriceInstance;
+				cashDoubleValue = ((cashDoubleValue + totalPriceInstance) * tax);
 				setCashText(cashDoubleValue);
 				setCurrentCash(cashDoubleValue);
 
@@ -591,7 +581,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 					cashDoubleDifference = cashDoubleValueTemp
 							- cashDoubleValue;
 					totalPriceInstance = totalPriceInstance
-							- cashDoubleDifference;
+							- (cashDoubleDifference * removeTax);
 					//if the new totalPriceInstance is larger than 0.00, continue with the calculation
 					if (totalPriceInstance >= 0.00) {
 						setTotalPrice(totalPriceInstance);
@@ -613,7 +603,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 					cashDoubleDifference = cashDoubleValue
 							- cashDoubleValueTemp;
 					totalPriceInstance = totalPriceInstance
-							+ cashDoubleDifference;
+							+ (cashDoubleDifference * removeTax);
 					setTotalPrice(totalPriceInstance);
 					setTotalText(totalPriceInstance);
 					cashDoubleValueTemp = getCurrentCash()
