@@ -148,10 +148,10 @@ public class PunchActivity extends Activity implements OnClickListener,
 	public void calorieUpdate() {
 		// grabs each calorie from the spinner locations and adds them together
 		calories = (TextView) findViewById(R.id.calorieView);
-		Double calTotal = 0.0, eCal, sCal, dCal;
+		int calTotal = 0, eCal, sCal, dCal;
 		TextView eView, sView, dView, itemCat;
 		eView = (TextView) entreeSpinner.findViewById(R.id.spinner_textView2);
-		eCal = Double.parseDouble(eView.getText().toString());
+		eCal = Integer.parseInt(eView.getText().toString());
 		calTotal = calTotal + eCal;
 
 		// the following code checks if entree is category 4 in order to ignore
@@ -160,11 +160,11 @@ public class PunchActivity extends Activity implements OnClickListener,
 		String cat = itemCat.getText().toString();
 		if (!cat.equals("4")) {
 			sView = (TextView) sideSpinner.findViewById(R.id.spinner_textView2);
-			sCal = Double.parseDouble(sView.getText().toString());
+			sCal = Integer.parseInt(sView.getText().toString());
 			calTotal = calTotal + sCal;
 		}
 		dView = (TextView) drinkSpinner.findViewById(R.id.spinner_textView2);
-		dCal = Double.parseDouble(dView.getText().toString());
+		dCal = Integer.parseInt(dView.getText().toString());
 		calTotal = calTotal + dCal;
 		calories.setText("Total Calories = " + calTotal);
 	}
