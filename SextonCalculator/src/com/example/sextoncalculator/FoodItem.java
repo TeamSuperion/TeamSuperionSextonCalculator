@@ -8,11 +8,11 @@ import android.os.Parcelable;
 /**
  * FoodItem is used to create a food item that is available for purchase. Food
  * items have a name, price, and quantity.
- * @author Jonathan Ly, Tsuehue Xiong, Adam Bachmeier, Justin Springer
- *
+ * 
+ * @author Johnathan Ly, Tsuehue Xiong, Adam Bachmeier, Justin Springer
+ * 
  */
 public class FoodItem implements Parcelable, Comparable<FoodItem> {
-
 	private String name;
 	private double price;
 	private int quantity;
@@ -26,9 +26,13 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * Constructor for FoodItem. Initializes name, price, and quantity
-	 * @param name the initialized name
-	 * @param price the initialized price
-	 * @param quantity the initialized quantity
+	 * 
+	 * @param name
+	 *            the initialized name
+	 * @param price
+	 *            the initialized price
+	 * @param quantity
+	 *            the initialized quantity
 	 */
 	public FoodItem(String name, double price, int quantity) {
 		this.name = name;
@@ -36,9 +40,11 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 		this.quantity = quantity;
 	}
 
-	/** 
-	 * Sets the name of the food item. 
-	 * @param name the name to set it to
+	/**
+	 * Sets the name of the food item.
+	 * 
+	 * @param name
+	 *            the name to set it to
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -46,16 +52,20 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * 
-	 *Sets the price of the food item. 
-	 * @param price the price to set it to
+	 * Sets the price of the food item.
+	 * 
+	 * @param price
+	 *            the price to set it to
 	 */
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	/** 
-	 * Sets the quantity of the food item. 
-	 * @param quantity the quantity to set it to
+	/**
+	 * Sets the quantity of the food item.
+	 * 
+	 * @param quantity
+	 *            the quantity to set it to
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
@@ -63,6 +73,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * Sets the calories of the food item
+	 * 
 	 * @param calories
 	 */
 	public void setCalories(int calories) {
@@ -71,6 +82,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * Gets the name of the food item
+	 * 
 	 * @return name the name
 	 */
 	public String getName() {
@@ -79,6 +91,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * Gets the price of the food item
+	 * 
 	 * @return price the price
 	 */
 	public double getPrice() {
@@ -86,7 +99,8 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 	}
 
 	/**
-	 * Gets the quantity of the food item 
+	 * Gets the quantity of the food item
+	 * 
 	 * @return quantity the quantity
 	 */
 	public int getQuantity() {
@@ -95,6 +109,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * Gets the calories of the food item
+	 * 
 	 * @return calories the calories
 	 */
 	public int getCalories() {
@@ -102,8 +117,9 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 	}
 
 	/**
-	 * Returns a string formated version of the food item
-	 * two options depending if calories was set
+	 * Returns a string formated version of the food item two options depending
+	 * if calories was set
+	 * 
 	 * @return out the string representation of food item
 	 */
 	public String toString() {
@@ -118,6 +134,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * Checks if two food items have the same name.
+	 * 
 	 * @return true if they are equal, false otherwise
 	 */
 	public boolean equals(Object obj) {
@@ -128,16 +145,13 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 		return result;
 	}
 
-	/*
-	 * Parcelable methods are needed to make FoodItem passable to other
-	 * activities.
-	 */
+	// Parcelable methods are needed to make FoodItem passable to other
+	// activities.
 
 	/**
 	 * Empty method, required for implementing parcelable.
 	 */
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -166,6 +180,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * Reads food item from parcel.
+	 * 
 	 * @param in
 	 */
 	private FoodItem(Parcel in) {
@@ -177,6 +192,7 @@ public class FoodItem implements Parcelable, Comparable<FoodItem> {
 
 	/**
 	 * Compares two food items to determine if they are equal
+	 * 
 	 * @return 1 if ___, 0 if ___
 	 */
 	public int compareTo(FoodItem another) {

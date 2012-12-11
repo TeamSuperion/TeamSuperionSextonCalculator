@@ -9,12 +9,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 /**
- * HeaderActivity is used to give the buttons of the Header xml file some functionality
- * @author Adam Bachmeier, Justin Springer, Tsuehue Xiong, Jonathan Ly
- *
+ * HeaderActivity is used to give the buttons of the Header xml file some
+ * functionality
+ * 
+ * @author Adam Bachmeier, Justin Springer, Tsuehue Xiong, Johnathan Ly
+ * 
  */
 public class HeaderActivity extends Activity implements OnClickListener {
-
 	protected Button homeButton, resetButton, checkoutButton;
 
 	/**

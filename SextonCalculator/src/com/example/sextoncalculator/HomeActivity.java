@@ -10,14 +10,12 @@ import android.widget.Button;
 
 /**
  * Handles the events brought up by the Home xml file
- * @author Justin Springer, Jonathan Ly, Tsuehue Xiong, Adam Bachmeier
- *
+ * 
+ * @author Justin Springer, Johnathan Ly, Tsuehue Xiong, Adam Bachmeier
+ * 
  */
 public class HomeActivity extends Activity implements OnClickListener {
-
-	protected Button punchButton, 
-	//calorieButton, 
-	browseButton;
+	protected Button punchButton, browseButton;
 
 	/**
 	 * Generic onCreate method
@@ -26,11 +24,8 @@ public class HomeActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-
 		punchButton = (Button) findViewById(R.id.punch_button);
 		punchButton.setOnClickListener(this);
-		//		calorieButton = (Button) findViewById(R.id.calorie_button);
-		//		calorieButton.setOnClickListener(this);
 		browseButton = (Button) findViewById(R.id.browse_button);
 		browseButton.setOnClickListener(this);
 	}
@@ -52,7 +47,6 @@ public class HomeActivity extends Activity implements OnClickListener {
 		if (v == punchButton) {
 			intent = new Intent(this, PunchActivity.class);
 			startActivity(intent);
-
 		} else if (v == browseButton) {
 			intent = new Intent(this, BrowseActivity.class);
 			startActivity(intent);

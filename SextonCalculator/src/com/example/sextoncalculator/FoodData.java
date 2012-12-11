@@ -12,10 +12,10 @@ import android.provider.BaseColumns;
 /**
  * FoodData creates a database used to store food item information. It also
  * provides methods to perform queries on the database.
- * @author Tsuehue Xiong, Adam Bachmeier, Jonathan Ly, Justin Springer
+ * 
+ * @author Tsuehue Xiong, Adam Bachmeier, Johnathan Ly, Justin Springer
  */
 public class FoodData extends SQLiteOpenHelper {
-
 	private static final String DATABASE_NAME = "food.db";
 	private static final int DATABASE_VERSION = 1;
 	public static final String TABLE_NAME = "food";
@@ -28,6 +28,7 @@ public class FoodData extends SQLiteOpenHelper {
 
 	/**
 	 * Default constructor for FoodData
+	 * 
 	 * @param context
 	 */
 	public FoodData(Context context) {
@@ -40,10 +41,6 @@ public class FoodData extends SQLiteOpenHelper {
 	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// String createSql = "CREATE TABLE " + TABLE_NAME + " (" + ID +
-		// " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT NOT NULL, " +
-		// PRICE + " REAL NOT NULL, " + CALORIES + " INTEGER NOT NULL);";
-		// db.execSQL(createSql);
 		String createSql = "CREATE TABLE " + TABLE_NAME + " (" + ID
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME
 				+ " TEXT NOT NULL, " + CALORIES + " INTEGER NOT NULL, " + PRICE
@@ -65,6 +62,7 @@ public class FoodData extends SQLiteOpenHelper {
 	/**
 	 * Inserts new food item record into database. Information includes name,
 	 * calories, price, and quantity.
+	 * 
 	 * @param name
 	 * @param calories
 	 * @param price
@@ -85,6 +83,7 @@ public class FoodData extends SQLiteOpenHelper {
 
 	/**
 	 * Returns all food item records from database.
+	 * 
 	 * @param activity
 	 * @return
 	 */
@@ -100,6 +99,7 @@ public class FoodData extends SQLiteOpenHelper {
 
 	/**
 	 * Returns all category 1 (entre) food item records from database.
+	 * 
 	 * @param activity
 	 * @return
 	 */
@@ -116,6 +116,7 @@ public class FoodData extends SQLiteOpenHelper {
 
 	/**
 	 * Returns all category 2 (side) food item records from database.
+	 * 
 	 * @param activity
 	 * @return
 	 */
@@ -132,6 +133,7 @@ public class FoodData extends SQLiteOpenHelper {
 
 	/**
 	 * Returns all category 3 (drink) food item records from database.
+	 * 
 	 * @param activity
 	 * @return
 	 */
@@ -148,6 +150,7 @@ public class FoodData extends SQLiteOpenHelper {
 
 	/**
 	 * Returns number of food item records in database.
+	 * 
 	 * @return
 	 */
 	public long count() {
@@ -159,7 +162,11 @@ public class FoodData extends SQLiteOpenHelper {
 	 * Loads database with food item information.
 	 */
 	public void load() {
-
+		// Cat 1 Main
+		// Cat 2 Side
+		// Cat 3 Beverage
+		// Cat 4 Main+
+		// Cat 5 Misc
 		insert("Apple", 110, "0.70", 2, 0);
 		insert("Orange", 86, "0.70", 2, 0);
 		insert("Banana", 105, "0.70", 2, 0);
@@ -202,31 +209,27 @@ public class FoodData extends SQLiteOpenHelper {
 		insert("Sausage Pizza", 315, "2.15", 1, 0);
 		insert("Cheese Pizza", 265, "2.15", 1, 0);
 		insert("Veggie Pizza", 270, "2.15", 1, 0);
-		//		insert("Cappucino 12 oz", 100, "0.99", 3, 0);
+		// insert("Cappucino 12 oz", 100, "0.99", 3, 0);
 		insert("Cappucino 16 oz", 150, "1.49", 3, 0);
-		//		insert("Hot Chocolate 12 oz", 200, "0.99", 3, 0);
+		// insert("Hot Chocolate 12 oz", 200, "0.99", 3, 0);
 		insert("Hot Chocolate 16 oz", 150, "1.49", 3, 0);
-		//		insert("Hot Cider 12 oz", 200, "0.99", 3, 0);
+		// insert("Hot Cider 12 oz", 200, "0.99", 3, 0);
 		insert("Hot Cider 16 oz", 180, "1.49", 3, 0);
-		//		insert("Skim Milk 12 oz", 240, "0.99", 3, 0);
+		// insert("Skim Milk 12 oz", 240, "0.99", 3, 0);
 		insert("Skim Milk 16 oz", 120, "1.49", 3, 0);
-		//		insert("Chocolate Milk 12 oz", 260, "0.99", 3, 0);
+		// insert("Chocolate Milk 12 oz", 260, "0.99", 3, 0);
 		insert("Chocolate Milk 16 oz", 225, "1.49", 3, 0);
-		//		insert("Black Coffee 12 oz", 5, "0.99", 3, 0);
+		// insert("Black Coffee 12 oz", 5, "0.99", 3, 0);
 		insert("Black Coffee 16 oz", 10, "1.49", 3, 0);
-		//		insert("Tea 12 oz", 100, "0.99", 3, 0);
+		// insert("Tea 12 oz", 100, "0.99", 3, 0);
 		insert("Tea 16 oz", 130, "1.49", 3, 0);
-		//		insert("Pop 12 oz", 140, "0.99", 3, 0);
+		// insert("Pop 12 oz", 140, "0.99", 3, 0);
 		insert("Pop 16 oz", 190, "1.49", 3, 0);
-		// Cat 1 Main
-		// Cat 2 Side
-		// Cat 3 Beverage
-		// Cat 4 Main+
-		// Cat 5 Misc
 	}
 
 	/**
 	 * Updates quantity for a food item record.
+	 * 
 	 * @param id
 	 * @param quantity
 	 */
@@ -238,13 +241,12 @@ public class FoodData extends SQLiteOpenHelper {
 	}
 
 	/**
-	 *  Resets quantity to zero for all food item records.
+	 * Resets quantity to zero for all food item records.
 	 */
 	public void resetQuantity() {
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(QUANTITY, 0);
 		db.update(TABLE_NAME, values, null, null);
-		// db.update(TABLE_NAME, values, null);
 	}
 }

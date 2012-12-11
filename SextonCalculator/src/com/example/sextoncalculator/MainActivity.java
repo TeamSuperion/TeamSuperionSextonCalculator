@@ -10,11 +10,11 @@ import android.widget.Button;
 
 /**
  * Handles the events brought up by the Main xml file
- * @author Jonathan Ly, Justin Springer, Tsuehue Xiong, Adam Bachmeier
- *
+ * 
+ * @author Johnathan Ly, Justin Springer, Tsuehue Xiong, Adam Bachmeier
+ * 
  */
 public class MainActivity extends Activity implements OnClickListener {
-
 	protected Button startButton;
 
 	/**
