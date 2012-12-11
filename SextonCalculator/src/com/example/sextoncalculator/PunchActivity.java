@@ -2,6 +2,7 @@ package com.example.sextoncalculator;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;

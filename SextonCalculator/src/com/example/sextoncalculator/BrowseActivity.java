@@ -3,9 +3,7 @@ package com.example.sextoncalculator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,7 +12,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -41,13 +38,13 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// loads database if empty
 		foodData = new FoodData(this);
 		if (foodData.count() == 0) {
 			foodData.load();
 		}
-		
+
 		// reset quantity to 0 and display food data from database in list view
 		foodData.resetQuantity();
 		Cursor cursor = foodData.all(this);
@@ -59,7 +56,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 						R.id.itemQuantity_textView });
 		setListAdapter(foodCursorAdapter);
 		setContentView(R.layout.activity_browse);
-		
+
 		// find and set on click listener to all buttons
 		homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setOnClickListener(this);
@@ -143,7 +140,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	public void increaseQuantity(View v) {
 		// get layout
 		RelativeLayout layout = (RelativeLayout) v.getParent();
-		
+
 		// get text views from layout
 		TextView itemId = (TextView) layout.findViewById(R.id.itemId_textView);
 		TextView itemName = (TextView) layout
@@ -152,17 +149,17 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 				.findViewById(R.id.itemPrice_textView);
 		TextView itemQuantity = (TextView) layout
 				.findViewById(R.id.itemQuantity_textView);
-		
+
 		// get value from text views
 		int id = Integer.parseInt(itemId.getText().toString());
 		String name = itemName.getText().toString();
 		double price = Double.parseDouble(itemPrice.getText().toString());
 		int quantity = Integer.parseInt(itemQuantity.getText().toString());
-		
+
 		// update item quantity in database then refresh list view
 		foodData.updateQuantity(id, quantity + 1);
 		foodCursorAdapter.getCursor().requery();
-		
+
 		// update item quantity in food list
 		FoodItem foodItem = new FoodItem(name, price, 1);
 		if (foodList.indexOf(foodItem) == -1) {
@@ -186,7 +183,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 	public void decreaseQuantity(View v) {
 		// get layout
 		RelativeLayout layout = (RelativeLayout) v.getParent();
-		
+
 		// get text views from layout
 		TextView itemId = (TextView) layout.findViewById(R.id.itemId_textView);
 		TextView itemName = (TextView) layout
@@ -195,13 +192,13 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 				.findViewById(R.id.itemPrice_textView);
 		TextView itemQuantity = (TextView) layout
 				.findViewById(R.id.itemQuantity_textView);
-		
+
 		// get values from text views
 		int id = Integer.parseInt(itemId.getText().toString());
 		String name = itemName.getText().toString();
 		double price = Double.parseDouble(itemPrice.getText().toString());
 		int quantity = Integer.parseInt(itemQuantity.getText().toString());
-		
+
 		// update item quantity in database then refresh list view and update
 		// item quantity in food list
 		if (quantity > 1) {
@@ -218,7 +215,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			FoodItem oldFoodItem = foodList.get(foodList.indexOf(foodItem));
 			foodList.remove(oldFoodItem);
 		}
-		
+
 		// update calculated total price
 		calculateTotal();
 	}
@@ -235,7 +232,7 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 		for (int i = 0; i < foodList.size(); i++) {
 			total += foodList.get(i).getPrice() * foodList.get(i).getQuantity();
 		}
-		
+
 		// set total price text to calculated total price
 		if (total == 0.00) {
 			totalPrice.setText("Total Price: $0.00");
