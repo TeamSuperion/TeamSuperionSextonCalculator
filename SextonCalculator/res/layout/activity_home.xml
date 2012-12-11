@@ -3,20 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ff0000" >
-
-    <TextView
-        android:id="@+id/home_text"
+    
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:gravity="top|center"
-        android:text="@string/home_text"
-        android:textColor="#ffffff"
-        android:textSize="40dp" />
-
+        android:layout_above="@+id/punch_button"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/sexton2" />
+    
     <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -27,13 +24,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp" >
-
-            <Button
-                android:id="@+id/punch_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/punch_button"
-                android:textColor="#ffffff" />
         </TableRow>
 
         <TableRow
@@ -41,14 +31,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp" >
-
-            <Button
-                android:id="@+id/browse_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/browse_button"
-                android:textColor="#ffffff" />
         </TableRow>
     </TableLayout>
+
+    <TextView
+        android:id="@+id/home_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="top|center"
+        android:text="@string/home_text"
+        android:textColor="#ffffff"
+        android:textSize="40dp" />
+
+    <Button
+        android:id="@+id/browse_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/browse_button"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/punch_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/browse_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/punch_button"
+        android:textColor="#ffffff" />
+
+
 
 </RelativeLayout>
