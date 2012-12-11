@@ -1,7 +1,5 @@
 package com.example.sextoncalculator;
 
-import java.util.Comparator;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
