@@ -41,21 +41,5 @@ public class FoodItemTest extends AndroidTestCase {
 		two.setCalories(30);
 		assertEquals(two.toString(), "test calories: 30");
 	}
-	
-	public void testEquals(){
-		one.setName("test");
-		one.setPrice(3.49);
-		one.setQuantity(4);
-		assertTrue(two.equals(one));
-	}
-	
-	public void testCompareTo(){
-		one.setName("test");
-		one.setPrice(3.49);
-		one.setQuantity(4);
-		assertEquals(two.compareTo(one), 1);
-		one.setName("Fail");
-		assertEquals(two.compareTo(one), 0);
-	}
 
 }
