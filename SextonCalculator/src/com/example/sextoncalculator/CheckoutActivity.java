@@ -360,7 +360,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		if (flag == 1) {
 			// punch can only be implemented if the current cash and flex is
 			// equal to 0.00
-			if ((punchIntCounterTemp == 0) && (getCurrentCash() == 0.00)
+			if ((punchIntCounter == 0) && (punchIntCounterTemp == 0) && (getCurrentCash() == 0.00)
 					&& (getCurrentFlex() == 0.00)) {
 				totalPriceInstance = 0.00;
 				punchIntCounter = 1;
@@ -495,8 +495,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		if (totalPriceInstance >= 0.00) {
 			// set the value of flexDoubleValue to totalPriceInstance and set
 			// the value of totalPriceInstance to 0.00 if the current value of
-			// flexDoubleValueTemp is equal to 0.00
-			if (flexDoubleValueTemp == 0.00) {
+			// flexDoubleValueTemp and flexDoubleValue is equal to 0.00
+			if ((flexDoubleValue == 0.00) && (flexDoubleValueTemp == 0.00)) {
 				setNewFlex = flexDoubleValue + totalPriceInstance;
 				setNewTotal = 0.00;
 			}
@@ -603,8 +603,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		if (totalPriceInstance >= 0.00) {
 			// set the value of cashDoubleValue to totalPriceInstance and set
 			// the value of totalPriceInstance to 0.00 if the current value of
-			// cashDoubleValueTemp is equal to 0.00
-			if (cashDoubleValueTemp == 0.00) {
+			// cashDoubleValueTemp and cashDoubleValue is equal to 0.00
+			if ((cashDoubleValueTemp == 0.00) && (cashDoubleValue == 0.00)) {
 				setNewCash = ((cashDoubleValue + totalPriceInstance) * tax);
 				setNewTotal = 0.00;
 			}
