@@ -1,10 +1,10 @@
 package com.example.sextoncalculator.test;
 
+import android.test.AndroidTestCase;
+
 import com.example.sextoncalculator.FoodItem;
 
-import junit.framework.TestCase;
-
-public class FoodItemTest extends TestCase {
+public class FoodItemTest extends AndroidTestCase {
 
 	FoodItem one, two;
 	String name = "test";
