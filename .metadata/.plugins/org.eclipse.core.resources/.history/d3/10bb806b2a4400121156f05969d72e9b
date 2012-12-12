@@ -1,0 +1,7 @@
+package com.example.sextoncalculator.test;
+
+import android.test.ActivityInstrumentationTestCase2;
+
+public class PunchActivityTest extends ActivityInstrumentationTestCase2<T> {
+
+}
