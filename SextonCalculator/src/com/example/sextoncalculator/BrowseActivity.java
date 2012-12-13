@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * BrowseActivity creates interface to browse all food items available. Total
@@ -87,6 +89,8 @@ public class BrowseActivity extends ListActivity implements OnClickListener {
 			restartActivity();
 		} else if (v == checkoutButton) {
 			if (foodList.isEmpty()) {
+				Context context = this.getBaseContext();
+				Toast.makeText(context,"You haven't selected any items", Toast.LENGTH_SHORT).show();
 			} else {
 				intent = new Intent(this, CheckoutActivity.class);
 				Collections.sort(foodList);

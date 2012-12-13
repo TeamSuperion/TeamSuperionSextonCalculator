@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Handles the functionality of the Checkout xml file
@@ -210,6 +212,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			// if punchIntCounter is equal to 0 or smaller, do nothing
 			else {
 				// do nothing because punch can't be negative
+				Context context = this.getBaseContext();
+				Toast.makeText(context,"You cannot input a negative value for punch", Toast.LENGTH_SHORT).show();
 			}
 		}
 		setPunchIntCounter(punchIntCounter);
@@ -237,7 +241,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		}
 		// if the current flex value is negative, do nothing
 		else {
-			// current cash value is negative
+			// current flex value is negative
+			Context context = this.getBaseContext();
+			Toast.makeText(context,"You cannot input a negative value for flex", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -262,6 +268,8 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 		// if the current cash value is negative, do nothing
 		else {
 			// current cash value is negative
+			Context context = this.getBaseContext();
+			Toast.makeText(context,"You cannot input a negative value for cash", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -414,6 +422,9 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 				// the user is inputting an excessive amount of punches
 				else {
 					// telling user that they are using excessive punches
+					Context context = this.getBaseContext();
+					Toast.makeText(context,"You are using excessive punches.", Toast.LENGTH_SHORT).show();
+
 				}
 			}
 			// if the input value of punch is smaller than the current value,
@@ -542,17 +553,19 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 					setNewFlex = getCurrentFlex() - flexDoubleDifference;
 				}
 			}
+			setTotalPrice(setNewTotal);
+			setTotalText(setNewTotal);
+			setCurrentFlex(setNewFlex);
+			setFlexText(setNewFlex);
 		}
 		// if the new input value for flexDoubleValueTemp is negative, don't
 		// calculate the new changes
 		else {
 			// do nothing because the current totalPriceInstance is a negative
 			// value
+			Context context = this.getBaseContext();
+			Toast.makeText(context,"There is no need to pay anymore flex", Toast.LENGTH_SHORT).show();
 		}
-		setTotalPrice(setNewTotal);
-		setTotalText(setNewTotal);
-		setCurrentFlex(setNewFlex);
-		setFlexText(setNewFlex);
 	}
 
 	/**
@@ -652,17 +665,20 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 					setNewCash = getCurrentCash() - cashDoubleDifference;
 				}
 			}
+			setTotalPrice(setNewTotal);
+			setTotalText(setNewTotal);
+			setCurrentCash(setNewCash);
+			setCashText(setNewCash);
 		}
+		
 		// if the new input value for flexDoubleValueTemp is negative, don't
 		// calculate the new changes
 		else {
 			// do nothing because the current totalPriceInstance is a negative
 			// value
+			Context context = this.getBaseContext();
+			Toast.makeText(context,"There is no need to pay anymore cash", Toast.LENGTH_SHORT).show();
 		}
-		setTotalPrice(setNewTotal);
-		setTotalText(setNewTotal);
-		setCurrentCash(setNewCash);
-		setCashText(setNewCash);
 	}
 
 }
