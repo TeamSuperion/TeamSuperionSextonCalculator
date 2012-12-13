@@ -374,7 +374,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 				punchIntCounter = 1;
 			}
 			// nothing changes if the entered value of punchIntCounter is larger
-			// than 1 because you can only ;unch once
+			// than 1 because you can only punch once
 			else if (punchIntCounterTemp > 1) {
 				totalPriceInstance = getTotalPrice();
 				punchIntCounter = getPunchIntCounter();
@@ -388,7 +388,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			// the entered value must be 0 because it can't be a negative number
 			// 1 punch is taken away from checkout
 			else if (punchIntCounterTemp < 1) {
-				totalPriceInstance = punchValue;
+				totalPriceInstance = getTotalPrice();
 				punchIntCounter = 0;
 			}
 		}
@@ -400,7 +400,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 			// clicking the punchButton will increment punch by 1 only if
 			// totalPriceInstance is larger than $0.00
 			if ((punchIntCounterTemp == punchIntCounter)
-					&& (totalPriceInstance > 0.00)) {
+					&& (totalPriceInstance > 0.00) && (getTotalPrice() != 0.00)) {
 				totalPriceInstance = totalPriceInstance - punchValue;
 				punchIntCounter = getPunchIntCounter() + 1;
 			}
@@ -503,7 +503,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 
 		// if the totalPriceInstance is equal to 0.00, continue with
 		// flexActivity
-		if (totalPriceInstance >= 0.00) {
+		if (totalPriceInstance > 0.00) {
 			// set the value of flexDoubleValue to totalPriceInstance and set
 			// the value of totalPriceInstance to 0.00 if the current value of
 			// flexDoubleValueTemp and flexDoubleValue is equal to 0.00
@@ -613,7 +613,7 @@ public class CheckoutActivity extends Activity implements OnClickListener {
 
 		// if the totalPriceInstance is equal to 0.00, continue with
 		// cashActivity
-		if (totalPriceInstance >= 0.00) {
+		if (totalPriceInstance > 0.00) {
 			// set the value of cashDoubleValue to totalPriceInstance and set
 			// the value of totalPriceInstance to 0.00 if the current value of
 			// cashDoubleValueTemp and cashDoubleValue is equal to 0.00
